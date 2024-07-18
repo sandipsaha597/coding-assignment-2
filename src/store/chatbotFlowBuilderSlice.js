@@ -34,6 +34,8 @@ const initialState =
               x: 10,
               y: 100,
             },
+            width: 300,
+            height: 'auto',
           },
           {
             id: '2',
@@ -45,6 +47,8 @@ const initialState =
               x: 100,
               y: 200,
             },
+            width: 300,
+            height: 'auto',
           },
         ],
       }
@@ -61,6 +65,10 @@ const applyNodeChanges = (changes, nodes) => {
         }
         if (type === 'position') {
           node.position = change.position
+        }
+        if (type === 'resize') {
+          node.width += change.width
+          node.height += change.height
         }
       }
     })

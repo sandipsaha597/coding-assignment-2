@@ -36,7 +36,6 @@ const DragShadow = ({ children, onDrag = () => {}, onDrop = () => false }) => {
   const { style: dragShadowStyles, ...draggedShadowPropsRest } =
     draggedShadowProps
 
-  console.log(dragItemRef.current?.getBoundingClientRect().width)
   return (
     <>
       {/* Using the sx prop to apply styles instead of the style attribute because inline styles can be

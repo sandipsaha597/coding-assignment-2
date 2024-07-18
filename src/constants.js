@@ -23,6 +23,11 @@ export const rightSidePanelWidth = {
   lg: '400px',
 }
 
+export const renderMode = {
+  editor: 'editor',
+  previewOrLive: 'previewOrLive',
+}
+
 // Types of nodes available in the chatbot flow.
 export const NODE_TYPE_MAP = {
   TEXT_NODE: 'textNode',

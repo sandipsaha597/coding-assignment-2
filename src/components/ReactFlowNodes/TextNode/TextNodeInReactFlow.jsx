@@ -13,7 +13,6 @@ const TextNodeInReactFlow = ({ selected, data }) => {
             sx={{
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
-              width: 300,
             }}
           >
             {data.textMessage}

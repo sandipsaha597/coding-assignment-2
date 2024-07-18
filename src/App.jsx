@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import { Rnd } from 'react-rnd'
 import './App.css'
 import Header from './components/Header/Header'
 import NodesPanel from './components/NodesPanel/NodesPanel'
@@ -15,6 +16,7 @@ import SettingsPanel from './components/SettingsPanel/SettingsPanel'
 import {
   NODE_TYPE_MAP,
   NODE_TYPE_REACT_FLOW_COMPONENT_MAP,
+  renderMode,
   rightSidePanelWidth,
 } from './constants'
 import {
@@ -22,7 +24,6 @@ import {
   ToastContainer,
 } from './customLibraries/MyReactToastify'
 import useChatbotFlowBuilder from './hooks/useChatbotFlowBuilder/useChatbotFlowBuilder'
-import { Rnd } from 'react-rnd'
 
 const getMousePosition = (e) => ({
   x: e.clientX,
@@ -225,6 +226,36 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
               <StyledRnd
                 selected={node.selected}
                 enableResizing={!!node.selected && enableResizing}
+                size={{ width: node.width, height: node.height }}
+                onResizeStop={(a, b, c, { width, height }, { x, y }) => {
+                  onNodesChange([
+                    {
+                      id: node.id,
+                      type: 'position',
+                      position: { x, y },
+                      dragging: false,
+                    },
+                    {
+                      id: node.id,
+                      type: 'resize',
+                      widthChange: width,
+                      heightChange: height,
+                      dragging: true,
+                    },
+                  ])
+                }}
+                position={{ x: node.position.x, y: node.position.y }}
+                onDragStop={(e, { x, y }) => {
+                  // console.log(data)
+                  onNodesChange([
+                    {
+                      id: node.id,
+                      type: 'position',
+                      position: { x, y },
+                      dragging: true,
+                    },
+                  ])
+                }}
                 resizeHandleClasses={{
                   bottom: 'resize-handler resize-handler-bottom',
                   bottomLeft: 'resize-handler resize-handler-bottom-left',
@@ -236,20 +267,13 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
                   topRight: 'resize-handler resize-handler-top-right',
                 }}
               >
-                <Comp {...node} />
+                <Disable>
+                  <Comp {...node} mode={renderMode.editor} />
+                </Disable>
               </StyledRnd>
               {/* <DragAndMove
                 dragItemPosition={{ x: node.position.x, y: node.position.y }}
-                onDrag={(e, dragItemRef, calculatedNewPosition) => {
-                  onNodesChange([
-                    {
-                      id: node.id,
-                      type: 'position',
-                      position: calculatedNewPosition,
-                      dragging: true,
-                    },
-                  ])
-                }}
+                
               >
               </DragAndMove> */}
             </Box>
@@ -258,6 +282,20 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
       </div>
     </Box>
   )
+})
+
+const Disable = styled('div')({
+  width: '100%',
+  height: '100%',
+  '&::after': {
+    content: `''`,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    // background: 'red',
+  },
 })
 
 const StyledRnd = styled(Rnd)((props) => () => {
@@ -277,7 +315,6 @@ const StyledRnd = styled(Rnd)((props) => () => {
     '&:hover': {
       outline: `2px solid #7386bc`,
     },
-    '.resize-handler': `${props.selected ? 'block' : 'none'}`,
     '.resize-handler.resize-handler-bottom': {
       ...baseStyles,
       ...widthTopAndBottom,

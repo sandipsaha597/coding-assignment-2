@@ -1,9 +1,11 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPageById, getProjectById } from '../../../../core/utilFunctions.js'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
 import { chatbotFlowBuilderSliceActions } from '../../redux/chatbotFlowBuilderSlice.js'
 import { getNewPageObj } from '../../utils/utils.js'
+import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates.js'
+import { debounce } from '@mui/material'
 
 /**
  * This hook contains the global state, context, and methods for the chatbotFlowBuilder.
@@ -26,15 +28,25 @@ import { getNewPageObj } from '../../utils/utils.js'
  */
 
 export const useWebsiteBuilder = () => {
-  const { pages, activePageId } = useSelector(
-    (state) => state.chatbotFlowBuilder
-  )
+  const websiteBuilderState = useSelector((state) => state.chatbotFlowBuilder)
+  const { pages, activePageId } = websiteBuilderState
 
   const { websiteBuilderRef } = useWebsiteBuilderContext()
+  const { updateProject } = useProjectsAndTemplates()
   const dispatch = useDispatch()
   const [activePage] = getPageById(activePageId, pages)
   const nodes = activePage.nodes
-  // when a node is selected, that node's selected fields becomes true automatically
+
+  const debounceUpdateProject = useMemo(
+    () => debounce(updateProject, 300),
+    [updateProject]
+  )
+
+  useEffect(() => {
+    debounceUpdateProject(websiteBuilderState)
+  }, [websiteBuilderState, debounceUpdateProject])
+
+  // when a node is selected, that node's selected fields becomes true through onNodesChange
   const selectedNodes = useMemo(() => {
     return nodes
       .filter((node) => node.selected)

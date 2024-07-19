@@ -1,8 +1,5 @@
-import { createSlice, current } from '@reduxjs/toolkit'
-import {
-  getPageById,
-  getSavedProjectsAndTemplates,
-} from '../../core/utilFunctions'
+import { createSlice } from '@reduxjs/toolkit'
+import { getPageById, getProjectById } from '../../core/utilFunctions'
 import { getItemById } from '../../utils/functions'
 // getSavedProjectsAndTemplates()
 const savedProjectsAndTemplates = null
@@ -157,8 +154,11 @@ const projectsAndTemplatesSlice = createSlice({
       const [page] = getPageById(state.activePageId, state.pages)
       page.nodes.push(payload.newNode)
     },
-    saveAndUpdateProject: (state, { payload }) => {
-      state.nodes = state.nodes.filter((v) => v.id !== payload.id)
+    updateProject: (state, { payload }) => {
+      const projectId = payload.updatedProject.id
+      const [, projectIndex] = getProjectById(projectId, state.projects)
+
+      state.projects[projectIndex] = payload.updatedProject
     },
     initializeProject: (state, { payload }) => {
       let [template, index] = getItemById(payload.templateId, state.templates)

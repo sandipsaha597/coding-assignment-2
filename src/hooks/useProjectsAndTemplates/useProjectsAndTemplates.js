@@ -1,12 +1,13 @@
 import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveProjectsAndTemplatesToLocalStorage } from '../../core/utilFunctions'
-import { projectsAndTemplatesSliceActions } from '../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import {
+  projectAndTemplatesSelector,
+  projectsAndTemplatesSliceActions,
+} from '../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 export const useProjectsAndTemplates = () => {
-  const projectsAndTemplates = useSelector(
-    (state) => state.projectsAndTemplates
-  )
+  const projectsAndTemplates = useSelector(projectAndTemplatesSelector)
 
   const dispatch = useDispatch()
 
@@ -15,7 +16,16 @@ export const useProjectsAndTemplates = () => {
   }, [projectsAndTemplates])
 
   // const saveAsTemplate = () => {}
-  // const saveAndUpdateProject = () => {}
+  const updateProject = useCallback(
+    (updatedProject) => {
+      dispatch(
+        projectsAndTemplatesSliceActions.updateProject({
+          updatedProject,
+        })
+      )
+    },
+    [dispatch]
+  )
 
   const initializeProject = useCallback(
     (templateId) => {
@@ -31,5 +41,5 @@ export const useProjectsAndTemplates = () => {
     [dispatch]
   )
 
-  return { projectsAndTemplates, initializeProject }
+  return { projectsAndTemplates, initializeProject, updateProject }
 }

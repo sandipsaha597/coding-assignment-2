@@ -2,17 +2,16 @@ import { Box, styled } from '@mui/material'
 import { produce } from 'immer'
 import { forwardRef, useRef } from 'react'
 import { Rnd } from 'react-rnd'
-import { nodeResizingMap } from '../../constants'
 import Disable from '../../../../components/Disable/Disable'
 import { renderMode } from '../../../../constants'
-import AddPageButton from '../AddPage/AddPageButton'
-import PagesAndAddPages from '../AddPage/PagesAndAddPages'
+import { nodeResizingMap } from '../../constants'
 
 const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
   { nodes, nodeTypes, onNodesChange },
   ref
 ) {
   const selectedItems = useRef([])
+
   return (
     <Box
       ref={ref}
@@ -46,7 +45,7 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
                   const newSelectedItemsArray = produce(
                     selectedItems.current,
                     (draftState) => {
-                      draftState.map((v) => {
+                      draftState.forEach((v) => {
                         v.selected = false
                       })
                       draftState.push({
@@ -56,6 +55,7 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
                       })
                     }
                   )
+                  onNodesChange(newSelectedItemsArray)
                   selectedItems.current = [
                     {
                       type: 'select',
@@ -63,7 +63,6 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
                       selected: true,
                     },
                   ]
-                  onNodesChange(newSelectedItemsArray)
                 }
               }}
               key={node.id}

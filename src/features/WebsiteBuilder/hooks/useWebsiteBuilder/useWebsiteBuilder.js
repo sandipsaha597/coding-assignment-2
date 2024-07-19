@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { chatbotFlowBuilderSliceActions } from '../../redux/chatbotFlowBuilderSlice.js'
+import { getPageById, getProjectById } from '../../../../core/utilFunctions.js'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
-import { getPageById } from '../../../../core/utilFunctions.js'
+import { chatbotFlowBuilderSliceActions } from '../../redux/chatbotFlowBuilderSlice.js'
 import { getNewPageObj } from '../../utils/utils.js'
 
 /**
@@ -100,6 +100,18 @@ export const useWebsiteBuilder = () => {
     [dispatch]
   )
 
+  const setProject = useCallback(
+    (id) => {
+      const [project] = getProjectById(id)
+      dispatch(
+        chatbotFlowBuilderSliceActions.setProject({
+          project,
+        })
+      )
+    },
+    [dispatch]
+  )
+
   return {
     nodes,
     addNode,
@@ -111,5 +123,6 @@ export const useWebsiteBuilder = () => {
     activePageId,
     changeActivePage,
     websiteBuilderRef,
+    setProject,
   }
 }

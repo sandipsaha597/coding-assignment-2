@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 import {
   getPageById,
   getSavedProjectsAndTemplates,
 } from '../../core/utilFunctions'
-
-const savedProjectsAndTemplates = getSavedProjectsAndTemplates()
+import { getItemById } from '../../utils/functions'
+// getSavedProjectsAndTemplates()
+const savedProjectsAndTemplates = null
 /*
   This state contains the nodes and edges for the chatbotFlowBuilder.
   It should only include values that:
@@ -20,6 +21,22 @@ const savedProjectsAndTemplates = getSavedProjectsAndTemplates()
   After consulting ChatGPT, I learned that it is not only okay to use them together but also considered a very good practice 
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
+const generateBlankTemplate = () => {
+  return {
+    projectName: 'Blank template',
+    pages: [
+      {
+        id: crypto.randomUUID(),
+        pageDetails: {
+          pageTitle: 'Home page',
+          pageDescription: '',
+          pageSlug: '/',
+        },
+        nodes: [],
+      },
+    ],
+  }
+}
 
 const template1 = {
   id: crypto.randomUUID(),
@@ -68,7 +85,7 @@ const template2 = {
   projectName: 'Portfolio',
   pages: [
     {
-      id: '6ad8fb18-2e59-42b1-934b-8610cdbca809',
+      id: '409a75c1-4c30-405e-9724-075727614b2c',
       pageDetails: {
         pageTitle: 'Home page',
         pageDescription: '',
@@ -97,6 +114,19 @@ const template2 = {
           position: {
             x: 100,
             y: 200,
+          },
+          width: 300,
+          height: 'auto',
+        },
+        {
+          id: '3',
+          type: 'textNode',
+          data: {
+            textMessage: 'lorem ipsum',
+          },
+          position: {
+            x: 100,
+            y: 400,
           },
           width: 300,
           height: 'auto',
@@ -130,8 +160,17 @@ const projectsAndTemplatesSlice = createSlice({
     saveAndUpdateProject: (state, { payload }) => {
       state.nodes = state.nodes.filter((v) => v.id !== payload.id)
     },
+    initializeProject: (state, { payload }) => {
+      let [template, index] = getItemById(payload.templateId, state.templates)
+      if (index === -1) template = generateBlankTemplate()
+      state.projects.push({ ...template, id: payload.newProjectId })
+    },
   },
 })
+
+export const projectAndTemplatesSelector = (state) => state.projectsAndTemplates
+export const projectsSelector = (state) => state.projectsAndTemplates.projects
+export const templatesSelector = (state) => state.projectsAndTemplates.templates
 
 export const projectsAndTemplatesSliceActions =
   projectsAndTemplatesSlice.actions

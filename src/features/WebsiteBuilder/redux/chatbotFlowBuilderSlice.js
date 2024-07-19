@@ -34,7 +34,7 @@ const initialState = {
           id: '1',
           type: 'textNode',
           data: {
-            textMessage: 'hello world',
+            textMessage: 'hello world I am Indefatigable',
           },
           position: {
             x: 10,
@@ -87,6 +87,9 @@ const chatbotFlowBuilderSlice = createSlice({
   name: 'websiteBuilder',
   initialState,
   reducers: {
+    setProject: (state, { payload }) => {
+      return payload.project
+    },
     /**
      * Adds a new node to the state.
      * @param {Object} action.payload - The payload containing the new node to add.
@@ -130,6 +133,10 @@ const chatbotFlowBuilderSlice = createSlice({
     },
   },
 })
+
+export const websiteBuilderSelector = (state) => state.chatbotFlowBuilder
+export const websiteBuilderPagesSelector = (state) =>
+  state.chatbotFlowBuilder.pages
 
 export const chatbotFlowBuilderSliceActions = chatbotFlowBuilderSlice.actions
 const chatbotFlowBuilderSliceReducer = chatbotFlowBuilderSlice.reducer

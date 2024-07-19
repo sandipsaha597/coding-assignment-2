@@ -8,6 +8,8 @@ import { rightSidePanelWidth } from '../constants'
 import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 function WebsiteBuilder() {
   // useChatbotFlowBuilder contains all the functionalities, states, context and methods related to chatbotFlow
@@ -16,7 +18,13 @@ function WebsiteBuilder() {
     websiteBuilderRef,
     setChatbotReactFlowInstance,
     onNodesChange,
+    setProject,
   } = useWebsiteBuilder()
+  const params = useParams()
+
+  useEffect(() => {
+    setProject(params.projectId)
+  }, [params, setProject])
 
   return (
     <ChatbotFlowBuilder>

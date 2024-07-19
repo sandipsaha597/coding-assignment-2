@@ -1,7 +1,11 @@
-import { getValueFromLocalStorage } from '../utils/functions'
+import { getItemById, getValueFromLocalStorage } from '../utils/functions'
 import { LOCAL_STORAGE_KEYS } from '../constants'
 import { store } from '../store/store'
 import { produce } from 'immer'
+import {
+  projectsSelector,
+  templatesSelector,
+} from '../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 /**
  * Core utility functions.
@@ -35,9 +39,8 @@ import { produce } from 'immer'
  * For that case nodes parameter is provided. Please Provide the nodes argument when using this function in a pure function.
  */
 export const getNodeById = (id, nodes) => {
-  const currentNodes = nodes
-  const nodeIndex = currentNodes.findIndex((node) => id === node.id)
-  return [currentNodes[nodeIndex], nodeIndex]
+  const nodeIndex = nodes.findIndex((node) => id === node.id)
+  return [nodes[nodeIndex], nodeIndex]
 }
 
 export const getPageById = (id, pages) => {
@@ -46,6 +49,15 @@ export const getPageById = (id, pages) => {
   const pageIndex = currentPages.findIndex((page) => activePageId === page.id)
   if (pageIndex === -1) return [currentPages[0], 0]
   return [currentPages[pageIndex], pageIndex]
+}
+
+export const getTemplateById = (id, templates) => {
+  templates = templates ?? templatesSelector(store.getState())
+  return getItemById(id, templates)
+}
+export const getProjectById = (id, projects) => {
+  projects = projects ?? projectsSelector(store.getState())
+  return getItemById(id, projects)
 }
 
 /**

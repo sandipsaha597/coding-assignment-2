@@ -118,3 +118,8 @@ export const getValueFromLocalStorage = (key) => {
     return null
   }
 }
+
+export const getItemById = (id, arr) => {
+  const nodeIndex = arr.findIndex((item) => id === item.id)
+  return [arr[nodeIndex], nodeIndex]
+}

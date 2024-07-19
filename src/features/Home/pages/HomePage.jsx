@@ -1,18 +1,19 @@
 import {
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Container,
   Typography,
-  Button,
 } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom'
 import { useProjectsAndTemplates } from '../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates'
 
 const HomePage = () => {
-  const { projectsAndTemplates } = useProjectsAndTemplates()
-  console.log({ projectsAndTemplates })
+  const { projectsAndTemplates, initializeProject } = useProjectsAndTemplates()
+  const navigate = useNavigate()
 
   return (
     <Container component="main">
@@ -38,8 +39,10 @@ const HomePage = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button>Share</Button>
-                <Button>Learn More</Button>
+                <Button>Preview</Button>
+                <Button component={Link} to={`/builder/${project.id}`}>
+                  Edit
+                </Button>
               </CardActions>
             </Card>
           )
@@ -56,9 +59,9 @@ const HomePage = () => {
             gridTemplateColumns: '1fr 1fr 1fr 1fr',
           }}
         >
-          {projectsAndTemplates.templates.map((project) => {
+          {projectsAndTemplates.templates.map((template) => {
             return (
-              <Card key={project.id} sx={{}} elevation={3}>
+              <Card key={template.id} sx={{}} elevation={3}>
                 <CardMedia
                   sx={{ height: 140 }}
                   image="/static/images/cards/contemplative-reptile.jpg"
@@ -66,12 +69,23 @@ const HomePage = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    {project.projectName}
+                    {template.projectName}
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button>Preview</Button>
-                  <Button>Use template</Button>
+                  {/* <Button>Preview</Button> */}
+                  <Button component={Link} to={`/preview${template.id}`}>
+                    Preview
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      const projectId = initializeProject(template.id)
+                      navigate(`/builder/${projectId}`)
+                    }}
+                  >
+                    Use template
+                  </Button>
+                  {/* <Link to={`/edit/`}></Link> */}
                 </CardActions>
               </Card>
             )

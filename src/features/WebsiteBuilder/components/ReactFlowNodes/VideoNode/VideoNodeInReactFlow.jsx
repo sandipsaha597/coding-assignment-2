@@ -1,7 +1,7 @@
 import { styled } from '@mui/material'
 import { renderMode } from '../../../../../constants'
 
-// Text node to show in chatbotFlow
+// Text node to show in website
 const VideoNodeInReactFlow = ({ data, mode }) => {
   return (
     <>

@@ -1,6 +1,6 @@
 // I heard you give brownie points to candidates who knows redux..... so here you go... 🚀🚀🚀
 import { configureStore } from '@reduxjs/toolkit'
-import chatbotFlowBuilderSliceReducer from '../features/WebsiteBuilder/redux/chatbotFlowBuilderSlice'
+import websiteBuilderSliceReducer from '../features/WebsiteBuilder/redux/websiteBuilderSlice'
 import projectsAndTemplatesSliceReducer from './projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 /**
@@ -9,7 +9,7 @@ import projectsAndTemplatesSliceReducer from './projectAndTemplatesSlice/project
 
 export const store = configureStore({
   reducer: {
-    chatbotFlowBuilder: chatbotFlowBuilderSliceReducer,
+    websiteBuilder: websiteBuilderSliceReducer,
     projectsAndTemplates: projectsAndTemplatesSliceReducer,
   },
 })

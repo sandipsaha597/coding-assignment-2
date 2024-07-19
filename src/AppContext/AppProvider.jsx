@@ -12,7 +12,7 @@ import { AppContext } from './AppContext'
  */
 
 const AppProvider = ({ children }) => {
-  /* chatbotFlowBuilder - end */
+  /* websiteBuilder - end */
 
   // all the values and methods available in AppContext
   const value = {}

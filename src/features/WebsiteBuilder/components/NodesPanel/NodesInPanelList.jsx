@@ -115,7 +115,7 @@ const NodesInPanelList = () => {
                     y: e.clientY,
                   }
                 )
-                // creating a valid new node to add to chatbotFlow
+                // creating a valid new node to add to website
                 const newNode = {
                   id: crypto.randomUUID(),
                   position: {

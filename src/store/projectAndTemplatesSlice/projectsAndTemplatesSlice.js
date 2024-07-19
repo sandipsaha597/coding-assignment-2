@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { LOCAL_STORAGE_KEYS } from '../../constants'
 import { getPageById, getProjectById } from '../../core/utilFunctions'
-import { getItemById } from '../../utils/functions'
-// getSavedProjectsAndTemplates()
-const savedProjectsAndTemplates = null
+import { getItemById, getValueFromLocalStorage } from '../../utils/functions'
+
+const savedProjectsAndTemplates = getValueFromLocalStorage(
+  LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE
+)
 /*
-  This state contains the nodes and edges for the chatbotFlowBuilder.
+  This state contains the nodes and edges for the websiteBuilder.
   It should only include values that:
   - Continuously change,
   - Are serializable,

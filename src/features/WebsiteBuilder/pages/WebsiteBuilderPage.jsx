@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 function WebsiteBuilder() {
-  // useChatbotFlowBuilder contains all the functionalities, states, context and methods related to chatbotFlow
+  // useChatbotFlowBuilder contains all the functionalities, states, context and methods related to website
   const {
     nodes,
     websiteBuilderRef,

@@ -2,11 +2,8 @@ import { useRef } from 'react'
 import { WebsiteBuilderContext } from './WebsiteBuilderContext'
 
 const WebsiteBuilderProvider = ({ children }) => {
-  /* chatbotFlowBuilder - start */
-  // reference of the chatbotFlowBuilder reactFlow component
+  // reference of the websiteBuilder canvas
   const websiteBuilderRef = useRef(null)
-
-  /* chatbotFlowBuilder - end */
 
   // all the values and methods available in AppContext
   const value = {

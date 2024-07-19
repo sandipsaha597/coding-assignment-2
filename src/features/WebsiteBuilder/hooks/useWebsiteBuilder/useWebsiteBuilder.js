@@ -2,33 +2,33 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPageById, getProjectById } from '../../../../core/utilFunctions.js'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
-import { chatbotFlowBuilderSliceActions } from '../../redux/chatbotFlowBuilderSlice.js'
+import { websiteBuilderSliceActions } from '../../redux/websiteBuilderSlice.js'
 import { getNewPageObj } from '../../utils/utils.js'
 import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates.js'
 import { debounce } from '@mui/material'
 
 /**
- * This hook contains the global state, context, and methods for the chatbotFlowBuilder.
+ * This hook contains the global state, context, and methods for the websiteBuilder.
  *
- * @returns {Object} An object containing various states, context, and methods to interact with the chatbotFlowBuilder.
+ * @returns {Object} An object containing various states, context, and methods to interact with the websiteBuilder.
  *
  * Properties:
- *  - {Array} nodes: The nodes currently present in the chatbotFlowBuilder.
+ *  - {Array} nodes: The nodes currently present in the websiteBuilder.
  *  - {Function} addNode: A function to add a node to the flow.
  *  - {Array} selectedNodes: Nodes that are currently selected in the flow.
  *  - {Function} onNodesChange: A React Flow prop. Pass the values as they are.
  *  - {Function} editNodeData: A function to edit the data of an existing node.
- *  - {Array} edges: The edges currently present in the chatbotFlowBuilder.
+ *  - {Array} edges: The edges currently present in the websiteBuilder.
  *  - {Function} onEdgesChange: A React Flow prop. Pass the values as they are.
  *  - {Function} onConnect: A React Flow prop. Pass the values as they are.
- *  - {Ref} chatbotReactFlowRef: HTML element reference of the chatbotFlowBuilder.
- *  - {Object} chatbotReactFlowInstance: The instance of chatbotReactFlow, initialized upon chatbotFlow (reactFlow) initialization.
+ *  - {Ref} chatbotReactFlowRef: HTML element reference of the websiteBuilder.
+ *  - {Object} chatbotReactFlowInstance: The instance of chatbotReactFlow, initialized upon website (reactFlow) initialization.
  *        This includes methods like addNodes, screenToFlowPosition, etc. Refer to the React Flow documentation for more info: https://reactflow.dev/api-reference/types/react-flow-instance
  *  - {Function} setChatbotReactFlowInstance: Sets the chatbotReactFlowInstance. Pass it in the onInit prop of React Flow.
  */
 
 export const useWebsiteBuilder = () => {
-  const websiteBuilderState = useSelector((state) => state.chatbotFlowBuilder)
+  const websiteBuilderState = useSelector((state) => state.websiteBuilder)
   const { pages, activePageId } = websiteBuilderState
 
   const { websiteBuilderRef } = useWebsiteBuilderContext()
@@ -55,7 +55,7 @@ export const useWebsiteBuilder = () => {
 
   /*  */
   /**
-   * use this function to add a node to chatbotFlowBuilder.
+   * use this function to add a node to websiteBuilder.
    * newNode should be a valid reactFlow node
    * to remove a a node just select the node in the UI and press backspace
    * that node and all the edges will get deleted automatically
@@ -65,20 +65,18 @@ export const useWebsiteBuilder = () => {
    */
   const addNode = useCallback(
     (newNode) => {
-      dispatch(chatbotFlowBuilderSliceActions.addNode({ newNode }))
+      dispatch(websiteBuilderSliceActions.addNode({ newNode }))
     },
     [dispatch]
   )
   const addPage = useCallback(() => {
-    dispatch(
-      chatbotFlowBuilderSliceActions.addPage({ newPage: getNewPageObj() })
-    )
+    dispatch(websiteBuilderSliceActions.addPage({ newPage: getNewPageObj() }))
   }, [dispatch])
 
   const changeActivePage = useCallback(
     (pageId) => {
       dispatch(
-        chatbotFlowBuilderSliceActions.changeActivePage({
+        websiteBuilderSliceActions.changeActivePage({
           pageId,
         })
       )
@@ -91,7 +89,7 @@ export const useWebsiteBuilder = () => {
     If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
   const onNodesChange = useCallback(
     (changes) =>
-      dispatch(chatbotFlowBuilderSliceActions.onNodesChange({ changes })),
+      dispatch(websiteBuilderSliceActions.onNodesChange({ changes })),
     [dispatch]
   )
 
@@ -103,7 +101,7 @@ export const useWebsiteBuilder = () => {
   const editNodeData = useCallback(
     (nodeId, newData) => {
       dispatch(
-        chatbotFlowBuilderSliceActions.editNodeData({
+        websiteBuilderSliceActions.editNodeData({
           nodeId,
           newData,
         })
@@ -116,7 +114,7 @@ export const useWebsiteBuilder = () => {
     (id) => {
       const [project] = getProjectById(id)
       dispatch(
-        chatbotFlowBuilderSliceActions.setProject({
+        websiteBuilderSliceActions.setProject({
           project,
         })
       )

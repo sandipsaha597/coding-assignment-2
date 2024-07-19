@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getNodeById, getPageById } from '../../../core/utilFunctions'
 
 /*
-  This state contains the nodes and edges for the chatbotFlowBuilder.
+  This state contains the nodes and edges for the websiteBuilder.
   It should only include values that:
   - Continuously change,
   - Are serializable,
@@ -83,7 +83,7 @@ const applyNodeChanges = (changes, nodes) => {
   return nodes
 }
 
-const chatbotFlowBuilderSlice = createSlice({
+const websiteBuilderSlice = createSlice({
   name: 'websiteBuilder',
   initialState,
   reducers: {
@@ -134,10 +134,9 @@ const chatbotFlowBuilderSlice = createSlice({
   },
 })
 
-export const websiteBuilderSelector = (state) => state.chatbotFlowBuilder
-export const websiteBuilderPagesSelector = (state) =>
-  state.chatbotFlowBuilder.pages
+export const websiteBuilderSelector = (state) => state.websiteBuilder
+export const websiteBuilderPagesSelector = (state) => state.websiteBuilder.pages
 
-export const chatbotFlowBuilderSliceActions = chatbotFlowBuilderSlice.actions
-const chatbotFlowBuilderSliceReducer = chatbotFlowBuilderSlice.reducer
-export default chatbotFlowBuilderSliceReducer
+export const websiteBuilderSliceActions = websiteBuilderSlice.actions
+const websiteBuilderSliceReducer = websiteBuilderSlice.reducer
+export default websiteBuilderSliceReducer

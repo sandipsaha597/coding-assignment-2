@@ -1,5 +1,3 @@
-import { nodesWithHandleCountN } from '../utilFunctions'
-
 /**
  * Error types for validation before saving.
  *
@@ -10,7 +8,7 @@ export const validationBeforeSaveErrorTypes = {
 }
 
 /**
- * Validates the chatbotFlowBuilder state before saving.
+ * Validates the websiteBuilder state before saving.
  *
  * It uses nodesWithHandleCountN function to get the nodeIds of nodes which has exactly 0 edges connected to target handle
  * validations:
@@ -22,18 +20,16 @@ export const validationBeforeSaveErrorTypes = {
  * - {string} - A descriptive error message if validation failed (empty string if validation passed).
  */
 export const validationBeforeSave = () => {
-  // Get node IDs that have exactly 0 target handles
-  const nodeIds = nodesWithHandleCountN(0, 'target')
-
-  // Check if more than one node has an empty target handle
-  if (nodeIds.length > 1) {
-    return [
-      false,
-      validationBeforeSaveErrorTypes.moreThanOneNodeHasEmptyTargetHandle,
-      'More than one node has empty target handle',
-    ]
-  }
-
-  // Return validation passed status if there are no issues
-  return [true, '', '']
+  // // Get node IDs that have exactly 0 target handles
+  // const nodeIds = nodesWithHandleCountN(0, 'target')
+  // // Check if more than one node has an empty target handle
+  // if (nodeIds.length > 1) {
+  //   return [
+  //     false,
+  //     validationBeforeSaveErrorTypes.moreThanOneNodeHasEmptyTargetHandle,
+  //     'More than one node has empty target handle',
+  //   ]
+  // }
+  // // Return validation passed status if there are no issues
+  // return [true, '', '']
 }

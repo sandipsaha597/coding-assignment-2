@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 
-// Text node to show in chatbotFlow
+// Text node to show in website
 const ButtonNodeInReactFlow = ({ data }) => {
   return <StyledButton>{data.buttonText}</StyledButton>
 }

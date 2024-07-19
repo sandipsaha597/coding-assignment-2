@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 
-// Text node to show in chatbotFlow
+// Text node to show in website
 const TextNodeInReactFlow = ({ data }) => {
   return (
     <Typography

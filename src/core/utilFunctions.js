@@ -1,6 +1,7 @@
 import { getValueFromLocalStorage } from '../utils/functions'
 import { LOCAL_STORAGE_KEYS } from '../constants'
 import { store } from '../store/store'
+import { produce } from 'immer'
 
 /**
  * Core utility functions.
@@ -34,9 +35,17 @@ import { store } from '../store/store'
  * For that case nodes parameter is provided. Please Provide the nodes argument when using this function in a pure function.
  */
 export const getNodeById = (id, nodes) => {
-  const currentNodes = nodes ?? store.getState().chatbotFlowBuilder.nodes
+  const currentNodes = nodes
   const nodeIndex = currentNodes.findIndex((node) => id === node.id)
   return [currentNodes[nodeIndex], nodeIndex]
+}
+
+export const getPageById = (id, pages) => {
+  const currentPages = pages
+  const activePageId = id
+  const pageIndex = currentPages.findIndex((page) => activePageId === page.id)
+  if (pageIndex === -1) return [currentPages[0], 0]
+  return [currentPages[pageIndex], pageIndex]
 }
 
 /**
@@ -50,19 +59,26 @@ export const getNodeById = (id, nodes) => {
  * or null if not found or if the key does not exist.
  */
 
-export const getSavedChatbotFlowBuilderState = () =>
-  getValueFromLocalStorage(LOCAL_STORAGE_KEYS.SAVED_CHATBOT_FLOW_BUILDER_STATE)
+export const getSavedProjectsAndTemplates = () =>
+  getValueFromLocalStorage(
+    LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE
+  )
 
 // saves the current chatbotFlowBuilder state to local storage
-export const saveChatbotFlow = () => {
+export const saveProjectsAndTemplatesToLocalStorage = (
+  projectsAndTemplates
+) => {
   /* in case the store.getState().chatbotFlowBuilder contains non-serializable values or/and bigInt
   numbers or/and circular object the JSON.stringify will fail that's why wrapped the whole thing in
   a try catch block */
+  projectsAndTemplates = produce(projectsAndTemplates, (draft) => {
+    draft.projects.forEach((v) => delete v.activePageId)
+    draft.templates.forEach((v) => delete v.activePageId)
+  })
   try {
-    const chatbotFlowBuilderState = store.getState().chatbotFlowBuilder
     localStorage.setItem(
-      LOCAL_STORAGE_KEYS.SAVED_CHATBOT_FLOW_BUILDER_STATE,
-      JSON.stringify(chatbotFlowBuilderState)
+      LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE,
+      JSON.stringify(projectsAndTemplates)
     )
     return [true, 'Flow saved']
   } catch (err) {

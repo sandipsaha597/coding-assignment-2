@@ -1,10 +1,10 @@
 import { Button, styled, useMediaQuery, useTheme } from '@mui/material'
 import { memo } from 'react'
 import { rightSidePanelWidth } from '../../constants'
-import { saveChatbotFlow } from '../../core/utilFunctions'
-import { validationBeforeSave } from '../../core/validationFunctions/validationBeforeSave'
-import { toast } from '../../customLibraries/MyReactToastify/toast'
 import SaveOutlinedIconMUI from '@mui/icons-material/SaveOutlined'
+import { toast } from '../../../../customLibraries/MyReactToastify/toast'
+import { validationBeforeSave } from '../../../../core/validationFunctions/validationBeforeSave'
+import { saveProjectsAndTemplatesToLocalStorage } from '../../../../core/utilFunctions'
 
 // memoized header to prevent unnecessary re-renders
 const Header = memo(function Header() {
@@ -39,7 +39,8 @@ const Header = memo(function Header() {
             return
           }
           // save the flow to localStorage
-          const [isFlowSaved, message] = saveChatbotFlow()
+          const [isFlowSaved, message] =
+            saveProjectsAndTemplatesToLocalStorage()
           if (isFlowSaved) {
             // if saving succeeds it shows user a success message
             toast.success(message)

@@ -1,9 +1,7 @@
-import MessageOutlinedIconMUI from '@mui/icons-material/MessageOutlined'
-import { Box, Typography, styled } from '@mui/material'
-import { WhatsAppIcon } from '../../../assets/svgIcons'
+import { styled } from '@mui/material'
 
 // Text node to show in chatbotFlow
-const ImageNodeInReactFlow = ({ selected, data }) => {
+const ImageNodeInReactFlow = ({ data }) => {
   return (
     <>
       {/* simple styling as per the design provided */}
@@ -24,13 +22,6 @@ const ImageNodeInReactFlow = ({ selected, data }) => {
 }
 
 export default ImageNodeInReactFlow
-
-const StyledTextNodeInReactFlow = styled('div')(({ selected }) => ({
-  // the selected nodes should be highlighted
-  // outline: `2px solid ${selected ? '#7386bc' : 'transparent'}`,
-  // borderRadius: '10px',
-  // overflow: 'hidden',
-}))
 
 const StyledImg = styled('img')({
   display: 'block',

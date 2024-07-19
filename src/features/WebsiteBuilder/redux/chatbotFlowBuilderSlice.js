@@ -1,10 +1,6 @@
-import { createSlice, current } from '@reduxjs/toolkit'
-import {
-  getNodeById,
-  getSavedChatbotFlowBuilderState,
-} from '../core/utilFunctions'
+import { createSlice } from '@reduxjs/toolkit'
+import { getNodeById, getPageById } from '../../../core/utilFunctions'
 
-const savedChatbotFlowBuilderState = getSavedChatbotFlowBuilderState()
 /*
   This state contains the nodes and edges for the chatbotFlowBuilder.
   It should only include values that:
@@ -20,39 +16,50 @@ const savedChatbotFlowBuilderState = getSavedChatbotFlowBuilderState()
   After consulting ChatGPT, I learned that it is not only okay to use them together but also considered a very good practice 
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
-const initialState =
-  savedChatbotFlowBuilderState === null
-    ? {
-        nodes: [
-          {
-            id: '1',
-            type: 'textNode',
-            data: {
-              textMessage: 'hello world',
-            },
-            position: {
-              x: 10,
-              y: 100,
-            },
-            width: 300,
-            height: 'auto',
+
+const initialState = {
+  id: crypto.randomUUID(),
+  projectName: 'My project',
+  activePageId: '',
+  pages: [
+    {
+      id: crypto.randomUUID(),
+      pageDetails: {
+        pageTitle: '',
+        pageDescription: '',
+        pageSlug: '/',
+      },
+      nodes: [
+        {
+          id: '1',
+          type: 'textNode',
+          data: {
+            textMessage: 'hello world',
           },
-          {
-            id: '2',
-            type: 'textNode',
-            data: {
-              textMessage: 'hello world 2',
-            },
-            position: {
-              x: 100,
-              y: 200,
-            },
-            width: 300,
-            height: 'auto',
+          position: {
+            x: 10,
+            y: 100,
           },
-        ],
-      }
-    : savedChatbotFlowBuilderState
+          width: 300,
+          height: 'auto',
+        },
+        {
+          id: '2',
+          type: 'textNode',
+          data: {
+            textMessage: 'hello world 2',
+          },
+          position: {
+            x: 100,
+            y: 200,
+          },
+          width: 300,
+          height: 'auto',
+        },
+      ],
+    },
+  ],
+}
 
 const applyNodeChanges = (changes, nodes) => {
   changes.forEach((change) => {
@@ -86,16 +93,24 @@ const chatbotFlowBuilderSlice = createSlice({
      * @param {Object} payload.newNode - a valid new node
      */
     addNode: (state, { payload }) => {
-      state.nodes.push(payload.newNode)
+      const [page] = getPageById(state.activePageId, state.pages)
+      page.nodes.push(payload.newNode)
     },
     removeNode: (state, { payload }) => {
       state.nodes = state.nodes.filter((v) => v.id !== payload.id)
+    },
+    addPage: (state, { payload }) => {
+      state.pages.push(payload.newPage)
+    },
+    changeActivePage: (state, { payload }) => {
+      state.activePageId = payload.pageId
     },
     /* reactFlow prop */
     /* upon selecting a node and pressing backspace deletes that node
     If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
     onNodesChange: (state, { payload }) => {
-      state.nodes = applyNodeChanges(payload.changes, state.nodes)
+      const [activePage] = getPageById(state.activePageId, state.pages)
+      activePage.nodes = applyNodeChanges(payload.changes, activePage.nodes)
     },
     /**
      * Edits the data of a node in the state based on the provided node ID.
@@ -105,11 +120,12 @@ const chatbotFlowBuilderSlice = createSlice({
      * @param {Object} payload.newData - newData object to replace the old data object
      */
     editNodeData: (state, { payload }) => {
-      const [, nodeIndex] = getNodeById(payload.nodeId, state.nodes)
+      const [activePage] = getPageById(state.activePageId, state.pages)
+      const [node, nodeIndex] = getNodeById(payload.nodeId, activePage.nodes)
       if (nodeIndex === -1) {
         console.error('Attempt to edit a node which does not exist')
       } else {
-        state.nodes[nodeIndex].data = payload.newData
+        node.data = payload.newData
       }
     },
   },

@@ -1,12 +1,12 @@
 import { styled } from '@mui/material'
 import { useEffect, useState } from 'react'
-import useChatbotFlowBuilder from '../../hooks/useChatbotFlowBuilder/useChatbotFlowBuilder'
 import SettingsPanelEditForm from './SettingsPanelForm'
 import SettingsPanelHeader from './SettingsPanelHeader'
 import { settingsPanelTypeToTitleMap } from './constants'
+import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 
 const SettingsPanel = () => {
-  const { selectedNodes } = useChatbotFlowBuilder()
+  const { selectedNodes } = useWebsiteBuilder()
   const [settingsPanelShow, setSettingsPanelShow] = useState(false)
 
   useEffect(() => {

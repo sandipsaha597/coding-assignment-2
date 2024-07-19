@@ -3,10 +3,10 @@ import ImageOutlinedIconMUI from '@mui/icons-material/ImageOutlined'
 import SmartButtonOutlinedIconMUI from '@mui/icons-material/SmartButtonOutlined'
 import VideoCameraBackOutlinedIconMUI from '@mui/icons-material/VideoCameraBackOutlined'
 import { styled } from '@mui/system'
-import { NODE_TYPE_MAP } from '../../constants'
-import useChatbotFlowBuilder from '../../hooks/useChatbotFlowBuilder/useChatbotFlowBuilder'
-import { isElementsOverlappingByMargin } from '../../utils/functions'
-import DragShadow from '../DragShadow/DragShadow'
+import DragShadow from '../../../../components/DragShadow/DragShadow'
+import { NODE_TYPE_MAP } from '../../../../constants'
+import { isElementsOverlappingByMargin } from '../../../../utils/functions'
+import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import NodeInNodesPanel from './NodeInNodesPanel'
 
 // list of nodes currently available is the app and shown in the nodes panel
@@ -19,8 +19,8 @@ const nodesInNodesPanel = [
     defaultData: {
       textMessage: 'Text message',
     },
-    width: 300,
-    height: 'auto',
+    defaultWidth: 300,
+    defaultHeight: 'auto',
   },
   {
     id: crypto.randomUUID(),
@@ -28,11 +28,11 @@ const nodesInNodesPanel = [
     icon: <ImageOutlinedIconMUI fontSize="large" />,
     text: 'Image',
     defaultData: {
-      src: 'https://placehold.co/400x400',
+      src: 'https://placehold.co/300x300',
       alt: 'dummy image',
     },
-    defaultWidth: 400,
-    defaultHeight: 400,
+    defaultWidth: 300,
+    defaultHeight: 300,
   },
   {
     id: crypto.randomUUID(),
@@ -69,7 +69,7 @@ const getMousePositionRelativeToElement = (element, mousePosition) => {
 }
 
 const NodesInPanelList = () => {
-  const { addNode, chatbotReactFlowRef } = useChatbotFlowBuilder()
+  const { addNode, websiteBuilderRef } = useWebsiteBuilder()
 
   return (
     <StyledNodesInPanelList>
@@ -97,7 +97,7 @@ const NodesInPanelList = () => {
 
                 // check if the chatBotFlow box and node in panel box are overlapping of not
                 const isOverlapping = isElementsOverlappingByMargin(
-                  chatbotReactFlowRef.current,
+                  websiteBuilderRef.current,
                   draggedItem,
                   // the draggedItem(node in panel) should be 50% or more inside of the chatBotFlow
                   draggedItemBoundingClientRect.width / 2,
@@ -109,7 +109,7 @@ const NodesInPanelList = () => {
                 // need the screenToFlowPosition to place the node in the right place of the flow
                 // const position = chatbotReactFlowInstance.screenToFlowPosition()
                 const position = getMousePositionRelativeToElement(
-                  chatbotReactFlowRef.current.children[0],
+                  websiteBuilderRef.current.children[0],
                   {
                     x: e.clientX,
                     y: e.clientY,

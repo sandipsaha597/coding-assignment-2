@@ -1,7 +1,9 @@
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAppContext } from '../../AppContext/useAppContext'
-import { chatbotFlowBuilderSliceActions } from '../../store/chatbotFlowBuilderSlice'
+import { chatbotFlowBuilderSliceActions } from '../../redux/chatbotFlowBuilderSlice.js'
+import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
+import { getPageById } from '../../../../core/utilFunctions.js'
+import { getNewPageObj } from '../../utils/utils.js'
 
 /**
  * This hook contains the global state, context, and methods for the chatbotFlowBuilder.
@@ -23,16 +25,15 @@ import { chatbotFlowBuilderSliceActions } from '../../store/chatbotFlowBuilderSl
  *  - {Function} setChatbotReactFlowInstance: Sets the chatbotReactFlowInstance. Pass it in the onInit prop of React Flow.
  */
 
-const useChatbotFlowBuilder = () => {
-  const nodes = useSelector((state) => state.chatbotFlowBuilder.nodes)
-  const edges = useSelector((state) => state.chatbotFlowBuilder.edges)
-  const {
-    chatbotReactFlowRef,
-    chatbotReactFlowInstance,
-    setChatbotReactFlowInstance,
-  } = useAppContext().chatbotFlowBuilder
-  const dispatch = useDispatch()
+export const useWebsiteBuilder = () => {
+  const { pages, activePageId } = useSelector(
+    (state) => state.chatbotFlowBuilder
+  )
 
+  const { websiteBuilderRef } = useWebsiteBuilderContext()
+  const dispatch = useDispatch()
+  const [activePage] = getPageById(activePageId, pages)
+  const nodes = activePage.nodes
   // when a node is selected, that node's selected fields becomes true automatically
   const selectedNodes = useMemo(() => {
     return nodes
@@ -56,6 +57,22 @@ const useChatbotFlowBuilder = () => {
     },
     [dispatch]
   )
+  const addPage = useCallback(() => {
+    dispatch(
+      chatbotFlowBuilderSliceActions.addPage({ newPage: getNewPageObj() })
+    )
+  }, [dispatch])
+
+  const changeActivePage = useCallback(
+    (pageId) => {
+      dispatch(
+        chatbotFlowBuilderSliceActions.changeActivePage({
+          pageId,
+        })
+      )
+    },
+    [dispatch]
+  )
 
   /* reactFlow prop */
   /* upon selecting a node and pressing backspace deletes that node
@@ -63,26 +80,6 @@ const useChatbotFlowBuilder = () => {
   const onNodesChange = useCallback(
     (changes) =>
       dispatch(chatbotFlowBuilderSliceActions.onNodesChange({ changes })),
-    [dispatch]
-  )
-
-  /* reactFlow prop */
-  /* upon selecting an edge and pressing backspace deletes that edge. 
-    If onEdgeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component
-    upon selecting a node and pressing backspace deletes that node
-    edges related to that node should delete as well.
-    If onEdgeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component
-    */
-  const onEdgesChange = useCallback(
-    (changes) =>
-      dispatch(chatbotFlowBuilderSliceActions.onEdgesChange({ changes })),
-    [dispatch]
-  )
-
-  /* reactFlow prop */
-  /* triggers upon valid connection of two node. */
-  const onConnect = useCallback(
-    (params) => dispatch(chatbotFlowBuilderSliceActions.onConnect({ params })),
     [dispatch]
   )
 
@@ -108,14 +105,11 @@ const useChatbotFlowBuilder = () => {
     addNode,
     selectedNodes,
     onNodesChange,
+    addPage,
     editNodeData,
-    edges,
-    onEdgesChange,
-    onConnect,
-    chatbotReactFlowRef,
-    chatbotReactFlowInstance,
-    setChatbotReactFlowInstance,
+    pages,
+    activePageId,
+    changeActivePage,
+    websiteBuilderRef,
   }
 }
-
-export default useChatbotFlowBuilder

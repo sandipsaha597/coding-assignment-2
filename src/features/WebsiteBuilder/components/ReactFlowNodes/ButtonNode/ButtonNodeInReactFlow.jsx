@@ -2,11 +2,7 @@ import { styled } from '@mui/material'
 
 // Text node to show in chatbotFlow
 const ButtonNodeInReactFlow = ({ data }) => {
-  return (
-    <StyledButton onClick={() => console.log('click')}>
-      {data.buttonText}
-    </StyledButton>
-  )
+  return <StyledButton>{data.buttonText}</StyledButton>
 }
 
 export default ButtonNodeInReactFlow

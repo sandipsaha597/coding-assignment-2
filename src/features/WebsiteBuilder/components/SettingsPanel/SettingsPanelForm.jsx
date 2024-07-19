@@ -1,10 +1,10 @@
 import { styled } from '@mui/material'
-import { NODE_TYPE_FORM_COMPONENT_MAP } from '../../constants'
-import useChatbotFlowBuilder from '../../hooks/useChatbotFlowBuilder/useChatbotFlowBuilder'
+import { NODE_TYPE_FORM_COMPONENT_MAP } from '../../../../constants'
+import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 
 // this hook implements the functionalities of SettingsPanelForm
 const useSettingsPanelForm = () => {
-  const { selectedNodes, editNodeData } = useChatbotFlowBuilder()
+  const { selectedNodes, editNodeData } = useWebsiteBuilder()
   // if exactly one node is selected only then settings panel form should be visible
   const settingsPanelFormVisible = selectedNodes.length === 1 ? true : false
 

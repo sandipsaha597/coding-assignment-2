@@ -1,11 +1,11 @@
-import ButtonNodeEditForm from './components/ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonNodeEditForm'
-import ImageNodeEditForm from './components/ReactFlowNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
-import TextNodeEditForm from './components/ReactFlowNodeEditForms/TextNodeEditForm/TextNodeEditForm'
-import VideoNodeEditForm from './components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
-import ButtonNodeInReactFlow from './components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
-import ImageNodeInReactFlow from './components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
-import TextNodeInReactFlow from './components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
-import VideoNodeInReactFlow from './components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
+import ButtonNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonNodeEditForm'
+import ImageNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
+import TextNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/TextNodeEditForm/TextNodeEditForm'
+import VideoNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
+import ButtonNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
+import ImageNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
+import TextNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
+import VideoNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
 
 /**
  * Naming conventions:
@@ -15,13 +15,6 @@ import VideoNodeInReactFlow from './components/ReactFlowNodes/VideoNode/VideoNod
  * - camelCase names (e.g., defaultEdgeOptions) indicate that names are used only in the frontend
  *   codebase and can be changed more easily.
  */
-
-// width of the right side panel of the app
-export const rightSidePanelWidth = {
-  sm: '90px',
-  md: '200px',
-  lg: '400px',
-}
 
 export const renderMode = {
   editor: 'editor',
@@ -64,5 +57,5 @@ export const NODE_TYPE_FORM_COMPONENT_MAP = {
 
 // Keys used for storing data in localStorage
 export const LOCAL_STORAGE_KEYS = {
-  SAVED_CHATBOT_FLOW_BUILDER_STATE: 'savedChatbotFlowBuilderState',
+  SAVED_PROJECTS_AND_TEMPLATES_STATE: 'savedProjectsAndTemplatesState',
 }

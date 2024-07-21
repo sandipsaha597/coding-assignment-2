@@ -24,7 +24,12 @@ import { useDragShadow } from '../../hooks/useDragShadow/useDragShadow'
  * ```
  */
 
-const DragShadow = ({ children, onDrag = () => {}, onDrop = () => false }) => {
+const DragShadow = ({
+  children,
+  onDrag = () => {},
+  onDrop = () => false,
+  dragShadowSx,
+}) => {
   /* All the functionalities are implemented inside the useDragShadow hook 
     instead of using useDragShadow hook, draggable prop and onDragStart, onDragEnd etc attributes and event could be used
     but it gives a translucent blur effect on the shadow which I don't like so I implemented my own functionality and styles.
@@ -40,12 +45,7 @@ const DragShadow = ({ children, onDrag = () => {}, onDrop = () => false }) => {
     <>
       {/* Using the sx prop to apply styles instead of the style attribute because inline styles can be
       detected as a security vulnerability in various security scans due to potential XSS attacks. */}
-      <Box
-        className="hello"
-        ref={dragItemRef}
-        {...dragItemPropsRest}
-        sx={dragItemStyles}
-      >
+      <Box ref={dragItemRef} {...dragItemPropsRest} sx={dragItemStyles}>
         {children}
       </Box>
       {/* the shadow of the drag item which moves and follows the mouse */}
@@ -56,6 +56,7 @@ const DragShadow = ({ children, onDrag = () => {}, onDrop = () => false }) => {
           ...dragShadowStyles,
           width: dragItemRef.current?.getBoundingClientRect().width,
           height: dragItemRef.current?.getBoundingClientRect().height,
+          ...dragShadowSx,
         }}
       >
         {/* the exact same children is rendered so it looks the exact same as drag item */}

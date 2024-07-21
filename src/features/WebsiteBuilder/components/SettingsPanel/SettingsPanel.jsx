@@ -5,7 +5,7 @@ import SettingsPanelHeader from './SettingsPanelHeader'
 import { settingsPanelTypeToTitleMap } from './constants'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 
-const SettingsPanel = () => {
+const useSettingsPanel = () => {
   const { selectedNodes } = useWebsiteBuilder()
   const [settingsPanelShow, setSettingsPanelShow] = useState(false)
 
@@ -18,6 +18,12 @@ const SettingsPanel = () => {
       setSettingsPanelShow(false)
     }
   }, [selectedNodes])
+  return { selectedNodes, settingsPanelShow, setSettingsPanelShow }
+}
+
+const SettingsPanel = () => {
+  const { selectedNodes, settingsPanelShow, setSettingsPanelShow } =
+    useSettingsPanel()
 
   return (
     <StyledSettingsPanel settingsPanelShow={settingsPanelShow}>
@@ -41,4 +47,5 @@ const StyledSettingsPanel = styled('section')(({ settingsPanelShow }) => ({
   height: '100%',
   transform: settingsPanelShow ? 'translate(0%, 0)' : 'translate(-100%, 0)',
   transition: '.4s ease-in-out',
+  zIndex: 100,
 }))

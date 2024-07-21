@@ -1,5 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { getNodeById, getPageById } from '../../../core/utilFunctions'
+import { createSlice, current } from '@reduxjs/toolkit'
+import {
+  getNodeById,
+  getNodeInProjectById,
+  getPageById,
+} from '../../../core/utilFunctions'
+import { NODE_TYPE_MAP } from '../../../constants'
 
 /*
   This state contains the nodes and edges for the websiteBuilder.
@@ -21,6 +26,29 @@ const initialState = {
   id: crypto.randomUUID(),
   projectName: 'My project',
   activePageId: '',
+  navbar: {
+    styles: {
+      width: '100%',
+      height: 'auto',
+      background: 'red',
+      itemColor: 'white',
+      activeItemColor: 'green',
+      gap: '10px',
+      margin: 'auto',
+    },
+    items: [
+      {
+        id: crypto.randomUUID(),
+        title: 'Home',
+        to: '',
+      },
+      {
+        id: crypto.randomUUID(),
+        title: 'Portfolio',
+        to: 'portfolio',
+      },
+    ],
+  },
   pages: [
     {
       id: crypto.randomUUID(),
@@ -61,28 +89,6 @@ const initialState = {
   ],
 }
 
-const applyNodeChanges = (changes, nodes) => {
-  changes.forEach((change) => {
-    const { id, type } = change
-    nodes.forEach((node) => {
-      if (id === node.id) {
-        if (type === 'select') {
-          if (change.selected === false) delete node.selected
-          if (change.selected === true) node.selected = true
-        }
-        if (type === 'position') {
-          node.position = change.position
-        }
-        if (type === 'resize') {
-          node.width += change.width
-          node.height += change.height
-        }
-      }
-    })
-  })
-  return nodes
-}
-
 const websiteBuilderSlice = createSlice({
   name: 'websiteBuilder',
   initialState,
@@ -114,6 +120,26 @@ const websiteBuilderSlice = createSlice({
     onNodesChange: (state, { payload }) => {
       const [activePage] = getPageById(state.activePageId, state.pages)
       activePage.nodes = applyNodeChanges(payload.changes, activePage.nodes)
+    },
+    onNodeSelect: (state, { payload }) => {
+      state.pages.forEach((page) =>
+        page.nodes.forEach((v) => (v.selected = false))
+      )
+      const nodeId = payload.id
+      if (nodeId !== false) {
+        const { node } = getNodeInProjectById(payload.id, state)
+        node.selected = true
+      }
+    },
+    updateNodeSize: (state, { payload }) => {
+      const { node } = getNodeInProjectById(payload.id, state)
+      node.width = payload.width
+      node.height = payload.height
+      node.position = payload.position
+    },
+    updateNodePosition: (state, { payload }) => {
+      const { node } = getNodeInProjectById(payload.id, state)
+      node.position = payload.position
     },
     /**
      * Edits the data of a node in the state based on the provided node ID.

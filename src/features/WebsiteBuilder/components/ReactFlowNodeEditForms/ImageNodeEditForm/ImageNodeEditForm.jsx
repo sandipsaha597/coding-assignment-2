@@ -22,7 +22,7 @@ const ImageNodeEditForm = memo(function ImageNodeEditForm({
       <TextField
         id="image-url"
         type="url"
-        value={data.textMessage}
+        value={data.src}
         onChange={(e) => handleFormChange('src', e.target.value)}
         label="Image URL"
         variant="outlined"

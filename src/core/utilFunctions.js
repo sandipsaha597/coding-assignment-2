@@ -42,6 +42,18 @@ export const getNodeById = (id, nodes) => {
   return [nodes[nodeIndex], nodeIndex]
 }
 
+export const getNodeInProjectById = (id, project) => {
+  const pages = project.pages
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i]
+    const nodes = page.nodes
+    const [node, index] = getNodeById(id, nodes)
+    if (index === -1) continue
+    return { node, nodeIndex: index, page, pagesIndex: i }
+  }
+  return { node: null, nodeIndex: -1, page: null, pagesIndex: -1 }
+}
+
 export const getPageById = (id, pages) => {
   const currentPages = pages
   const activePageId = id
@@ -57,6 +69,13 @@ export const getTemplateById = (id, templates) => {
 export const getProjectById = (id, projects) => {
   projects = projects ?? projectsSelector(store.getState())
   return getItemById(id, projects)
+}
+export const getProjectOrTemplateById = (id) => {
+  const [project, projectIndex] = getProjectById(id)
+  if (projectIndex !== -1) return [project, projectIndex]
+  const [template, templateIndex] = getTemplateById(id)
+  if (templateIndex !== -1) return [template, templateIndex]
+  return [null, -1]
 }
 
 /**

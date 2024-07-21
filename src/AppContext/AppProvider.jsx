@@ -12,8 +12,6 @@ import { AppContext } from './AppContext'
  */
 
 const AppProvider = ({ children }) => {
-  /* websiteBuilder - end */
-
   // all the values and methods available in AppContext
   const value = {}
 

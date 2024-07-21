@@ -2,7 +2,10 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPageById, getProjectById } from '../../../../core/utilFunctions.js'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
-import { websiteBuilderSliceActions } from '../../redux/websiteBuilderSlice.js'
+import {
+  websiteBuilderSelector,
+  websiteBuilderSliceActions,
+} from '../../redux/websiteBuilderSlice.js'
 import { getNewPageObj } from '../../utils/utils.js'
 import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates.js'
 import { debounce } from '@mui/material'
@@ -28,8 +31,8 @@ import { debounce } from '@mui/material'
  */
 
 export const useWebsiteBuilder = () => {
-  const websiteBuilderState = useSelector((state) => state.websiteBuilder)
-  const { pages, activePageId } = websiteBuilderState
+  const websiteBuilderState = useSelector(websiteBuilderSelector)
+  const { pages, activePageId, navbar } = websiteBuilderState
 
   const { websiteBuilderRef } = useWebsiteBuilderContext()
   const { updateProject } = useProjectsAndTemplates()
@@ -38,7 +41,7 @@ export const useWebsiteBuilder = () => {
   const nodes = activePage.nodes
 
   const debounceUpdateProject = useMemo(
-    () => debounce(updateProject, 300),
+    () => debounce(updateProject, 1000),
     [updateProject]
   )
 
@@ -122,11 +125,42 @@ export const useWebsiteBuilder = () => {
     [dispatch]
   )
 
+  const onNodeSelect = useCallback(
+    (id) => dispatch(websiteBuilderSliceActions.onNodeSelect({ id })),
+    [dispatch]
+  )
+
+  const updateNodeSize = useCallback(
+    (id, { width, height, position }) => {
+      dispatch(
+        websiteBuilderSliceActions.updateNodeSize({
+          id,
+          width,
+          height,
+          position,
+        })
+      )
+    },
+    [dispatch]
+  )
+
+  const updateNodePosition = useCallback(
+    (id, position) =>
+      dispatch(websiteBuilderSliceActions.updateNodePosition({ id, position })),
+    [dispatch]
+  )
+
   return {
     nodes,
     addNode,
     selectedNodes,
+
+    onNodeSelect,
+    updateNodeSize,
+    updateNodePosition,
+
     onNodesChange,
+
     addPage,
     editNodeData,
     pages,
@@ -134,5 +168,7 @@ export const useWebsiteBuilder = () => {
     changeActivePage,
     websiteBuilderRef,
     setProject,
+
+    navbar,
   }
 }

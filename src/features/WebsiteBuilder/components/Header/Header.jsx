@@ -14,21 +14,10 @@ const Header = memo(function Header() {
   return (
     <StyledHeader>
       <Button
-        variant="outlined"
+        variant="contained"
         size="small"
-        // tried to style the button close to the UI design provided
-        // ideally the desired styled button should come form design system
         sx={{
           gridArea: 'button',
-          bgcolor: '#fff',
-          fontWeight: 'bold',
-          fontSize: '13px',
-          border: '2px solid #575d99',
-          padding: '3px 24px',
-          color: '#575d99',
-          '&:hover': {
-            border: '2px solid #575d99',
-          },
         }}
         onClick={() => {
           // validating the form before saving
@@ -50,7 +39,11 @@ const Header = memo(function Header() {
           toast.error(message)
         }}
       >
-        {matches ? 'Save Changes' : <SaveOutlinedIconMUI fontSize="small" />}
+        {matches ? (
+          'Save As Template'
+        ) : (
+          <SaveOutlinedIconMUI fontSize="small" />
+        )}
       </Button>
     </StyledHeader>
   )
@@ -64,7 +57,7 @@ const StyledHeader = styled('header')(({ theme }) => {
     gridArea: 'header',
     background: '#f3f3f3',
     placeItems: 'center',
-    gridTemplateAreas: `'normalButton button'`,
+    gridTemplateAreas: `'. button'`,
 
     gridTemplateColumns: `1fr ${rightSidePanelWidth.sm}`,
     [theme.breakpoints.up('md')]: {

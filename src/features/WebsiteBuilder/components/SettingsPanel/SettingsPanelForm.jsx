@@ -1,5 +1,5 @@
 import { styled } from '@mui/material'
-import { NODE_TYPE_FORM_COMPONENT_MAP } from '../../../../constants'
+import { nodeTypeFormComponentMap } from '../../../../constants'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 
 // this hook implements the functionalities of SettingsPanelForm
@@ -18,7 +18,7 @@ const useSettingsPanelForm = () => {
   const selectedNodeType = selectedNodeDetails.type
 
   // depending on the selected node type, it determines which FormComponent to show
-  const FormComponent = NODE_TYPE_FORM_COMPONENT_MAP[selectedNodeType]
+  const FormComponent = nodeTypeFormComponentMap[selectedNodeType]
 
   /**
    * call the function with new values to update selected node's data

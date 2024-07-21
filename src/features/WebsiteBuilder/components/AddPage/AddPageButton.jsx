@@ -4,7 +4,7 @@ import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuild
 const AddPageButton = () => {
   const { addPage } = useWebsiteBuilder()
   return (
-    <Button onClick={addPage} variant="outlined" sx={{ whiteSpace: 'nowrap' }}>
+    <Button onClick={addPage} variant="contained" sx={{ whiteSpace: 'nowrap' }}>
       + Add Page
     </Button>
   )

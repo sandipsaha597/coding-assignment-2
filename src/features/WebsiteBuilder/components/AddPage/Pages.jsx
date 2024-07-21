@@ -5,11 +5,12 @@ const Pages = () => {
   const { pages, activePageId, changeActivePage } = useWebsiteBuilder()
   return pages.map((page, i) => {
     const activePage =
-      activePageId === '' && i === 0
+      !!activePageId === false && i === 0
         ? true
         : activePageId === page.id
         ? true
         : false
+
     return (
       <Paper
         onClick={() => changeActivePage(page.id)}

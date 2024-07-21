@@ -1,24 +1,31 @@
 import { Box, styled } from '@mui/material'
-import { NODE_TYPE_REACT_FLOW_COMPONENT_MAP } from '../../../constants'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { nodeTypeWebsiteBuilderComponentMap } from '../../../constants'
+import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'
 import SettingsPanel from '../components/SettingsPanel/SettingsPanel'
 import WebsiteBuilderCanvas from '../components/WebsiteBuilderCanvas/WebsiteBuilderCanvas'
-import { rightSidePanelWidth } from '../constants'
-import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
+import {
+  nodeResizingMap,
+  rightSidePanelWidth,
+  zIndexManagement,
+} from '../constants'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
-import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
 
 function WebsiteBuilder() {
-  // useChatbotFlowBuilder contains all the functionalities, states, context and methods related to website
+  // useWebsiteBuilder contains all the functionalities, states, context and
+  // methods related to website builder part
   const {
     nodes,
     websiteBuilderRef,
-    setChatbotReactFlowInstance,
-    onNodesChange,
     setProject,
+    onNodeSelect,
+    updateNodeSize,
+    updateNodePosition,
+    navbar,
   } = useWebsiteBuilder()
   const params = useParams()
 
@@ -31,27 +38,21 @@ function WebsiteBuilder() {
       {/* header of the app */}
       <Header />
       <ReactFlowWrapper>
-        <Box sx={{ marginBottom: '100px' }}>
+        <Box bgcolor={'#fff'}>
           <WebsiteBuilderCanvas
             ref={websiteBuilderRef}
+            navbar={navbar}
             nodes={nodes}
-            onNodesChange={(changes) => {
-              onNodesChange(changes)
-            }}
-            nodeTypes={NODE_TYPE_REACT_FLOW_COMPONENT_MAP}
-            onInit={setChatbotReactFlowInstance}
+            onNodeSelect={onNodeSelect}
+            onNodeResizeStop={updateNodeSize}
+            onNodeDragStop={updateNodePosition}
+            nodeTypes={nodeTypeWebsiteBuilderComponentMap}
+            nodeResize={nodeResizingMap}
           />
         </Box>
-        <Box
-          sx={{
-            position: 'sticky',
-            bottom: '20px',
-            margin: 'auto',
-            width: '92%',
-          }}
-        >
+        <PagesAndAddPagesWrapper>
           <PagesAndAddPages />
-        </Box>
+        </PagesAndAddPagesWrapper>
       </ReactFlowWrapper>
       <RightSidePanel>
         <SettingsPanel />
@@ -91,7 +92,9 @@ const ChatbotFlowBuilder = styled('div')(({ theme }) => ({
 
 const ReactFlowWrapper = styled('main')({
   gridArea: 'react-flow',
-  overflowY: 'auto',
+  overflowY: 'scroll',
+  overflowX: 'hidden',
+  background: '#f3f3f3',
 })
 
 const RightSidePanel = styled('aside')({
@@ -103,3 +106,13 @@ const RightSidePanel = styled('aside')({
   overflow: 'hidden',
   position: 'relative',
 })
+
+const PagesAndAddPagesWrapper = styled('div')(({ theme }) => ({
+  position: 'sticky',
+  bottom: 0,
+  margin: 'auto',
+  paddingTop: theme.spacing(3),
+  paddingBottom: theme.spacing(3),
+  width: '92%',
+  zIndex: zIndexManagement.pagesAndAddPages,
+}))

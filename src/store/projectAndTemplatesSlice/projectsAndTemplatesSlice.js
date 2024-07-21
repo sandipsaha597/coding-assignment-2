@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { LOCAL_STORAGE_KEYS } from '../../constants'
+import { LOCAL_STORAGE_KEYS, NODE_TYPE_MAP } from '../../constants'
 import { getPageById, getProjectById } from '../../core/utilFunctions'
 import { getItemById, getValueFromLocalStorage } from '../../utils/functions'
 
@@ -21,16 +21,17 @@ const savedProjectsAndTemplates = getValueFromLocalStorage(
   After consulting ChatGPT, I learned that it is not only okay to use them together but also considered a very good practice 
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
-const generateBlankTemplate = () => {
+const generateBlankTemplate = (id) => {
   return {
+    id: id ?? crypto.randomUUID(),
     projectName: 'Blank template',
     pages: [
       {
         id: crypto.randomUUID(),
         pageDetails: {
-          pageTitle: 'Home page',
-          pageDescription: '',
-          pageSlug: '/',
+          title: 'Home page',
+          description: '',
+          slug: '/',
         },
         nodes: [],
       },
@@ -41,24 +42,47 @@ const generateBlankTemplate = () => {
 const template1 = {
   id: crypto.randomUUID(),
   projectName: 'In built template',
+  navbar: {
+    styles: {
+      width: '100%',
+      height: 'auto',
+      background: 'red',
+      itemColor: 'white',
+      activeItemColor: 'green',
+      gap: '10px',
+      margin: 'auto',
+    },
+    items: [
+      {
+        id: crypto.randomUUID(),
+        title: 'Home',
+        to: '',
+      },
+      {
+        id: crypto.randomUUID(),
+        title: 'Portfolio',
+        to: 'portfolio',
+      },
+    ],
+  },
   pages: [
     {
       id: '6ad8fb18-2e59-42b1-934b-8610cdbca809',
       pageDetails: {
-        pageTitle: 'Home page',
-        pageDescription: '',
-        pageSlug: '/',
+        title: 'Home page',
+        description: '',
+        slug: '',
       },
       nodes: [
         {
           id: '1',
           type: 'textNode',
           data: {
-            textMessage: 'hello world',
+            textMessage: 'This is template 1',
           },
           position: {
-            x: 10,
-            y: 100,
+            x: 0,
+            y: 0,
           },
           width: 300,
           height: 'auto',
@@ -78,6 +102,42 @@ const template1 = {
         },
       ],
     },
+    {
+      id: '0c44bd51-2802-4359-ab19-5482758abd80',
+      pageDetails: {
+        title: 'Portfolio',
+        description: '',
+        slug: 'portfolio',
+      },
+      nodes: [
+        {
+          id: '1',
+          type: 'textNode',
+          data: {
+            textMessage: 'My Portfolio',
+          },
+          position: {
+            x: 10,
+            y: 100,
+          },
+          width: 300,
+          height: 'auto',
+        },
+        {
+          id: '2',
+          type: 'textNode',
+          data: {
+            textMessage: 'Skilled in Figma & Adobe XD',
+          },
+          position: {
+            x: 100,
+            y: 200,
+          },
+          width: 300,
+          height: 'auto',
+        },
+      ],
+    },
   ],
 }
 const template2 = {
@@ -87,9 +147,9 @@ const template2 = {
     {
       id: '409a75c1-4c30-405e-9724-075727614b2c',
       pageDetails: {
-        pageTitle: 'Home page',
-        pageDescription: '',
-        pageSlug: '/',
+        title: 'Home page',
+        description: '',
+        slug: '/',
       },
       nodes: [
         {
@@ -165,7 +225,7 @@ const projectsAndTemplatesSlice = createSlice({
     },
     initializeProject: (state, { payload }) => {
       let [template, index] = getItemById(payload.templateId, state.templates)
-      if (index === -1) template = generateBlankTemplate()
+      if (index === -1) template = generateBlankTemplate(payload.newProjectId)
       state.projects.push({ ...template, id: payload.newProjectId })
     },
   },

@@ -10,3 +10,9 @@ export const rightSidePanelWidth = {
   md: '200px',
   lg: '400px',
 }
+
+export const zIndexManagement = {
+  pagesAndAddPages: 100,
+  nodesPanelListDragShadow: 75,
+  selectedNodeInCanvas: 50,
+}

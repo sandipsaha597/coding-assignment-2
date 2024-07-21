@@ -2,10 +2,10 @@ import ButtonNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNo
 import ImageNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
 import TextNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/TextNodeEditForm/TextNodeEditForm'
 import VideoNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
-import ButtonNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
+import ButtonNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
 import ImageNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
 import TextNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
-import VideoNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
+import VideoNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
 
 /**
  * Naming conventions:
@@ -33,12 +33,11 @@ export const NODE_TYPE_MAP = {
  * Maps the node types to components. It tells reactFlow which component
  * should be shown for each node type. Passed in the nodeTypes prop of reactFlow.
  */
-export const NODE_TYPE_REACT_FLOW_COMPONENT_MAP = {
+export const nodeTypeWebsiteBuilderComponentMap = {
   [NODE_TYPE_MAP.TEXT_NODE]: TextNodeInReactFlow,
   [NODE_TYPE_MAP.IMAGE_NODE]: ImageNodeInReactFlow,
-  [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeInReactFlow,
-  [NODE_TYPE_MAP.BUTTON_NODE]: ButtonNodeInReactFlow,
-  // [NODE_TYPE_MAP.FORM_NODE]: FormNode,
+  [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeInWebsiteBuilder,
+  [NODE_TYPE_MAP.BUTTON_NODE]: ButtonNodeInWebsiteBuilder,
 }
 
 /**
@@ -48,7 +47,7 @@ export const NODE_TYPE_REACT_FLOW_COMPONENT_MAP = {
  * - They should call the props.onChange callback function with the new values
  *   (the whole data object to be set as the selected node's data).
  */
-export const NODE_TYPE_FORM_COMPONENT_MAP = {
+export const nodeTypeFormComponentMap = {
   [NODE_TYPE_MAP.TEXT_NODE]: TextNodeEditForm,
   [NODE_TYPE_MAP.IMAGE_NODE]: ImageNodeEditForm,
   [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeEditForm,

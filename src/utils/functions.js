@@ -123,3 +123,11 @@ export const getItemById = (id, arr) => {
   const nodeIndex = arr.findIndex((item) => id === item.id)
   return [arr[nodeIndex], nodeIndex]
 }
+
+export const getMousePositionRelativeToElement = (element, mousePosition) => {
+  const elementBoundingRect = element.getBoundingClientRect()
+  return {
+    x: mousePosition.x - elementBoundingRect.left,
+    y: mousePosition.y - elementBoundingRect.top,
+  }
+}

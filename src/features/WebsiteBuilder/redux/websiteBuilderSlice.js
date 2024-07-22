@@ -42,7 +42,6 @@ const websiteBuilderSlice = createSlice({
     },
     addPage: (state, { payload }) => {
       state.pages.push(payload.newPage)
-      console.log('newPage', payload.newPage)
     },
     changeActivePage: (state, { payload }) => {
       state.pages.forEach((page) => (page.isActive = false))
@@ -68,9 +67,10 @@ const websiteBuilderSlice = createSlice({
     },
     updateNodeSize: (state, { payload }) => {
       const { node } = getNodeInProjectById(payload.id, state)
-      node.width = payload.width
-      node.height = payload.height
-      node.position = payload.position
+      const { changedWidth, changedHeight, position } = payload
+      if (changedWidth) node.width += changedWidth
+      if (changedHeight) node.height += changedHeight
+      node.position = position
     },
     updateNodePosition: (state, { payload }) => {
       const { node } = getNodeInProjectById(payload.id, state)

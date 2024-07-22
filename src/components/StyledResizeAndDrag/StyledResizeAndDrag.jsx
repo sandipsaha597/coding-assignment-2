@@ -27,7 +27,6 @@ const StyledResizeAndDrag = styled((props) => (
     height: '10px !important',
   }
   return {
-    // transition: 'all .1s ease',
     outline: `2px solid ${props.selected ? '#7386bc' : 'transparent'}`,
     zIndex: `${
       props.selected ? zIndexManagement.selectedNodeInCanvas : 'auto'

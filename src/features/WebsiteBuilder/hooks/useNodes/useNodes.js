@@ -57,12 +57,12 @@ export const useNodes = () => {
   )
 
   const updateNodeSize = useCallback(
-    (id, { width, height, position }) => {
+    (id, { changedWidth, changedHeight, position }) => {
       dispatch(
         websiteBuilderSliceActions.updateNodeSize({
           id,
-          width,
-          height,
+          changedWidth,
+          changedHeight,
           position,
         })
       )

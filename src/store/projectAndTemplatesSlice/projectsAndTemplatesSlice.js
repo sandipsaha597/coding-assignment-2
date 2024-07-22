@@ -60,8 +60,8 @@ export const generateBlankTemplate = (id) => {
 }
 
 const template1 = {
-  id: crypto.randomUUID(),
-  projectName: 'In built template',
+  id: 'fb4fa508-a68c-4904-a614-dad4e840de74',
+  projectName: 'Blank template',
   navbar: {
     styles: {
       width: '100%',
@@ -74,21 +74,20 @@ const template1 = {
     },
     items: [
       {
-        id: crypto.randomUUID(),
+        id: 'b367a7f0-a19b-4821-9ac4-c6e721f73a32',
         title: 'Home',
-        to: '',
+        to: 'homePageId',
       },
       {
-        id: crypto.randomUUID(),
-        title: 'Portfolio',
-        to: 'portfolio',
+        id: '6823e590-f8f7-4074-be9a-c522ac62764f',
+        title: '2nd',
+        to: 'c6c960a3-933b-4393-add5-83fd86368631',
       },
     ],
   },
   pages: [
     {
-      id: crypto.randomUUID(),
-      isActive: true,
+      id: 'homePageId',
       pageDetails: {
         title: 'Home page',
         description: '',
@@ -96,132 +95,166 @@ const template1 = {
       },
       nodes: [
         {
-          id: crypto.randomUUID(),
+          id: '5b77f4df-b826-4954-9612-de0253b7b07f',
+          position: {
+            x: 363.4000473022461,
+            y: 28.800003051757812,
+          },
           type: 'textNode',
           data: {
-            textMessage: 'This is template 1',
+            textMessage:
+              "hello I'm Sandip Saha\nA frontend developer, chasing excellence.\nfiw",
           },
-          position: {
-            x: 0,
-            y: 0,
-          },
-          width: 300,
-          height: 'auto',
-        },
-        {
-          id: crypto.randomUUID(),
-          type: 'textNode',
-          data: {
-            textMessage: 'hello world 2',
-          },
-          position: {
-            x: 100,
-            y: 200,
-          },
-          width: 300,
-          height: 'auto',
+          width: 316,
+          height: 'auto-24',
+          selected: false,
         },
       ],
+      isActive: true,
     },
     {
-      id: crypto.randomUUID(),
+      id: 'c6c960a3-933b-4393-add5-83fd86368631',
       pageDetails: {
-        title: 'Portfolio',
+        title: '2nd',
         description: '',
-        slug: 'portfolio',
+        slug: '2nd',
       },
       nodes: [
         {
-          id: crypto.randomUUID(),
+          id: '29caa762-359f-48ea-813e-605e503b3c8d',
+          position: {
+            x: 434.4000473022461,
+            y: 30.800003051757812,
+          },
           type: 'textNode',
           data: {
-            textMessage: 'My Portfolio',
-          },
-          position: {
-            x: 10,
-            y: 100,
+            textMessage: '2nd',
           },
           width: 300,
           height: 'auto',
-        },
-        {
-          id: crypto.randomUUID(),
-          type: 'textNode',
-          data: {
-            textMessage: 'Skilled in Figma & Adobe XD',
-          },
-          position: {
-            x: 100,
-            y: 200,
-          },
-          width: 300,
-          height: 'auto',
+          selected: false,
         },
       ],
+      isActive: false,
     },
   ],
 }
-const template2 = {
-  id: crypto.randomUUID(),
-  projectName: 'Portfolio',
-  pages: [
-    {
-      id: crypto.randomUUID(),
-      pageDetails: {
-        title: 'Home page',
-        description: '',
-        slug: '/',
-      },
-      nodes: [
-        {
-          id: crypto.randomUUID(),
-          type: 'textNode',
-          data: {
-            textMessage: 'hello world',
-          },
-          position: {
-            x: 10,
-            y: 100,
-          },
-          width: 300,
-          height: 'auto',
-        },
-        {
-          id: crypto.randomUUID(),
-          type: 'textNode',
-          data: {
-            textMessage: 'hello world 2',
-          },
-          position: {
-            x: 100,
-            y: 200,
-          },
-          width: 300,
-          height: 'auto',
-        },
-        {
-          id: crypto.randomUUID(),
-          type: 'textNode',
-          data: {
-            textMessage: 'lorem ipsum',
-          },
-          position: {
-            x: 100,
-            y: 400,
-          },
-          width: 300,
-          height: 'auto',
-        },
-      ],
-    },
-  ],
-}
+
+// const template2 = {
+//   id: 'a17315c9-234a-44d1-8993-2939a30aa1c1',
+//   projectName: 'Blank template',
+//   navbar: {
+//     styles: {
+//       width: '100%',
+//       height: 'auto',
+//       background: 'red',
+//       itemColor: 'white',
+//       activeItemColor: 'green',
+//       gap: '10px',
+//       margin: 'auto',
+//     },
+//     items: [
+//       {
+//         id: 'd915a53b-24db-477f-baa1-67a2189c217e',
+//         title: 'Home',
+//         to: 'homePageId',
+//       },
+//       {
+//         id: 'f2a0c2f3-e5d4-4814-a888-044505fa3874',
+//         title: 'About us',
+//         to: '979666e7-e1cd-4178-a92c-f179598b7b2c',
+//       },
+//     ],
+//   },
+//   pages: [
+//     {
+//       id: 'homePageId',
+//       pageDetails: {
+//         title: 'Home page',
+//         description: '',
+//         slug: '',
+//       },
+//       nodes: [
+//         {
+//           id: '116ce9c6-d473-45bf-b548-913772dc2026',
+//           position: {
+//             x: 389.4000473022461,
+//             y: 32.80000305175781,
+//           },
+//           type: 'textNode',
+//           data: {
+//             textMessage: 'Text message',
+//           },
+//           width: 300,
+//           height: 'auto',
+//           selected: false,
+//         },
+//         {
+//           id: '21668679-1c96-4e3a-b670-2bd5da147676',
+//           position: {
+//             x: 513.4000473022461,
+//             y: 3.8000030517578125,
+//           },
+//           type: 'imageNode',
+//           data: {
+//             src: 'https://placehold.co/300x300',
+//             alt: 'dummy image',
+//           },
+//           width: 300,
+//           height: 300,
+//           selected: false,
+//         },
+//       ],
+//       isActive: false,
+//     },
+//     {
+//       id: '979666e7-e1cd-4178-a92c-f179598b7b2c',
+//       pageDetails: {
+//         title: '979666e7-e1cd-4178-a92c-f179598b7b2c',
+//         description: '',
+//         slug: 'about-us',
+//       },
+//       nodes: [
+//         {
+//           id: '96ac854a-2bf2-4c56-b29e-c1378d1d8ca9',
+//           position: {
+//             x: 255.4000473022461,
+//             y: 19,
+//           },
+//           type: 'videoNode',
+//           data: {
+//             src: 'https://videos.pexels.com/video-files/17127360/17127360-uhd_2560_1440_30fps.mp4',
+//             title: 'Dummy video',
+//           },
+//           width: 259,
+//           height: 139,
+//           selected: false,
+//         },
+//         {
+//           id: '07f6713e-a155-45fe-aafe-a6d24db5d090',
+//           position: {
+//             x: 536.4000473022461,
+//             y: 129,
+//           },
+//           type: 'buttonNode',
+//           data: {
+//             buttonText: 'Click',
+//           },
+//           width: 100,
+//           height: 30,
+//           selected: false,
+//         },
+//       ],
+//       isActive: true,
+//     },
+//   ],
+// }
 
 const initialState =
   savedProjectsAndTemplates === null
     ? {
         projects: [],
-        templates: [template1, template2],
+        templates: [template1],
       }
     : savedProjectsAndTemplates
 

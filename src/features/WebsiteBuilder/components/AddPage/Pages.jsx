@@ -12,6 +12,7 @@ const Pages = () => {
           minWidth: 200,
           height: 100,
           outline: activePageId === page.id ? '2px solid dodgerblue' : '',
+          pointerEvents: 'auto',
         }}
       ></Paper>
     )

@@ -27,13 +27,13 @@ function WebsiteBuilder() {
     updateNodeSize,
     updateNodePosition,
     navbar,
+    pages,
   } = useWebsiteBuilder()
   const params = useParams()
 
   useAutoUpdateProject()
 
   useEffect(() => {
-    // console.log('setproject in useEffect', params)
     setProject(params.projectId)
   }, [params.projectId, setProject])
 
@@ -46,6 +46,7 @@ function WebsiteBuilder() {
           <WebsiteBuilderCanvas
             ref={websiteBuilderRef}
             navbar={navbar}
+            pages={pages}
             nodes={nodes}
             onNodeSelect={onNodeSelect}
             onNodeResizeStop={updateNodeSize}
@@ -120,4 +121,5 @@ const PagesAndAddPagesWrapper = styled('div')(({ theme }) => ({
   paddingBottom: theme.spacing(3),
   width: '92%',
   zIndex: zIndexManagement.pagesAndAddPages,
+  pointerEvents: 'none',
 }))

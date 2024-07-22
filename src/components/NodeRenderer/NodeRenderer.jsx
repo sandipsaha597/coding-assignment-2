@@ -26,11 +26,12 @@ const NodesRenderer = ({
         // dragGrid={[]}
         enableResizing={!!node.selected && enableResizing}
         size={{ width: node.width, height: node.height }}
-        onResizeStop={(a, b, element, d, { x, y }) => {
-          const { width, height } = element.getBoundingClientRect()
+        onResizeStop={(a, b, element, changedWidthAndHeight, { x, y }) => {
+          const { width, height } = changedWidthAndHeight
+
           onNodeResizeStop(node.id, {
-            width,
-            height,
+            changedWidth: width,
+            changedHeight: height,
             position: { x, y },
           })
         }}

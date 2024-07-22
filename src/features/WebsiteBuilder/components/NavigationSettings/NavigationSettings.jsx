@@ -121,7 +121,6 @@ const PagesDropdownSelect = ({ value, onChange }) => {
         {pages.map((page) => {
           const pageId = page.id
           const { title, slug } = page.pageDetails
-          console.log('pageSelect', pageId, title, slug)
           return (
             <MenuItem key={page.id} value={pageId}>
               {`${title} -  /${slug}`}
@@ -139,7 +138,6 @@ const NavbarItemAndLinkEditInputs = ({ item, onChange }) => {
       ...item,
       [key]: value,
     }
-    console.log('details nav', details, item)
     onChange(details)
   }
 
@@ -155,7 +153,6 @@ const NavbarItemAndLinkEditInputs = ({ item, onChange }) => {
       <PagesDropdownSelect
         value={item.to}
         onChange={(e) => {
-          console.log(e.target.value)
           handleChange('to', e.target.value)
         }}
       />
@@ -242,7 +239,6 @@ const PageDetailsEditInputs = ({ pages, index, onDataChange }) => {
 
       const [, index] = detectDuplicateSlug(value, pageId, pages)
       const isDuplicate = index === -1 ? false : true
-      console.log('value', value, index, isDuplicate)
       if (isDuplicate) {
         setSlugErrText('Duplicate slug detected')
         return

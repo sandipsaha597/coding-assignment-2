@@ -15,22 +15,25 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
   props,
   ref
 ) {
-  const { navbar } = props
+  const { navbar, pages } = props
+
   return (
     <Canvas ref={ref} height={1000} {...props}>
-      {(canvasProps) => {
-        return (
-          <>
-            <Box sx={{ pointerEvents: 'none' }}>
-              <WebsiteBuilderNavbar navbar={navbar} mode={renderMode.editor} />
-            </Box>
-            {/* </Box> */}
-            <PreviewAndWebsiteBuilderCanvasContainer>
-              <NodesRenderer {...canvasProps} />
-            </PreviewAndWebsiteBuilderCanvasContainer>
-          </>
-        )
-      }}
+      {(canvasProps) => (
+        <>
+          <Box sx={{ pointerEvents: 'none' }}>
+            <WebsiteBuilderNavbar
+              navbar={navbar}
+              pages={pages}
+              mode={renderMode.editor}
+            />
+          </Box>
+          {/* </Box> */}
+          <PreviewAndWebsiteBuilderCanvasContainer>
+            <NodesRenderer {...canvasProps} />
+          </PreviewAndWebsiteBuilderCanvasContainer>
+        </>
+      )}
     </Canvas>
   )
 })

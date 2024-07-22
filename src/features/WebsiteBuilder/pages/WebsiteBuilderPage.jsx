@@ -14,6 +14,7 @@ import {
 } from '../constants'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
 import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
+import { useAutoUpdateProject } from '../hooks/useAutoUpdateProject/useAutoUpdateProject.js'
 
 function WebsiteBuilder() {
   // useWebsiteBuilder contains all the functionalities, states, context and
@@ -29,9 +30,12 @@ function WebsiteBuilder() {
   } = useWebsiteBuilder()
   const params = useParams()
 
+  useAutoUpdateProject()
+
   useEffect(() => {
+    // console.log('setproject in useEffect', params)
     setProject(params.projectId)
-  }, [params, setProject])
+  }, [params.projectId, setProject])
 
   return (
     <ChatbotFlowBuilder>
@@ -97,7 +101,7 @@ const ReactFlowWrapper = styled('main')({
   background: '#f3f3f3',
 })
 
-const RightSidePanel = styled('aside')({
+const RightSidePanel = styled('aside')(({ theme }) => ({
   border: '1px solid #d8d8d8',
   borderRight: 'none',
   borderBottom: 'none',
@@ -105,7 +109,8 @@ const RightSidePanel = styled('aside')({
   gridArea: 'right-side-panel',
   overflow: 'hidden',
   position: 'relative',
-})
+  paddingBottom: theme.spacing(4),
+}))
 
 const PagesAndAddPagesWrapper = styled('div')(({ theme }) => ({
   position: 'sticky',

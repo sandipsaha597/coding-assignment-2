@@ -3,14 +3,7 @@ import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuild
 
 const Pages = () => {
   const { pages, activePageId, changeActivePage } = useWebsiteBuilder()
-  return pages.map((page, i) => {
-    const activePage =
-      !!activePageId === false && i === 0
-        ? true
-        : activePageId === page.id
-        ? true
-        : false
-
+  return pages.map((page) => {
     return (
       <Paper
         onClick={() => changeActivePage(page.id)}
@@ -18,7 +11,7 @@ const Pages = () => {
         sx={{
           minWidth: 200,
           height: 100,
-          outline: activePage ? '2px solid dodgerblue' : '',
+          outline: activePageId === page.id ? '2px solid dodgerblue' : '',
         }}
       ></Paper>
     )

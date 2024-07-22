@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { LOCAL_STORAGE_KEYS, NODE_TYPE_MAP } from '../../constants'
+import { LOCAL_STORAGE_KEYS } from '../../constants'
 import { getPageById, getProjectById } from '../../core/utilFunctions'
 import { getItemById, getValueFromLocalStorage } from '../../utils/functions'
 
@@ -21,17 +21,37 @@ const savedProjectsAndTemplates = getValueFromLocalStorage(
   After consulting ChatGPT, I learned that it is not only okay to use them together but also considered a very good practice 
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
-const generateBlankTemplate = (id) => {
+
+export const homePageId = 'homePageId'
+export const generateBlankTemplate = (id) => {
   return {
     id: id ?? crypto.randomUUID(),
     projectName: 'Blank template',
+    navbar: {
+      styles: {
+        width: '100%',
+        height: 'auto',
+        background: 'red',
+        itemColor: 'white',
+        activeItemColor: 'green',
+        gap: '10px',
+        margin: 'auto',
+      },
+      items: [
+        {
+          id: crypto.randomUUID(),
+          title: 'Home',
+          to: homePageId,
+        },
+      ],
+    },
     pages: [
       {
-        id: crypto.randomUUID(),
+        id: homePageId,
         pageDetails: {
           title: 'Home page',
           description: '',
-          slug: '/',
+          slug: '',
         },
         nodes: [],
       },
@@ -67,7 +87,8 @@ const template1 = {
   },
   pages: [
     {
-      id: '6ad8fb18-2e59-42b1-934b-8610cdbca809',
+      id: crypto.randomUUID(),
+      isActive: true,
       pageDetails: {
         title: 'Home page',
         description: '',
@@ -75,7 +96,7 @@ const template1 = {
       },
       nodes: [
         {
-          id: '1',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'This is template 1',
@@ -88,7 +109,7 @@ const template1 = {
           height: 'auto',
         },
         {
-          id: '2',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'hello world 2',
@@ -103,7 +124,7 @@ const template1 = {
       ],
     },
     {
-      id: '0c44bd51-2802-4359-ab19-5482758abd80',
+      id: crypto.randomUUID(),
       pageDetails: {
         title: 'Portfolio',
         description: '',
@@ -111,7 +132,7 @@ const template1 = {
       },
       nodes: [
         {
-          id: '1',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'My Portfolio',
@@ -124,7 +145,7 @@ const template1 = {
           height: 'auto',
         },
         {
-          id: '2',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'Skilled in Figma & Adobe XD',
@@ -145,7 +166,7 @@ const template2 = {
   projectName: 'Portfolio',
   pages: [
     {
-      id: '409a75c1-4c30-405e-9724-075727614b2c',
+      id: crypto.randomUUID(),
       pageDetails: {
         title: 'Home page',
         description: '',
@@ -153,7 +174,7 @@ const template2 = {
       },
       nodes: [
         {
-          id: '1',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'hello world',
@@ -166,7 +187,7 @@ const template2 = {
           height: 'auto',
         },
         {
-          id: '2',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'hello world 2',
@@ -179,7 +200,7 @@ const template2 = {
           height: 'auto',
         },
         {
-          id: '3',
+          id: crypto.randomUUID(),
           type: 'textNode',
           data: {
             textMessage: 'lorem ipsum',
@@ -231,11 +252,12 @@ const projectsAndTemplatesSlice = createSlice({
   },
 })
 
+const projectsAndTemplatesSliceReducer = projectsAndTemplatesSlice.reducer
+export const projectsAndTemplatesSliceActions =
+  projectsAndTemplatesSlice.actions
+
 export const projectAndTemplatesSelector = (state) => state.projectsAndTemplates
 export const projectsSelector = (state) => state.projectsAndTemplates.projects
 export const templatesSelector = (state) => state.projectsAndTemplates.templates
 
-export const projectsAndTemplatesSliceActions =
-  projectsAndTemplatesSlice.actions
-const projectsAndTemplatesSliceReducer = projectsAndTemplatesSlice.reducer
 export default projectsAndTemplatesSliceReducer

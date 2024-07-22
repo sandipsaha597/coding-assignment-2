@@ -3,15 +3,15 @@ export const getNewPageObj = () => {
   return {
     id,
     pageDetails: {
-      pageTitle: id,
-      pageDescription: '',
-      pageSlug: `/${crypto.randomUUID()}`,
+      title: id,
+      description: '',
+      slug: `${id}`,
     },
     nodes: [],
   }
 }
 
-export const createValidNodeObject = ({
+export const getNewNodeObject = ({
   id,
   position,
   type,
@@ -26,5 +26,13 @@ export const createValidNodeObject = ({
     data,
     width,
     height,
+  }
+}
+
+export const getNewNavbarItemObj = () => {
+  return {
+    id: crypto.randomUUID(),
+    title: 'new menu item',
+    to: '',
   }
 }

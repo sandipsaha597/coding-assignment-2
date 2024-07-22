@@ -15,7 +15,7 @@ const LeftOverflowScrollLayout = ({ left: Left, right: Right }) => {
           alignItems: 'center',
           gap: '10px',
           // maxWidth: '70%',
-          overflowX: 'auto',
+          overflowX: 'scroll',
           padding: '5px',
         }}
       >

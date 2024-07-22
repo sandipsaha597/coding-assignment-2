@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from '../constants'
+import { websiteBuilderPagesSelector } from '../features/WebsiteBuilder/redux/websiteBuilderSlice'
 import {
   projectsSelector,
   templatesSelector,
@@ -54,12 +55,35 @@ export const getNodeInProjectById = (id, project) => {
   return { node: null, nodeIndex: -1, page: null, pagesIndex: -1 }
 }
 
+export const getActivePage = (pages) => {
+  pages = pages ?? websiteBuilderPagesSelector(store.getState())
+  const index = pages.findIndex((page) => page.isActive === true)
+  if (index === -1) return [pages[0], 0]
+  return [pages[index], index]
+}
+
 export const getPageById = (id, pages) => {
-  const currentPages = pages
-  const activePageId = id
-  const pageIndex = currentPages.findIndex((page) => activePageId === page.id)
-  if (pageIndex === -1) return [currentPages[0], 0]
-  return [currentPages[pageIndex], pageIndex]
+  pages = pages ?? websiteBuilderPagesSelector(store.getState())
+  const pageIndex = pages.findIndex((page) => id === page.id)
+  if (pageIndex === -1) return [pages[0], 0]
+  return [pages[pageIndex], pageIndex]
+}
+
+export const findPageBySlug = (slug, pages) => {
+  pages = pages ?? websiteBuilderPagesSelector(store.getState)
+  const index = pages.findIndex((page) => page.pageDetails.slug === slug)
+  if (index === -1) return [null, -1]
+  return [pages[index], index]
+}
+
+export const detectDuplicateSlug = (slug, pageId, pages) => {
+  pages = pages ?? websiteBuilderPagesSelector(store.getState)
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i]
+    if (page.id === pageId) continue
+    if (slug === page.pageDetails.slug) return [page, i]
+  }
+  return [null, -1]
 }
 
 export const getTemplateById = (id, templates) => {

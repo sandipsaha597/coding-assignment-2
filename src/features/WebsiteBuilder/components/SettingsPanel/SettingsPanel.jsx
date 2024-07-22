@@ -11,7 +11,7 @@ const useSettingsPanel = () => {
 
   useEffect(() => {
     /* if exactly one node is selected, settings panel will be shown
-    by pressing ctrl/cmd + shift user can do multi-selection in reactFlow */
+    by pressing ctrl/cmd + shift user can do multi-selection (not implemented yet) */
     if (selectedNodes.length === 1) {
       setSettingsPanelShow(true)
     } else {

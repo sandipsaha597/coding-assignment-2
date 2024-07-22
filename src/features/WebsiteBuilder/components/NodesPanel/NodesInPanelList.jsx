@@ -1,20 +1,20 @@
 import { styled } from '@mui/system'
 import DragShadow from '../../../../components/DragShadow/DragShadow'
 
+import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import {
   getMousePositionRelativeToElement,
   isElementsOverlappingByMargin,
 } from '../../../../utils/functions'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
-import NodeInNodesPanel from './NodeInNodesPanel'
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
 import { zIndexManagement } from '../../constants'
+import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
+import { getNewNodeObject } from '../../utils/utils.js'
 import { nodesInNodesPanel } from './constants.jsx'
-import { createValidNodeObject } from '../../utils/utils.js'
+import NodeInNodesPanel from './NodeInNodesPanel'
 
 const NodesInPanelList = () => {
-  const { addNode, websiteBuilderRef } = useWebsiteBuilder()
+  const { addNode, websiteBuilderRef, activePageId } = useWebsiteBuilder()
 
   const handleOnDrop = (
     { nodeType, defaultData, defaultWidth, defaultHeight },
@@ -67,21 +67,21 @@ const NodesInPanelList = () => {
       y: position.y - offset.y,
     }
     // creating a valid new node to add to website
-    const newNode = createValidNodeObject({
+    const newNode = getNewNodeObject({
       position: positionOfNewNode,
       type: nodeType,
       data: defaultData,
       width: defaultWidth,
       height: defaultHeight,
     })
-    addNode(newNode)
+    addNode(newNode, activePageId)
 
     // returning true which makes it a valid/successful drop
     return true
   }
 
   return (
-    <Accordion>
+    <Accordion defaultExpanded>
       <AccordionSummary expandIcon={<ExpandMoreIconMUI />}>
         Elements
       </AccordionSummary>

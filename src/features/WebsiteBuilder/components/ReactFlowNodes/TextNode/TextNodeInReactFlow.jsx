@@ -1,15 +1,12 @@
 import { Typography } from '@mui/material'
-import { renderMode } from '../../../../../constants'
-import { pointerEventsNoneIfEditor } from '../utils/functions'
 
 // Text node to show in website
-const TextNodeInReactFlow = ({ data, mode }) => {
+const TextNodeInWebsiteBuilder = ({ data }) => {
   return (
     <Typography
       sx={{
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
-        ...pointerEventsNoneIfEditor(mode),
       }}
     >
       {data.textMessage}
@@ -17,4 +14,4 @@ const TextNodeInReactFlow = ({ data, mode }) => {
   )
 }
 
-export default TextNodeInReactFlow
+export default TextNodeInWebsiteBuilder

@@ -4,7 +4,7 @@ import TextNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNode
 import VideoNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
 import ButtonNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
 import ImageNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
-import TextNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
+import TextNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
 import VideoNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
 
 /**
@@ -34,7 +34,7 @@ export const NODE_TYPE_MAP = {
  * should be shown for each node type. Passed in the nodeTypes prop of reactFlow.
  */
 export const nodeTypeWebsiteBuilderComponentMap = {
-  [NODE_TYPE_MAP.TEXT_NODE]: TextNodeInReactFlow,
+  [NODE_TYPE_MAP.TEXT_NODE]: TextNodeInWebsiteBuilder,
   [NODE_TYPE_MAP.IMAGE_NODE]: ImageNodeInReactFlow,
   [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeInWebsiteBuilder,
   [NODE_TYPE_MAP.BUTTON_NODE]: ButtonNodeInWebsiteBuilder,

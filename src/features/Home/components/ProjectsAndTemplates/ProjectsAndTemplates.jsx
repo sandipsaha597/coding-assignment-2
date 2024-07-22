@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates'
-import PreviewButton from '../../../../components/PreviewButton/PreviewButton'
 import { Button, Grid, Typography } from '@mui/material'
+import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import PreviewButton from '../../../../components/PreviewButton/PreviewButton'
+import { useInitializeProjectAndRedirect } from '../../../../hooks/useInitializeProjectAndRedirect/useInitializeProjectAndRedirect'
+import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates'
 import CardItemList from '../CardItemsList/CardItemsList'
 
 const useSections = () => {
-  const { projectsAndTemplates, initializeProject } = useProjectsAndTemplates()
-  const navigate = useNavigate()
+  const { projectsAndTemplates } = useProjectsAndTemplates()
+  const { initializeProjectAndRedirect } = useInitializeProjectAndRedirect()
 
   const sections = useMemo(
     () => [
@@ -40,8 +41,7 @@ const useSections = () => {
               <PreviewButton data={data.id} />
               <Button
                 onClick={() => {
-                  const projectId = initializeProject(data.id)
-                  navigate(`/builder/${projectId}`)
+                  initializeProjectAndRedirect(data.id)
                 }}
                 variant="outlined"
               >
@@ -52,7 +52,7 @@ const useSections = () => {
         },
       },
     ],
-    [initializeProject, navigate, projectsAndTemplates]
+    [projectsAndTemplates]
   )
 
   return sections

@@ -1,6 +1,5 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveProjectsAndTemplatesToLocalStorage } from '../../core/utilFunctions'
 import {
   projectAndTemplatesSelector,
   projectsAndTemplatesSliceActions,
@@ -10,10 +9,6 @@ export const useProjectsAndTemplates = () => {
   const projectsAndTemplates = useSelector(projectAndTemplatesSelector)
 
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    saveProjectsAndTemplatesToLocalStorage(projectsAndTemplates)
-  }, [projectsAndTemplates])
 
   // const saveAsTemplate = () => {}
   const updateProject = useCallback(

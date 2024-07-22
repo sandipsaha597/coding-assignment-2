@@ -1,10 +1,7 @@
-import { createSlice, current } from '@reduxjs/toolkit'
-import {
-  getNodeById,
-  getNodeInProjectById,
-  getPageById,
-} from '../../../core/utilFunctions'
-import { NODE_TYPE_MAP } from '../../../constants'
+import { createSlice } from '@reduxjs/toolkit'
+import { getNodeInProjectById, getPageById } from '../../../core/utilFunctions'
+import { getItemById } from '../../../utils/functions'
+import { generateBlankTemplate } from '../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 /*
   This state contains the nodes and edges for the websiteBuilder.
@@ -22,72 +19,7 @@ import { NODE_TYPE_MAP } from '../../../constants'
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
 
-const initialState = {
-  id: crypto.randomUUID(),
-  projectName: 'My project',
-  activePageId: '',
-  navbar: {
-    styles: {
-      width: '100%',
-      height: 'auto',
-      background: 'red',
-      itemColor: 'white',
-      activeItemColor: 'green',
-      gap: '10px',
-      margin: 'auto',
-    },
-    items: [
-      {
-        id: crypto.randomUUID(),
-        title: 'Home',
-        to: '',
-      },
-      {
-        id: crypto.randomUUID(),
-        title: 'Portfolio',
-        to: 'portfolio',
-      },
-    ],
-  },
-  pages: [
-    {
-      id: crypto.randomUUID(),
-      pageDetails: {
-        pageTitle: '',
-        pageDescription: '',
-        pageSlug: '/',
-      },
-      nodes: [
-        {
-          id: '1',
-          type: 'textNode',
-          data: {
-            textMessage: 'hello world I am Indefatigable',
-          },
-          position: {
-            x: 10,
-            y: 100,
-          },
-          width: 300,
-          height: 'auto',
-        },
-        {
-          id: '2',
-          type: 'textNode',
-          data: {
-            textMessage: 'hello world 2',
-          },
-          position: {
-            x: 100,
-            y: 200,
-          },
-          width: 300,
-          height: 'auto',
-        },
-      ],
-    },
-  ],
-}
+const initialState = generateBlankTemplate()
 
 const websiteBuilderSlice = createSlice({
   name: 'websiteBuilder',
@@ -102,7 +34,7 @@ const websiteBuilderSlice = createSlice({
      * @param {Object} payload.newNode - a valid new node
      */
     addNode: (state, { payload }) => {
-      const [page] = getPageById(state.activePageId, state.pages)
+      const [page] = getPageById(payload.pageId, state.pages)
       page.nodes.push(payload.newNode)
     },
     removeNode: (state, { payload }) => {
@@ -110,17 +42,20 @@ const websiteBuilderSlice = createSlice({
     },
     addPage: (state, { payload }) => {
       state.pages.push(payload.newPage)
+      console.log('newPage', payload.newPage)
     },
     changeActivePage: (state, { payload }) => {
-      state.activePageId = payload.pageId
+      state.pages.forEach((page) => (page.isActive = false))
+      const [page] = getPageById(payload.pageId, state.pages)
+      page.isActive = true
+    },
+    updatePageDetails: (state, { payload }) => {
+      const [page] = getPageById(payload.pageId, state.pages)
+      page.pageDetails = payload.details
     },
     /* reactFlow prop */
     /* upon selecting a node and pressing backspace deletes that node
     If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
-    onNodesChange: (state, { payload }) => {
-      const [activePage] = getPageById(state.activePageId, state.pages)
-      activePage.nodes = applyNodeChanges(payload.changes, activePage.nodes)
-    },
     onNodeSelect: (state, { payload }) => {
       state.pages.forEach((page) =>
         page.nodes.forEach((v) => (v.selected = false))
@@ -149,20 +84,38 @@ const websiteBuilderSlice = createSlice({
      * @param {Object} payload.newData - newData object to replace the old data object
      */
     editNodeData: (state, { payload }) => {
-      const [activePage] = getPageById(state.activePageId, state.pages)
-      const [node, nodeIndex] = getNodeById(payload.nodeId, activePage.nodes)
-      if (nodeIndex === -1) {
-        console.error('Attempt to edit a node which does not exist')
-      } else {
+      const { node, nodeIndex } = getNodeInProjectById(payload.nodeId, state)
+      if (nodeIndex !== -1) {
         node.data = payload.newData
+      }
+    },
+    addItemInNavbar: (state, { payload }) => {
+      state.navbar.items.push(payload.newItem)
+      // return {
+      //   ...state,
+      //   navbar: {
+      //     ...state.navbar,
+      //     items: [...state.navbar.items, payload.newItem],
+      //   },
+      // }
+    },
+    updateItemInNavbar: (state, { payload }) => {
+      const itemId = payload.itemId
+      const updatedData = payload.updatedData
+      const [, index] = getItemById(itemId, state.navbar.items)
+      if (index !== -1) {
+        state.navbar.items[index] = updatedData
       }
     },
   },
 })
 
+const websiteBuilderSliceReducer = websiteBuilderSlice.reducer
+export const websiteBuilderSliceActions = websiteBuilderSlice.actions
+
 export const websiteBuilderSelector = (state) => state.websiteBuilder
 export const websiteBuilderPagesSelector = (state) => state.websiteBuilder.pages
+export const websiteBuilderNavbarSelector = (state) =>
+  state.websiteBuilder.navbar
 
-export const websiteBuilderSliceActions = websiteBuilderSlice.actions
-const websiteBuilderSliceReducer = websiteBuilderSlice.reducer
 export default websiteBuilderSliceReducer

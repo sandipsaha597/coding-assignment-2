@@ -120,8 +120,14 @@ export const getValueFromLocalStorage = (key) => {
 }
 
 export const getItemById = (id, arr) => {
-  const nodeIndex = arr.findIndex((item) => id === item.id)
-  return [arr[nodeIndex], nodeIndex]
+  const itemIndex = arr.findIndex((item) => id === item.id)
+  return [arr[itemIndex], itemIndex]
+}
+
+export const doesItemExist = (id, arr) => {
+  const [, index] = getItemById(id, arr)
+  if (index === -1) return false
+  return true
 }
 
 export const getMousePositionRelativeToElement = (element, mousePosition) => {

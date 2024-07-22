@@ -38,12 +38,3 @@ const Form = styled('form')({
   flexDirection: 'column',
   gap: '10px',
 })
-
-// ideally the colors, gaps etc should come from theme
-const Label = styled(Typography)({ color: '#d8d8d8', fontSize: '14px' })
-const Textarea = styled('textarea')({
-  padding: '10px',
-  borderRadius: '4px',
-  borderColor: '#dedede',
-  resize: 'vertical',
-})

@@ -1,15 +1,3 @@
-import { useCallback, useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPageById, getProjectById } from '../../../../core/utilFunctions.js'
-import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
-import {
-  websiteBuilderSelector,
-  websiteBuilderSliceActions,
-} from '../../redux/websiteBuilderSlice.js'
-import { getNewPageObj } from '../../utils/utils.js'
-import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates.js'
-import { debounce } from '@mui/material'
-
 /**
  * This hook contains the global state, context, and methods for the websiteBuilder.
  *
@@ -30,145 +18,62 @@ import { debounce } from '@mui/material'
  *  - {Function} setChatbotReactFlowInstance: Sets the chatbotReactFlowInstance. Pass it in the onInit prop of React Flow.
  */
 
+import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext'
+import { useNavbar } from '../useNavbar/useNavbar'
+import { useNodes } from '../useNodes/useNodes'
+import { usePages } from '../usePages/usePages'
+import { useProject } from '../useProject/useProject'
+
 export const useWebsiteBuilder = () => {
-  const websiteBuilderState = useSelector(websiteBuilderSelector)
-  const { pages, activePageId, navbar } = websiteBuilderState
+  const { websiteBuilderState, setProject } = useProject()
 
-  const { websiteBuilderRef } = useWebsiteBuilderContext()
-  const { updateProject } = useProjectsAndTemplates()
-  const dispatch = useDispatch()
-  const [activePage] = getPageById(activePageId, pages)
-  const nodes = activePage.nodes
+  const {
+    pages,
+    activePage,
+    addPage,
+    activePageId,
+    changeActivePage,
+    updatePageDetails,
+  } = usePages()
 
-  const debounceUpdateProject = useMemo(
-    () => debounce(updateProject, 1000),
-    [updateProject]
-  )
+  const { navbar, addItemInNavbar, updateItemInNavbar } = useNavbar()
 
-  useEffect(() => {
-    debounceUpdateProject(websiteBuilderState)
-  }, [websiteBuilderState, debounceUpdateProject])
-
-  // when a node is selected, that node's selected fields becomes true through onNodesChange
-  const selectedNodes = useMemo(() => {
-    return nodes
-      .filter((node) => node.selected)
-      .map((v) => ({ id: v.id, type: v.type, data: v.data }))
-  }, [nodes])
-
-  /*  */
-  /**
-   * use this function to add a node to websiteBuilder.
-   * newNode should be a valid reactFlow node
-   * to remove a a node just select the node in the UI and press backspace
-   * that node and all the edges will get deleted automatically
-   *
-   * Adds a new node to the state.
-   * @param {Object} newNode - a valid new node
-   */
-  const addNode = useCallback(
-    (newNode) => {
-      dispatch(websiteBuilderSliceActions.addNode({ newNode }))
-    },
-    [dispatch]
-  )
-  const addPage = useCallback(() => {
-    dispatch(websiteBuilderSliceActions.addPage({ newPage: getNewPageObj() }))
-  }, [dispatch])
-
-  const changeActivePage = useCallback(
-    (pageId) => {
-      dispatch(
-        websiteBuilderSliceActions.changeActivePage({
-          pageId,
-        })
-      )
-    },
-    [dispatch]
-  )
-
-  /* reactFlow prop */
-  /* upon selecting a node and pressing backspace deletes that node
-    If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
-  const onNodesChange = useCallback(
-    (changes) =>
-      dispatch(websiteBuilderSliceActions.onNodesChange({ changes })),
-    [dispatch]
-  )
-
-  /**
-   * Edits the data of a node in the state based on the provided node ID.
-   * @param {String} payload.id - a valid nodeId
-   * @param {Object} payload.newData - newData object to replace the old data object
-   */
-  const editNodeData = useCallback(
-    (nodeId, newData) => {
-      dispatch(
-        websiteBuilderSliceActions.editNodeData({
-          nodeId,
-          newData,
-        })
-      )
-    },
-    [dispatch]
-  )
-
-  const setProject = useCallback(
-    (id) => {
-      const [project] = getProjectById(id)
-      dispatch(
-        websiteBuilderSliceActions.setProject({
-          project,
-        })
-      )
-    },
-    [dispatch]
-  )
-
-  const onNodeSelect = useCallback(
-    (id) => dispatch(websiteBuilderSliceActions.onNodeSelect({ id })),
-    [dispatch]
-  )
-
-  const updateNodeSize = useCallback(
-    (id, { width, height, position }) => {
-      dispatch(
-        websiteBuilderSliceActions.updateNodeSize({
-          id,
-          width,
-          height,
-          position,
-        })
-      )
-    },
-    [dispatch]
-  )
-
-  const updateNodePosition = useCallback(
-    (id, position) =>
-      dispatch(websiteBuilderSliceActions.updateNodePosition({ id, position })),
-    [dispatch]
-  )
-
-  return {
+  const {
     nodes,
-    addNode,
     selectedNodes,
-
+    addNode,
+    editNodeData,
     onNodeSelect,
     updateNodeSize,
     updateNodePosition,
+  } = useNodes()
 
-    onNodesChange,
+  const { websiteBuilderRef } = useWebsiteBuilderContext()
 
-    addPage,
-    editNodeData,
-    pages,
-    activePageId,
-    changeActivePage,
-    websiteBuilderRef,
-    setProject,
-
+  return {
     navbar,
+    addItemInNavbar,
+    updateItemInNavbar,
+
+    nodes,
+    selectedNodes,
+    addNode,
+    onNodeSelect,
+    updateNodeSize,
+    updateNodePosition,
+    editNodeData,
+
+    pages,
+    activePage,
+    activePageId,
+    addPage,
+    changeActivePage,
+    updatePageDetails,
+
+    websiteBuilderRef,
+
+    websiteBuilderState,
+
+    setProject,
   }
 }

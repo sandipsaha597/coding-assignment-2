@@ -22,6 +22,8 @@ const NodesRenderer = ({
         onClick={(e) => e.stopPropagation()}
         onMouseDown={() => (!node.selected ? onNodeSelect(node.id) : false)}
         selected={node.selected}
+        // resizeGrid={[]}
+        // dragGrid={[]}
         enableResizing={!!node.selected && enableResizing}
         size={{ width: node.width, height: node.height }}
         onResizeStop={(a, b, element, d, { x, y }) => {

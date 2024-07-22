@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
-import ToastItem from '../ToastItem/ToastItem'
+import { Box } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
 import { toastContainerPosition } from '../../constants'
 import { toastStore } from '../../toastStore'
-import { Box } from '@mui/material'
 import { positionStylesMap } from '../constants'
+import ToastItem from '../ToastItem/ToastItem'
 
 /**
  * Render this component in the app to enable toast notification functionality

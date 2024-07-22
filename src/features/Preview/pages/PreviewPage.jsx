@@ -15,6 +15,7 @@ const PageView = ({ page }) => {
     document.title = page.pageDetails.title
   }, [page])
   const nodes = page.nodes
+  console.log('nodes', nodes)
   return (
     <PreviewAndWebsiteBuilderCanvasContainer height={1000}>
       {nodes.map((node) => {
@@ -41,18 +42,19 @@ const PageView = ({ page }) => {
 const Preview = ({ view }) => {
   const pages = view.pages
   const navbar = view.navbar
-
   return (
     <div>
       <WebsiteBuilderNavbar navbar={navbar} />
       <Routes>
-        {pages.map((page) => (
-          <Route
-            key={page.id}
-            path={page.slug}
-            element={<PageView page={page} />}
-          />
-        ))}
+        {pages.map((page) => {
+          return (
+            <Route
+              key={page.id}
+              path={page.pageDetails.slug}
+              element={<PageView page={page} />}
+            />
+          )
+        })}
       </Routes>
     </div>
   )

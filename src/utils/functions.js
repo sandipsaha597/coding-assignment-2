@@ -137,3 +137,26 @@ export const getMousePositionRelativeToElement = (element, mousePosition) => {
     y: mousePosition.y - elementBoundingRect.top,
   }
 }
+
+// console.assert(isValidNumber(123)); // true
+// console.assert(isValidNumber(Infinity)); // false
+// console.assert(isValidNumber(-Infinity)); // false
+// console.assert(isValidNumber(Number.MAX_SAFE_INTEGER)); // true
+// console.assert(isValidNumber(Number.MIN_SAFE_INTEGER)); // true
+// =============================
+// console.assert(isValidNumber("")); // true
+// console.assert(isValidNumber("123")); // true
+// console.assert(isValidNumber("-123")); // true
+// console.assert(isValidNumber("12-e")); // false
+// console.assert(isValidNumber("0")); // true
+// console.assert(isValidNumber("0-")); // false
+// console.assert(isValidNumber("45.67")); // true
+// console.assert(isValidNumber("-0.89")); // true
+// console.assert(isValidNumber("abc")); // false
+// console.assert(isValidNumber("123abc")); // false
+// console.assert(isValidNumber("")); // false
+// console.assert(isValidNumber("-0")); // true
+export const isValidNumber = (input) => {
+  const numberRegex = /^-?\d+(\.\d+)?$/
+  return input === '' || numberRegex.test(input)
+}

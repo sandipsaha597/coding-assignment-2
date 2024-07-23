@@ -1,34 +1,22 @@
 import { Box, styled } from '@mui/material'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { nodeTypeWebsiteBuilderComponentMap } from '../../../constants'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'
 import SettingsPanel from '../components/SettingsPanel/SettingsPanel'
 import WebsiteBuilderCanvas from '../components/WebsiteBuilderCanvas/WebsiteBuilderCanvas'
-import {
-  nodeResizingMap,
-  rightSidePanelWidth,
-  zIndexManagement,
-} from '../constants'
+import { rightSidePanelWidth, zIndexManagement } from '../constants'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
-import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
 import { useAutoUpdateProject } from '../hooks/useAutoUpdateProject/useAutoUpdateProject.js'
+import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
+import { GoogleFontLoader } from '../../../customLibraries/GoogleFontLoader/index.js'
+import { availableFonts } from '../../../constants.js'
 
 function WebsiteBuilder() {
   // useWebsiteBuilder contains all the functionalities, states, context and
   // methods related to website builder part
-  const {
-    nodes,
-    websiteBuilderRef,
-    setProject,
-    onNodeSelect,
-    updateNodeSize,
-    updateNodePosition,
-    navbar,
-    pages,
-  } = useWebsiteBuilder()
+  const { setProject } = useWebsiteBuilder()
   const params = useParams()
 
   useAutoUpdateProject()
@@ -39,21 +27,12 @@ function WebsiteBuilder() {
 
   return (
     <ChatbotFlowBuilder>
+      <GoogleFontLoader fonts={availableFonts} />
       {/* header of the app */}
       <Header />
       <ReactFlowWrapper>
         <Box bgcolor={'#fff'}>
-          <WebsiteBuilderCanvas
-            ref={websiteBuilderRef}
-            navbar={navbar}
-            pages={pages}
-            nodes={nodes}
-            onNodeSelect={onNodeSelect}
-            onNodeResizeStop={updateNodeSize}
-            onNodeDragStop={updateNodePosition}
-            nodeTypes={nodeTypeWebsiteBuilderComponentMap}
-            nodeResize={nodeResizingMap}
-          />
+          <WebsiteBuilderCanvas />
         </Box>
         <PagesAndAddPagesWrapper>
           <PagesAndAddPages />

@@ -17,7 +17,7 @@ import { useMemo, useState } from 'react'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 import { usePages } from '../../hooks/usePages/usePages'
-import { doesItemExist, getItemById } from '../../../../utils/functions'
+import { doesItemExist } from '../../../../utils/functions'
 import { homePageId } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 // import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 

@@ -19,6 +19,10 @@ import { generateBlankTemplate } from '../../../store/projectAndTemplatesSlice/p
   since they serve different purposes. The react-redux library itself uses Context API under the hood.
 */
 
+const unSelectAllNodes = (pages) => {
+  pages.forEach((page) => page.nodes.forEach((v) => (v.selected = false)))
+}
+
 const initialState = generateBlankTemplate()
 
 const websiteBuilderSlice = createSlice({
@@ -34,8 +38,9 @@ const websiteBuilderSlice = createSlice({
      * @param {Object} payload.newNode - a valid new node
      */
     addNode: (state, { payload }) => {
+      unSelectAllNodes(state.pages)
       const [page] = getPageById(payload.pageId, state.pages)
-      page.nodes.push(payload.newNode)
+      page.nodes.push({ ...payload.newNode, selected: true })
     },
     removeNode: (state, { payload }) => {
       state.nodes = state.nodes.filter((v) => v.id !== payload.id)
@@ -56,9 +61,7 @@ const websiteBuilderSlice = createSlice({
     /* upon selecting a node and pressing backspace deletes that node
     If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
     onNodeSelect: (state, { payload }) => {
-      state.pages.forEach((page) =>
-        page.nodes.forEach((v) => (v.selected = false))
-      )
+      unSelectAllNodes(state.pages)
       const nodeId = payload.id
       if (nodeId !== false) {
         const { node } = getNodeInProjectById(payload.id, state)
@@ -70,6 +73,7 @@ const websiteBuilderSlice = createSlice({
       const { changedWidth, changedHeight, position } = payload
       if (changedWidth) node.width += changedWidth
       if (changedHeight) node.height += changedHeight
+
       node.position = position
     },
     updateNodePosition: (state, { payload }) => {

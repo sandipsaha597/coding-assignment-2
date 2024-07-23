@@ -1,5 +1,4 @@
 import { styled } from '@mui/material'
-import { pointerEventsNoneIfEditor } from '../utils/functions'
 
 // Text node to show in website
 const ButtonNodeInWebsiteBuilder = ({ data, mode }) => {
@@ -8,8 +7,7 @@ const ButtonNodeInWebsiteBuilder = ({ data, mode }) => {
 
 export default ButtonNodeInWebsiteBuilder
 
-const StyledButton = styled('button')(({ mode }) => ({
+const StyledButton = styled('button')(() => ({
   width: '100%',
   height: '100%',
-  ...pointerEventsNoneIfEditor(mode),
 }))

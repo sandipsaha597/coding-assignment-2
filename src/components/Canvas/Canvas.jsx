@@ -14,7 +14,10 @@ const Canvas = forwardRef(function Canvas(props, ref) {
     <Box
       ref={ref}
       component={component}
-      onClick={() => onNodeSelect(false)}
+      onClick={(e) => {
+        console.log('click', e)
+        onNodeSelect(false)
+      }}
       sx={{ width, height }}
     >
       {children ? children(props) : <NodesRenderer {...props} />}

@@ -4,21 +4,43 @@ import Canvas from '../../../../components/Canvas/Canvas'
 import NodesRenderer from '../../../../components/NodeRenderer/NodeRenderer'
 import PreviewAndWebsiteBuilderCanvasContainer from '../../../../components/PreviewAndWebsiteBuilderCanvasContainer/PreviewAndWebsiteBuilderCanvasContainer'
 import { WebsiteBuilderNavbar } from '../../../../components/WebsiteBuilderNavbar/WebsiteBuilderNavbar'
-import { renderMode } from '../../../../constants'
+import {
+  nodeTypeWebsiteBuilderComponentMap,
+  renderMode,
+} from '../../../../constants'
+import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
+import { nodeResizingMap } from '../../constants'
 
 // const nodeRelativePositionTypeMap = {
 //   INSIDE_CONTAINER: 'INSIDE_CONTAINER',
 //   OUTSIDE_CONTAINER: 'OUTSIDE_CONTAINER'
 // }
 
-const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
-  props,
-  ref
-) {
-  const { navbar, pages } = props
+const WebsiteBuilderCanvas = () => {
+  const {
+    nodes,
+    websiteBuilderRef,
+    setProject,
+    onNodeSelect,
+    updateNodeSize,
+    updateNodePosition,
+    navbar,
+    pages,
+  } = useWebsiteBuilder()
 
   return (
-    <Canvas ref={ref} height={1000} {...props}>
+    <Canvas
+      ref={websiteBuilderRef}
+      height={1000}
+      navbar={navbar}
+      pages={pages}
+      nodes={nodes}
+      onNodeSelect={onNodeSelect}
+      onNodeResizeStop={updateNodeSize}
+      onNodeDragStop={updateNodePosition}
+      nodeTypes={nodeTypeWebsiteBuilderComponentMap}
+      nodeResize={nodeResizingMap}
+    >
       {(canvasProps) => (
         <>
           <Box sx={{ pointerEvents: 'none' }}>
@@ -36,6 +58,6 @@ const WebsiteBuilderCanvas = forwardRef(function WebsiteBuilderCanvas(
       )}
     </Canvas>
   )
-})
+}
 
 export default WebsiteBuilderCanvas

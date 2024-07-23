@@ -4,6 +4,7 @@ import NavigationOutlinedIconMUI from '@mui/icons-material/NavigationOutlined'
 import SmartButtonOutlinedIconMUI from '@mui/icons-material/SmartButtonOutlined'
 import VideoCameraBackOutlinedIconMUI from '@mui/icons-material/VideoCameraBackOutlined'
 import { NODE_TYPE_MAP } from '../../../../constants'
+import { formGroupClasses } from '@mui/material'
 
 // list of nodes currently available is the app and shown in the nodes panel
 export const nodesInNodesPanel = [
@@ -14,6 +15,9 @@ export const nodesInNodesPanel = [
     text: 'Text message',
     defaultData: {
       textMessage: 'Text message',
+      fontFamily: 'inherit',
+      fontSize: 16,
+      color: 'inherit',
     },
     defaultWidth: 300,
     defaultHeight: 'auto',
@@ -50,17 +54,9 @@ export const nodesInNodesPanel = [
     text: 'Button',
     defaultData: {
       buttonText: 'Click',
-    },
-    defaultWidth: 100,
-    defaultHeight: 30,
-  },
-  {
-    id: crypto.randomUUID(),
-    nodeType: NODE_TYPE_MAP.NAVBAR_NODE,
-    icon: <NavigationOutlinedIconMUI fontSize="large" />,
-    text: 'Navbar',
-    defaultData: {
-      buttonText: 'Click',
+      fontFamily: 'inherit',
+      color: 'inherit',
+      fontSize: 14,
     },
     defaultWidth: 100,
     defaultHeight: 30,

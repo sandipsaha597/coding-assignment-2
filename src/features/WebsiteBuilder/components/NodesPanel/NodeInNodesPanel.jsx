@@ -1,7 +1,8 @@
 import { Typography, styled } from '@mui/material'
+import { memo } from 'react'
 
 // assuming all the nodes in nodes panel will have the same look only icon and text will vary
-const NodeInNodesPanel = ({ icon, text }) => {
+const NodeInNodesPanel = memo(function NodeInNodesPanel({ icon, text }) {
   return (
     <StyledNodeInNodesPanel>
       {icon}
@@ -15,7 +16,7 @@ const NodeInNodesPanel = ({ icon, text }) => {
       </Typography>
     </StyledNodeInNodesPanel>
   )
-}
+})
 
 export default NodeInNodesPanel
 

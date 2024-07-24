@@ -20,7 +20,6 @@ const WebsiteBuilderCanvas = () => {
   const {
     nodes,
     websiteBuilderRef,
-    setProject,
     onNodeSelect,
     updateNodeSize,
     updateNodePosition,

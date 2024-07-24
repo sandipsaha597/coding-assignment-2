@@ -1,8 +1,8 @@
 import { Button } from '@mui/material'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
+import { usePages } from '../../hooks/usePages/usePages'
 
 const AddPageButton = () => {
-  const { addPage } = useWebsiteBuilder()
+  const { addPage } = usePages()
   return (
     <Button
       onClick={addPage}

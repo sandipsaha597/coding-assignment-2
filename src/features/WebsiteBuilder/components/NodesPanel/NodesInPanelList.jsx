@@ -3,18 +3,21 @@ import DragShadow from '../../../../components/DragShadow/DragShadow'
 
 import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import { getActivePage } from '../../../../core/utilFunctions.js'
 import {
   getMousePositionRelativeToElement,
   isElementsOverlappingByMargin,
 } from '../../../../utils/functions'
 import { zIndexManagement } from '../../constants'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { getNewNodeObject } from '../../utils/utils.js'
 import { nodesInNodesPanel } from './constants.jsx'
 import NodeInNodesPanel from './NodeInNodesPanel'
+import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
+import { useNodes } from '../../hooks/useNodes/useNodes.js'
 
 const NodesInPanelList = () => {
-  const { addNode, websiteBuilderRef, activePageId } = useWebsiteBuilder()
+  const { addNode } = useNodes()
+  const { websiteBuilderRef } = useWebsiteBuilderContext()
 
   const handleOnDrop = (
     { nodeType, defaultData, defaultWidth, defaultHeight },
@@ -38,15 +41,13 @@ const NodesInPanelList = () => {
 
     // need the screenToFlowPosition to place the node in the right place of the flow
     // const position = chatbotReactFlowInstance.screenToFlowPosition()
-    const position = getMousePositionRelativeToElement(
-      websiteBuilderRef.current.querySelector(
-        '#preview-and-website-builder-canvas-container'
-      ),
-      {
-        x: e.clientX,
-        y: e.clientY,
-      }
+    const containerElement = websiteBuilderRef.current.querySelector(
+      '#preview-and-website-builder-canvas-container'
     )
+    const position = getMousePositionRelativeToElement(containerElement, {
+      x: e.clientX,
+      y: e.clientY,
+    })
     const positionOfNewNode = {
       /* positioning the newNode's top-left corner to draggedItem's(node in panel) top-left corner, despite of zoom level
                    Mathematical explanation: 
@@ -74,6 +75,8 @@ const NodesInPanelList = () => {
       width: defaultWidth,
       height: defaultHeight,
     })
+    const [activePage] = getActivePage()
+    const activePageId = activePage.id
     addNode(newNode, activePageId)
 
     // returning true which makes it a valid/successful drop

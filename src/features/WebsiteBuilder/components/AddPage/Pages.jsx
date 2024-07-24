@@ -1,8 +1,8 @@
 import { Paper } from '@mui/material'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
+import { usePages } from '../../hooks/usePages/usePages'
 
 const Pages = () => {
-  const { pages, activePageId, changeActivePage } = useWebsiteBuilder()
+  const { pages, activePageId, changeActivePage } = usePages()
   return pages.map((page) => {
     return (
       <Paper
@@ -13,6 +13,7 @@ const Pages = () => {
           height: 100,
           outline: activePageId === page.id ? '2px solid dodgerblue' : '',
           pointerEvents: 'auto',
+          cursor: 'pointer',
         }}
       ></Paper>
     )

@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton, Input, OutlinedInput } from '@mui/material'
 import { Add, Remove } from '@mui/icons-material'
 import { useCounter } from '../hooks/useCounter'
 
@@ -16,7 +16,10 @@ const Counter = ({ value, defaultValue, onChange, min, max }) => {
       <IconButton disabled={isSubtractDisabled} onClick={decrement}>
         <Remove />
       </IconButton>
-      <input
+      <OutlinedInput
+        id="counter-input"
+        size="small"
+        sx={{ input: { textAlign: 'center', width: '45px' } }}
         type="text"
         value={count}
         onChange={(e) => handleManualChange(e.target.value)}

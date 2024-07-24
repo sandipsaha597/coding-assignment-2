@@ -4,7 +4,8 @@ import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuild
 
 // this hook implements the functionalities of SettingsPanelForm
 const useSettingsPanelForm = () => {
-  const { selectedNodes, editNodeData } = useWebsiteBuilder()
+  const { websiteBuilderState, selectedNodes, editNodeData } =
+    useWebsiteBuilder()
   // if exactly one node is selected only then settings panel form should be visible
   const settingsPanelFormVisible = selectedNodes.length === 1 ? true : false
 
@@ -29,6 +30,8 @@ const useSettingsPanelForm = () => {
     editNodeData(selectedNodeDetails.id, values)
 
   return {
+    websiteBuilderState,
+
     settingsPanelFormVisible,
     selectedNodeDetails,
     selectedNodeType,
@@ -39,6 +42,8 @@ const useSettingsPanelForm = () => {
 
 const SettingsPanelEditForm = () => {
   const {
+    websiteBuilderState,
+
     settingsPanelFormVisible,
     selectedNodeDetails,
     FormComponent,
@@ -52,6 +57,7 @@ const SettingsPanelEditForm = () => {
         <FormComponent
           // passing the current selected node data so the form can show it
           data={selectedNodeDetails.data}
+          websiteBuilderState={websiteBuilderState}
           // when the form value changes it calls the onChange callback function with new values
           onChange={handleFormChange}
         />

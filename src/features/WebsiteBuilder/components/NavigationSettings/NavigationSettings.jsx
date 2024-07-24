@@ -14,11 +14,11 @@ import {
   TextField,
 } from '@mui/material'
 import { useMemo, useState } from 'react'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { detectDuplicateSlug } from '../../../../core/utilFunctions'
-import { usePages } from '../../hooks/usePages/usePages'
-import { doesItemExist } from '../../../../utils/functions'
 import { homePageId } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import { doesItemExist } from '../../../../utils/functions'
+import { useNavbar } from '../../hooks/useNavbar/useNavbar'
+import { usePages } from '../../hooks/usePages/usePages'
 // import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 
 const NavigationSettings = () => {
@@ -42,7 +42,7 @@ const NavigationSettings = () => {
 export default NavigationSettings
 
 const NavigationStyles = () => {
-  const { navbar } = useWebsiteBuilder()
+  const { navbar } = useNavbar()
   const navbarStyles = navbar.styles
   return (
     <Accordion>
@@ -161,7 +161,7 @@ const NavbarItemAndLinkEditInputs = ({ item, onChange }) => {
 }
 
 const NavbarItemAndLinksEditForm = () => {
-  const { navbar, addItemInNavbar, updateItemInNavbar } = useWebsiteBuilder()
+  const { navbar, addItemInNavbar, updateItemInNavbar } = useNavbar()
   const navbarItems = navbar.items
 
   return (
@@ -191,7 +191,7 @@ const NavbarItemAndLinksEditForm = () => {
 }
 
 const PagesDetailsEditForm = () => {
-  const { pages, updatePageDetails } = useWebsiteBuilder()
+  const { pages, updatePageDetails } = usePages()
   return (
     <Grid container spacing={3}>
       {pages.map((page, i) => {

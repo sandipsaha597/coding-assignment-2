@@ -7,8 +7,10 @@ const TextNodeInWebsiteBuilder = ({ data }) => {
       sx={{
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
-        fontFamily: data.tempFontFamily || data.fontFamily || 'inherit',
-        fontSize: data.fontSize || 'inherit',
+        fontFamily: data.styles.tempFontFamily || data.styles.fontFamily,
+        fontSize: data.styles.fontSize,
+        color:
+          data.styles.colorType === 'custom' ? data.styles.colorString : '',
       }}
     >
       {data.textMessage}

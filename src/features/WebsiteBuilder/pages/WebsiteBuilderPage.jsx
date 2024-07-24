@@ -1,6 +1,8 @@
 import { Box, styled } from '@mui/material'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { availableFonts } from '../../../constants.js'
+import { GoogleFontLoader } from '../../../customLibraries/GoogleFontLoader/index.js'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'
@@ -9,22 +11,9 @@ import WebsiteBuilderCanvas from '../components/WebsiteBuilderCanvas/WebsiteBuil
 import { rightSidePanelWidth, zIndexManagement } from '../constants'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
 import { useAutoUpdateProject } from '../hooks/useAutoUpdateProject/useAutoUpdateProject.js'
-import { useWebsiteBuilder } from '../hooks/useWebsiteBuilder/useWebsiteBuilder.js'
-import { GoogleFontLoader } from '../../../customLibraries/GoogleFontLoader/index.js'
-import { availableFonts } from '../../../constants.js'
+import { useProject } from '../hooks/useProject/useProject.js'
 
-function WebsiteBuilder() {
-  // useWebsiteBuilder contains all the functionalities, states, context and
-  // methods related to website builder part
-  const { setProject } = useWebsiteBuilder()
-  const params = useParams()
-
-  useAutoUpdateProject()
-
-  useEffect(() => {
-    setProject(params.projectId)
-  }, [params.projectId, setProject])
-
+const WebsiteBuilder = memo(function WebsiteBuilder() {
   return (
     <ChatbotFlowBuilder>
       <GoogleFontLoader fonts={availableFonts} />
@@ -44,15 +33,26 @@ function WebsiteBuilder() {
       </RightSidePanel>
     </ChatbotFlowBuilder>
   )
-}
+})
 
-const WebsiteBuilderPage = () => {
+const WebsiteBuilderPage = memo(function WebsiteBuilderPage() {
+  // useWebsiteBuilder contains all the functionalities, states, context and
+  // methods related to website builder part
+  const { setProject } = useProject()
+  const params = useParams()
+
+  useAutoUpdateProject()
+
+  useEffect(() => {
+    setProject(params.projectId)
+  }, [params.projectId, setProject])
+
   return (
     <WebsiteBuilderProvider>
       <WebsiteBuilder />
     </WebsiteBuilderProvider>
   )
-}
+})
 
 export default WebsiteBuilderPage
 

@@ -1,12 +1,13 @@
 import { styled } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { zIndexManagement } from '../../constants'
+import { useNodes } from '../../hooks/useNodes/useNodes'
 import SettingsPanelEditForm from './SettingsPanelForm'
 import SettingsPanelHeader from './SettingsPanelHeader'
 import { settingsPanelTypeToTitleMap } from './constants'
-import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 
 const useSettingsPanel = () => {
-  const { selectedNodes } = useWebsiteBuilder()
+  const { selectedNodes } = useNodes()
   const [settingsPanelShow, setSettingsPanelShow] = useState(false)
 
   useEffect(() => {
@@ -47,5 +48,6 @@ const StyledSettingsPanel = styled('section')(({ settingsPanelShow }) => ({
   height: '100%',
   transform: settingsPanelShow ? 'translate(0%, 0)' : 'translate(-100%, 0)',
   transition: '.4s ease-in-out',
-  zIndex: 100,
+  zIndex: zIndexManagement.settingsPanel,
+  overflow: 'scroll',
 }))

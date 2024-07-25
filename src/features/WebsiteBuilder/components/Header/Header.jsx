@@ -1,10 +1,7 @@
+import SaveOutlinedIconMUI from '@mui/icons-material/SaveOutlined'
 import { Button, styled, useMediaQuery, useTheme } from '@mui/material'
 import { memo } from 'react'
 import { rightSidePanelWidth } from '../../constants'
-import SaveOutlinedIconMUI from '@mui/icons-material/SaveOutlined'
-import { toast } from '../../../../customLibraries/MyReactToastify/toast'
-import { validationBeforeSave } from '../../../../core/validationFunctions/validationBeforeSave'
-import { saveProjectsAndTemplatesToLocalStorage } from '../../../../core/utilFunctions'
 
 // memoized header to prevent unnecessary re-renders
 const Header = memo(function Header() {
@@ -19,25 +16,7 @@ const Header = memo(function Header() {
         sx={{
           gridArea: 'button',
         }}
-        onClick={() => {
-          // validating the form before saving
-          const [isValid] = validationBeforeSave()
-          if (isValid === false) {
-            // if validation fails it show user an error message
-            toast.error('Cannot save flow')
-            return
-          }
-          // save the flow to localStorage
-          const [isFlowSaved, message] =
-            saveProjectsAndTemplatesToLocalStorage()
-          if (isFlowSaved) {
-            // if saving succeeds it shows user a success message
-            toast.success(message)
-            return
-          }
-          // if saving fails it shows user an error message
-          toast.error(message)
-        }}
+        onClick={() => {}}
       >
         {matches ? (
           'Save As Template'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { ColoredBox } from '../ColoredBox/ColoredBox'
 import { Menu } from '@mui/material'
 import Chrome from '@uiw/react-color-chrome'
+import { ColoredBox } from '../ColoredBox/ColoredBox'
 
 const ColorPicker = ({ color, onChange }) => {
   const [anchorEl, setAnchorEl] = useState(null)

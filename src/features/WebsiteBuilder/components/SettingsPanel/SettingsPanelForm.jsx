@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
-import { nodeTypeFormComponentMap } from '../../../../constants'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
+import { nodeTypeFormComponentMap } from '../../../../constants/nodeTypeFormComponentMap'
 
 // this hook implements the functionalities of SettingsPanelForm
 const useSettingsPanelForm = () => {

@@ -1,10 +1,4 @@
 import { LOCAL_STORAGE_KEYS } from '../constants'
-import { websiteBuilderPagesSelector } from '../features/WebsiteBuilder/redux/websiteBuilderSlice'
-import {
-  projectsSelector,
-  templatesSelector,
-} from '../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
-import { store } from '../store/store'
 import { getItemById, getValueFromLocalStorage } from '../utils/functions'
 
 /**
@@ -56,28 +50,24 @@ export const getNodeInProjectById = (id, project) => {
 }
 
 export const getActivePage = (pages) => {
-  pages = pages ?? websiteBuilderPagesSelector(store.getState())
   const index = pages.findIndex((page) => page.isActive === true)
   if (index === -1) return [pages[0], 0]
   return [pages[index], index]
 }
 
 export const getPageById = (id, pages) => {
-  pages = pages ?? websiteBuilderPagesSelector(store.getState())
   const pageIndex = pages.findIndex((page) => id === page.id)
   if (pageIndex === -1) return [pages[0], 0]
   return [pages[pageIndex], pageIndex]
 }
 
 export const findPageBySlug = (slug, pages) => {
-  pages = pages ?? websiteBuilderPagesSelector(store.getState)
   const index = pages.findIndex((page) => page.pageDetails.slug === slug)
   if (index === -1) return [null, -1]
   return [pages[index], index]
 }
 
 export const detectDuplicateSlug = (slug, pageId, pages) => {
-  pages = pages ?? websiteBuilderPagesSelector(store.getState)
   for (let i = 0; i < pages.length; i++) {
     const page = pages[i]
     if (page.id === pageId) continue
@@ -87,17 +77,15 @@ export const detectDuplicateSlug = (slug, pageId, pages) => {
 }
 
 export const getTemplateById = (id, templates) => {
-  templates = templates ?? templatesSelector(store.getState())
   return getItemById(id, templates)
 }
 export const getProjectById = (id, projects) => {
-  projects = projects ?? projectsSelector(store.getState())
   return getItemById(id, projects)
 }
-export const getProjectOrTemplateById = (id) => {
-  const [project, projectIndex] = getProjectById(id)
+export const getProjectOrTemplateById = (id, projects, templates) => {
+  const [project, projectIndex] = getProjectById(id, projects)
   if (projectIndex !== -1) return [project, projectIndex]
-  const [template, templateIndex] = getTemplateById(id)
+  const [template, templateIndex] = getTemplateById(id, templates)
   if (templateIndex !== -1) return [template, templateIndex]
   return [null, -1]
 }

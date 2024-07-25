@@ -2,12 +2,10 @@ import { Box } from '@mui/material'
 import { useEffect } from 'react'
 import { Route, Routes, useParams } from 'react-router-dom'
 import PreviewAndWebsiteBuilderCanvasContainer from '../../../components/PreviewAndWebsiteBuilderCanvasContainer/PreviewAndWebsiteBuilderCanvasContainer'
-import {
-  nodeTypeWebsiteBuilderComponentMap,
-  renderMode,
-} from '../../../constants'
 import { getProjectOrTemplateById } from '../../../core/utilFunctions'
 import { WebsiteBuilderNavbar } from '../../../components/WebsiteBuilderNavbar/WebsiteBuilderNavbar'
+import { nodeTypeWebsiteBuilderComponentMap } from '../../../constants/nodeTypeWebsiteBuilderComponentMap'
+import { renderMode } from '../../../constants/renderMode'
 
 const PageView = ({ page, project }) => {
   useEffect(() => {

@@ -2,29 +2,15 @@ import FormatColorTextIconMUI from '@mui/icons-material/FormatColorText'
 import ImageOutlinedIconMUI from '@mui/icons-material/ImageOutlined'
 import SmartButtonOutlinedIconMUI from '@mui/icons-material/SmartButtonOutlined'
 import VideoCameraBackOutlinedIconMUI from '@mui/icons-material/VideoCameraBackOutlined'
-import { NODE_TYPE_MAP } from '../../../../constants'
 import {
   COLOR_TYPES,
   getColorStructure,
 } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import { NODE_TYPE_MAP } from '../../../../constants/nodeTypesMap'
+import { getFontFamilyStructure } from '../../schemaGenerator/schemaGetters/getFontFamilyStructure'
+import { FONT_FAMILY_TYPES } from '../../schemaGenerator/types/fontFamilyTypes'
 
 // list of nodes currently available is the app and shown in the nodes panel
-
-export const FONT_FAMILY_TYPES = {
-  CUSTOM: 'CUSTOM',
-  INHERIT: 'INHERIT',
-}
-const getFontFamilyStructure = ({
-  type = FONT_FAMILY_TYPES.CUSTOM,
-  value = 'Arial, sans-serif',
-  temp = '',
-}) => {
-  return {
-    type,
-    value,
-    temp,
-  }
-}
 
 export const BUTTON_VARIANTS = {
   OUTLINED: 'outlined',

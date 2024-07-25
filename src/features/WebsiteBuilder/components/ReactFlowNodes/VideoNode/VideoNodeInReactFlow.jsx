@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 import { useRef } from 'react'
-import { renderMode } from '../../../../../constants'
+import { renderMode } from '../../../../../constants/renderMode'
 
 // Text node to show in website
 const VideoNodeInWebsiteBuilder = ({ data, mode }) => {

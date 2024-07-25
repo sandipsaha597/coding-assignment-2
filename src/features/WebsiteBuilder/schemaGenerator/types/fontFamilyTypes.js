@@ -1,0 +1,4 @@
+export const FONT_FAMILY_TYPES = {
+  CUSTOM: 'CUSTOM',
+  INHERIT: 'INHERIT',
+}

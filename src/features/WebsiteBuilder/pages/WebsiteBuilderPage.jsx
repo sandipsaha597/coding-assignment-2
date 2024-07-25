@@ -1,8 +1,9 @@
 import { Box, styled } from '@mui/material'
 import { memo, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { availableFonts } from '../../../constants.js'
 import { GoogleFontLoader } from '../../../customLibraries/GoogleFontLoader/index.js'
+
+import { availableFonts } from '../../../constants.js'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'

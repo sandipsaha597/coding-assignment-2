@@ -1,4 +1,4 @@
-import { renderMode } from '../../constants'
+import { renderMode } from '../../constants/renderMode'
 import { isResizeEnabled } from '../ResizeAndDrag'
 import StyledResizeAndDrag from '../StyledResizeAndDrag/StyledResizeAndDrag'
 import Disable from './../Disable/Disable'

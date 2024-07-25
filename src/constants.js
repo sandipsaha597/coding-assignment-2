@@ -1,12 +1,3 @@
-import ButtonNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonNodeEditForm'
-import ImageNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
-import TextNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/TextNodeEditForm/TextNodeEditForm'
-import VideoNodeEditForm from './features/WebsiteBuilder/components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
-import ButtonNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
-import ImageNodeInReactFlow from './features/WebsiteBuilder/components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
-import TextNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
-import VideoNodeInWebsiteBuilder from './features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
-
 /**
  * Naming conventions:
  * - Screaming Snake Case (e.g., NODE_TYPE_FORM_COMPONENT_MAP) indicates that the values
@@ -16,45 +7,12 @@ import VideoNodeInWebsiteBuilder from './features/WebsiteBuilder/components/Reac
  *   codebase and can be changed more easily.
  */
 
-export const renderMode = {
-  editor: 'editor',
-  previewOrLive: 'previewOrLive',
-}
-
 // Types of nodes available in the chatbot flow.
-export const NODE_TYPE_MAP = {
-  TEXT_NODE: 'textNode',
-  IMAGE_NODE: 'imageNode',
-  VIDEO_NODE: 'videoNode',
-  BUTTON_NODE: 'buttonNode',
-}
 
 /*
  * Maps the node types to components. It tells reactFlow which component
  * should be shown for each node type. Passed in the nodeTypes prop of reactFlow.
  */
-export const nodeTypeWebsiteBuilderComponentMap = {
-  [NODE_TYPE_MAP.TEXT_NODE]: TextNodeInWebsiteBuilder,
-  [NODE_TYPE_MAP.IMAGE_NODE]: ImageNodeInReactFlow,
-  [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeInWebsiteBuilder,
-  [NODE_TYPE_MAP.BUTTON_NODE]: ButtonNodeInWebsiteBuilder,
-}
-
-/**
- * Maps node types to their corresponding form components.
- * All form components should follow a specific structure:
- * - They should take the data through props.data and display it in the form inputs.
- * - They should call the props.onChange callback function with the new values
- *   (the whole data object to be set as the selected node's data).
- */
-export const nodeTypeFormComponentMap = {
-  [NODE_TYPE_MAP.TEXT_NODE]: TextNodeEditForm,
-  [NODE_TYPE_MAP.IMAGE_NODE]: ImageNodeEditForm,
-  [NODE_TYPE_MAP.VIDEO_NODE]: VideoNodeEditForm,
-  [NODE_TYPE_MAP.BUTTON_NODE]: ButtonNodeEditForm,
-}
-
-debugger
 
 // Keys used for storing data in localStorage
 export const LOCAL_STORAGE_KEYS = {

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
-import { renderMode } from '../../../../../constants'
 import { useColor } from '../../../utils/hooks'
 import { getFontFamily } from '../../../utils/utils'
+import { renderMode } from '../../../../../constants/renderMode'
 
 // Text node to show in website
 const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {

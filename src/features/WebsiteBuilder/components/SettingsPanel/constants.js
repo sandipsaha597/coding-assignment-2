@@ -1,4 +1,4 @@
-import { NODE_TYPE_MAP } from '../../../../constants'
+import { NODE_TYPE_MAP } from '../../../../constants/nodeTypesMap'
 
 // settings panel header title should be according to the node type selected
 export const settingsPanelTypeToTitleMap = {

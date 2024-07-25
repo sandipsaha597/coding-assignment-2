@@ -23,9 +23,11 @@ import { useNavbar } from '../useNavbar/useNavbar'
 import { useNodes } from '../useNodes/useNodes'
 import { usePages } from '../usePages/usePages'
 import { useProject } from '../useProject/useProject'
+import { useProjectThemeAndGlobalStyle } from '../useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
 
 export const useWebsiteBuilder = () => {
   const { websiteBuilderState, setProject } = useProject()
+  const { themeAndGlobalStyles } = useProjectThemeAndGlobalStyle()
 
   const {
     pages,
@@ -75,5 +77,7 @@ export const useWebsiteBuilder = () => {
     websiteBuilderState,
 
     setProject,
+
+    themeAndGlobalStyles,
   }
 }

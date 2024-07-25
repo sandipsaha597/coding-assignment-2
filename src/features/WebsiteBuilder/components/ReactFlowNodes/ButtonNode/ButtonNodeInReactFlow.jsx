@@ -1,34 +1,57 @@
-import { Box } from '@mui/material'
+import { Button } from '@mui/material'
+import { renderMode } from '../../../../../constants'
+import { useColor } from '../../../utils/hooks'
+import { getFontFamily } from '../../../utils/utils'
 
 // Text node to show in website
-const ButtonNodeInWebsiteBuilder = ({ data }) => {
+const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {
+  const buttonTextColor = useColor(data.styles.textColor, project)
+  const buttonColor = useColor(data.styles.buttonColor, project)
+
   const variant =
-    data.variant === 'outlined'
+    data.styles.variant === 'outlined'
       ? {
           backgroundColor: 'transparent',
-          border: `2px solid ${data.backgroundColor}`,
+          border: `2px solid ${buttonColor}`,
         }
-      : data.variant === 'contained'
+      : data.styles.variant === 'contained'
       ? {
-          backgroundColor: `${data.backgroundColor}`,
-          border: `2px solid ${data.backgroundColor}`,
+          backgroundColor: `${buttonColor}`,
+          border: `2px solid ${buttonColor}`,
         }
       : {}
 
+  const tabIndexObject = mode === renderMode.editor ? { tabIndex: -1 } : {}
   return (
-    <Box
-      component={'button'}
+    <Button
+      {...tabIndexObject}
       sx={{
         width: '100%',
         height: '100%',
-        fontSize: data.fontSize,
-        fontFamily: data.fontFamily,
-        color: data.color,
+        textTransform: 'none',
+
+        fontSize: data.styles.fontSize,
+        fontFamily: getFontFamily(data),
+        color: buttonTextColor,
         ...variant,
       }}
     >
       {data.buttonText}
-    </Box>
+    </Button>
+    // <Box
+    //   component={'button'}
+    //   sx={{
+    //     width: '100%',
+    //     height: '100%',
+    //     fontSize: data.styles.fontSize,
+    //     fontFamily: data.styles.fontFamily,
+    //     color: buttonTextColor,
+    //     borderRadius: '4px',
+    //     ...variant,
+    //   }}
+    // >
+    //   {data.buttonText}
+    // </Box>
   )
 }
 

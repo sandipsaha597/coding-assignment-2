@@ -1,4 +1,6 @@
 export const isResizeEnabled = (enableResizing) => {
+  if (enableResizing === true)
+    return { heightResizeEnabled: true, widthResizeEnabled: true }
   const heightResizeEnabled =
     enableResizing?.top ||
     enableResizing?.bottom ||

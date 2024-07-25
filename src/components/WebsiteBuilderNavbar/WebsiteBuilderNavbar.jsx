@@ -1,17 +1,17 @@
 import { styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { renderMode } from '../../constants'
-import { usePages } from '../../features/WebsiteBuilder/hooks/usePages/usePages'
 import { getActivePage, getPageById } from '../../core/utilFunctions'
+import { getColor2 } from '../../features/WebsiteBuilder/utils/utils'
 
 //  navbar.styles = {
-//   background: 'red',
-//   itemColor: 'white',
-//   activeItemColor: 'green',
+//   background: getColorStructure(),
+//   itemColor: getColorStructure(),
+//   activeItemColor: getColorStructure(),
 //   gap: '10px',
 //   margin: 'auto',
 // }
-export const WebsiteBuilderNavbar = ({ navbar, pages, mode }) => {
+export const WebsiteBuilderNavbar = ({ navbar, pages, mode, project }) => {
   const [activePage] = getActivePage(pages)
   const activePageId = activePage.id
   const navbarStyles = navbar.styles
@@ -26,7 +26,7 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode }) => {
   }
 
   return (
-    <StyledWebsiteBuilderNavbar navbarStyles={navbarStyles}>
+    <StyledWebsiteBuilderNavbar navbarStyles={navbarStyles} project={project}>
       {navbarItems.map((v) => {
         const [page] = getPageById(v.to, pages)
         const pageSlug = page.pageDetails.slug
@@ -49,18 +49,20 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode }) => {
   )
 }
 
-const StyledWebsiteBuilderNavbar = styled('nav')(({ navbarStyles }) => ({
-  background: navbarStyles.background,
-  gap: navbarStyles.gap,
-  a: {
-    color: navbarStyles.itemColor,
-  },
-  '.website-builder-navbar-active': {
-    color: navbarStyles.activeItemColor,
-  },
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '50px',
-  width: '100%',
-}))
+const StyledWebsiteBuilderNavbar = styled('nav')(
+  ({ navbarStyles, project }) => ({
+    backgroundColor: getColor2(navbarStyles.backgroundColor, project),
+    gap: navbarStyles.gap,
+    a: {
+      color: getColor2(navbarStyles.itemColor, project),
+    },
+    '.website-builder-navbar-active': {
+      color: getColor2(navbarStyles.activeItemColor, project),
+    },
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '50px',
+    width: '100%',
+  })
+)

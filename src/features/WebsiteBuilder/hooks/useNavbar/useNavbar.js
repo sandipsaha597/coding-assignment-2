@@ -30,5 +30,17 @@ export const useNavbar = () => {
     [dispatch]
   )
 
-  return { navbar, addItemInNavbar, updateItemInNavbar }
+  const updateNavbarStyles = useCallback(
+    (styleProperty, value) => {
+      dispatch(
+        websiteBuilderSliceActions.updateNavbarStyles({
+          styleProperty,
+          value,
+        })
+      )
+    },
+    [dispatch]
+  )
+
+  return { navbar, addItemInNavbar, updateItemInNavbar, updateNavbarStyles }
 }

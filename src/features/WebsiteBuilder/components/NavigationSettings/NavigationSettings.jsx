@@ -13,12 +13,17 @@ import {
   Select,
   TextField,
 } from '@mui/material'
+import { produce } from 'immer'
+import _ from 'lodash'
 import { useMemo, useState } from 'react'
+import ColorPickerDropdown from '../../../../components/ColorPickerDropdown/components/ColorPickerDropdown'
+import { Counter } from '../../../../components/Counter'
 import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 import { homePageId } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 import { doesItemExist } from '../../../../utils/functions'
 import { useNavbar } from '../../hooks/useNavbar/useNavbar'
 import { usePages } from '../../hooks/usePages/usePages'
+import { getColorPickerDropdownValueFromColorStructure } from '../../../../components/ColorPickerDropdown/core/functions'
 // import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 
 const NavigationSettings = () => {
@@ -41,9 +46,39 @@ const NavigationSettings = () => {
 
 export default NavigationSettings
 
+const colorChangeArr = [
+  {
+    id: '1',
+    property: 'backgroundColor',
+    label: 'Background Color',
+  },
+  {
+    id: '2',
+    property: 'itemColor',
+    label: 'Item Color',
+  },
+  {
+    id: '3',
+    property: 'activeItemColor',
+    label: 'Active Item Color',
+  },
+]
+
 const NavigationStyles = () => {
-  const { navbar } = useNavbar()
+  const { navbar, updateNavbarStyles } = useNavbar()
   const navbarStyles = navbar.styles
+
+  const handleFormChange = (styleProperty, changedValues) => {
+    /* lodash merge function changes the original object that's why we need to create a 
+    draftState to merge changedValues with it */
+    const newDataObj = produce(navbar.styles[styleProperty], (draftState) => {
+      return _.merge(draftState, changedValues)
+    })
+    // calling the updateNavbarStyles function with styleProperty and new values
+
+    updateNavbarStyles(styleProperty, newDataObj)
+  }
+
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIconMUI />}>
@@ -51,34 +86,39 @@ const NavigationStyles = () => {
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ display: 'flex', gap: 2, flexDirection: 'column' }}>
-          <TextField
-            type="text"
-            value={navbarStyles.background}
-            // onChange={(e) => handleFormChange('src', e.target.value)}
-            label="Background"
-            variant="outlined"
-          />
-          <TextField
-            type="text"
-            value={navbarStyles.itemColor}
-            // onChange={(e) => handleFormChange('src', e.target.value)}
-            label="Item color"
-            variant="outlined"
-          />
-          <TextField
-            type="text"
-            value={navbarStyles.activeItemColor}
-            // onChange={(e) => handleFormChange('src', e.target.value)}
-            label="Active Item Color"
-            variant="outlined"
-          />
-          <TextField
-            type="text"
-            value={navbarStyles.gap}
-            // onChange={(e) => handleFormChange('src', e.target.value)}
-            label="Gap"
-            variant="outlined"
-          />
+          <Grid container rowSpacing={2}>
+            {colorChangeArr.map((v) => {
+              return (
+                <ColorPickerDropdown
+                  key={v.id}
+                  value={getColorPickerDropdownValueFromColorStructure(
+                    navbarStyles[v.property]
+                  )}
+                  dropdownLabel={v.label}
+                  customColor={navbarStyles[v.property].value}
+                  onChange={(changeObj) =>
+                    handleFormChange(v.property, changeObj)
+                  }
+                />
+                // <ColorPickerWithLabel
+                //   key={v.id}
+                //   color={navbarStyles[v.property]}
+                //   label={v.label}
+                // />
+              )
+            })}
+          </Grid>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <InputLabel htmlFor="navbar-items-gap-counter">Gap:</InputLabel>
+            <Counter
+              inputId={'navbar-items-gap-counter'}
+              min={0}
+              value={Number(
+                navbarStyles['gap'].slice(0, navbarStyles['gap'].length - 2)
+              )}
+              onChange={(value) => updateNavbarStyles('gap', value + 'px')}
+            />
+          </Box>
         </Box>
       </AccordionDetails>
     </Accordion>

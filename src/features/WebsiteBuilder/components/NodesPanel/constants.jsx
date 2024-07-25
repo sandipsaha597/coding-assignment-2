@@ -3,8 +3,33 @@ import ImageOutlinedIconMUI from '@mui/icons-material/ImageOutlined'
 import SmartButtonOutlinedIconMUI from '@mui/icons-material/SmartButtonOutlined'
 import VideoCameraBackOutlinedIconMUI from '@mui/icons-material/VideoCameraBackOutlined'
 import { NODE_TYPE_MAP } from '../../../../constants'
+import {
+  COLOR_TYPES,
+  getColorStructure,
+} from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 // list of nodes currently available is the app and shown in the nodes panel
+
+export const FONT_FAMILY_TYPES = {
+  CUSTOM: 'CUSTOM',
+  INHERIT: 'INHERIT',
+}
+const getFontFamilyStructure = ({
+  type = FONT_FAMILY_TYPES.CUSTOM,
+  value = 'Arial, sans-serif',
+  temp = '',
+}) => {
+  return {
+    type,
+    value,
+    temp,
+  }
+}
+
+export const BUTTON_VARIANTS = {
+  OUTLINED: 'outlined',
+  CONTAINED: 'contained',
+}
 export const nodesInNodesPanel = [
   {
     id: crypto.randomUUID(),
@@ -14,9 +39,15 @@ export const nodesInNodesPanel = [
     defaultData: {
       textMessage: 'Text message',
       styles: {
-        fontFamily: 'inherit',
+        fontFamily: getFontFamilyStructure({
+          type: FONT_FAMILY_TYPES.CUSTOM,
+          value: 'Arial, sans-serif',
+        }),
         fontSize: 16,
-        colorType: 'inherit',
+        color: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          value: '#34495e',
+        }),
       },
     },
     defaultWidth: 300,
@@ -56,12 +87,23 @@ export const nodesInNodesPanel = [
     defaultData: {
       buttonText: 'Click',
       styles: {
-        fontFamily: 'inherit',
-        colorType: 'inherit',
-        fontSize: 14,
+        textColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          value: '#111827',
+        }),
+        buttonColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          value: '#d1d5db',
+        }),
+        fontFamily: getFontFamilyStructure({
+          type: FONT_FAMILY_TYPES.CUSTOM,
+          value: 'Arial, sans-serif',
+        }),
+        fontSize: 15,
+        variant: BUTTON_VARIANTS.OUTLINED,
       },
     },
     defaultWidth: 100,
-    defaultHeight: 30,
+    defaultHeight: 36,
   },
 ]

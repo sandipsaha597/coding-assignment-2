@@ -2,13 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import App from './App.jsx'
 import AppProvider from './AppContext/AppProvider.jsx'
 import {
   TOAST_CONTAINER_POSITION,
   ToastContainer,
 } from './customLibraries/MyReactToastify/index.js'
 import { store } from './store/store.js'
-import App from './App.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -9,7 +9,7 @@ import {
 import { getProjectOrTemplateById } from '../../../core/utilFunctions'
 import { WebsiteBuilderNavbar } from '../../../components/WebsiteBuilderNavbar/WebsiteBuilderNavbar'
 
-const PageView = ({ page }) => {
+const PageView = ({ page, project }) => {
   useEffect(() => {
     // a better option is to use react-helmet or similar library
     document.title = page.pageDetails.title
@@ -31,7 +31,7 @@ const PageView = ({ page }) => {
               top: node.position.y,
             }}
           >
-            <Comp {...node} mode={renderMode.previewOrLive} />
+            <Comp {...node} project={project} mode={renderMode.previewOrLive} />
           </Box>
         )
       })}
@@ -47,6 +47,7 @@ const Preview = ({ view }) => {
       <WebsiteBuilderNavbar
         navbar={navbar}
         pages={pages}
+        project={view}
         mode={renderMode.previewOrLive}
       />
       <Routes>
@@ -55,7 +56,7 @@ const Preview = ({ view }) => {
             <Route
               key={page.id}
               path={page.pageDetails.slug}
-              element={<PageView page={page} />}
+              element={<PageView page={page} project={view} />}
             />
           )
         })}

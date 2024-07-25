@@ -111,6 +111,18 @@ const websiteBuilderSlice = createSlice({
         state.navbar.items[index] = updatedData
       }
     },
+    updateNavbarStyles: (state, { payload }) => {
+      const { styleProperty, value } = payload
+      state.navbar.styles[styleProperty] = value
+    },
+
+    changeThemeColor: (state, { payload }) => {
+      const [themeItem] = getItemById(
+        payload.id,
+        state.themeAndGlobalStyles.theme
+      )
+      themeItem.color = payload.color
+    },
   },
 })
 
@@ -121,5 +133,7 @@ export const websiteBuilderSelector = (state) => state.websiteBuilder
 export const websiteBuilderPagesSelector = (state) => state.websiteBuilder.pages
 export const websiteBuilderNavbarSelector = (state) =>
   state.websiteBuilder.navbar
+export const websiteBuilderThemeAndGlobalStyleSelector = (state) =>
+  state.websiteBuilder.themeAndGlobalStyles
 
 export default websiteBuilderSliceReducer

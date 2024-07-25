@@ -12,6 +12,7 @@ const NodesRenderer = ({
   onNodeDragStop,
   ResizeAndDragComponent = StyledResizeAndDrag,
   resizeAndDragComponentProps,
+  ...props
 }) => {
   return nodes.map((node) => {
     const Comp = nodeTypes[node.type]
@@ -26,6 +27,7 @@ const NodesRenderer = ({
     ) => {
       const { widthResizeEnabled, heightResizeEnabled } =
         isResizeEnabled(enableResizing)
+
       const changedWidth = widthResizeEnabled
         ? changedWidthAndHeight.width
         : false
@@ -58,7 +60,7 @@ const NodesRenderer = ({
         {...resizeAndDragComponentProps}
       >
         <Disable>
-          <Comp {...node} mode={renderMode.editor} />
+          <Comp {...node} {...props} mode={renderMode.editor} />
         </Disable>
       </ResizeAndDragComponent>
     )

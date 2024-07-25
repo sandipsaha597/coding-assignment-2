@@ -15,7 +15,11 @@ const ColorPicker = ({ color, onChange }) => {
   }
   return (
     <>
-      <ColoredBox onClick={handleClick} color={color} sx={{ width: 35 }} />
+      <ColoredBox
+        onClick={handleClick}
+        color={color}
+        sx={{ width: 35, cursor: 'pointer' }}
+      />
       <Menu
         anchorEl={anchorEl}
         open={open}

@@ -10,6 +10,7 @@ import {
 } from '../../../../constants'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { nodeResizingMap } from '../../constants'
+import { useProjectThemeAndGlobalStyle } from '../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
 
 // const nodeRelativePositionTypeMap = {
 //   INSIDE_CONTAINER: 'INSIDE_CONTAINER',
@@ -25,12 +26,14 @@ const WebsiteBuilderCanvas = () => {
     updateNodePosition,
     navbar,
     pages,
+    websiteBuilderState,
   } = useWebsiteBuilder()
 
   return (
     <Canvas
       ref={websiteBuilderRef}
       height={1000}
+      project={websiteBuilderState}
       navbar={navbar}
       pages={pages}
       nodes={nodes}
@@ -46,6 +49,7 @@ const WebsiteBuilderCanvas = () => {
             <WebsiteBuilderNavbar
               navbar={navbar}
               pages={pages}
+              project={websiteBuilderState}
               mode={renderMode.editor}
             />
           </Box>
@@ -56,6 +60,19 @@ const WebsiteBuilderCanvas = () => {
         </>
       )}
     </Canvas>
+  )
+}
+
+const GlobalStyleWrapper = () => {
+  const { themeAndGlobalStyles } = useProjectThemeAndGlobalStyle()
+  const { styles } = themeAndGlobalStyles
+  return (
+    <Box
+      sx={{
+        fontFamily: styles.fontFamily,
+        color: styles.color,
+      }}
+    ></Box>
   )
 }
 

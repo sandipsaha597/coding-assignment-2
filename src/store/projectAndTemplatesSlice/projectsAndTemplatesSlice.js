@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { LOCAL_STORAGE_KEYS } from '../../constants'
 import { getPageById, getProjectById } from '../../core/utilFunctions'
 import { getItemById, getValueFromLocalStorage } from '../../utils/functions'
+import { LOCAL_STORAGE_KEYS } from '../../constants'
+
+debugger
 
 const savedProjectsAndTemplates = getValueFromLocalStorage(
   LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE
@@ -23,19 +25,60 @@ const savedProjectsAndTemplates = getValueFromLocalStorage(
 */
 
 export const homePageId = 'homePageId'
+
+export const COLOR_TYPES = {
+  CUSTOM: 'CUSTOM',
+  ID: 'ID',
+  INHERIT: 'INHERIT',
+}
+
+export const getColorStructure = ({
+  type = COLOR_TYPES.CUSTOM,
+  value = '#000',
+  temp = '',
+}) => {
+  return {
+    type,
+    value,
+    temp,
+  }
+}
+
 export const generateBlankTemplate = (id) => {
   return {
     id: id ?? crypto.randomUUID(),
     projectName: 'Blank template',
+    themeAndGlobalStyles: {
+      theme: [
+        {
+          id: 'd8d93770-7100-4cb4-a0e0-7f5e9a51db6a',
+          name: 'Primary',
+          color: '#2ecc71',
+        },
+        {
+          id: '29f315ac-8e87-43c6-82b2-4d62dce0c335',
+          name: 'Secondary',
+          color: '#f1c40f',
+        },
+      ],
+    },
     navbar: {
       styles: {
         width: '100%',
         height: 'auto',
-        background: 'red',
-        itemColor: 'white',
-        activeItemColor: 'green',
+        backgroundColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          customColor: '#2ecc71',
+        }),
+        itemColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          customColor: '#fff',
+        }),
+        activeItemColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          customColor: '#f1c40f',
+        }),
         gap: '10px',
-        margin: 'auto',
       },
       items: [
         {
@@ -97,8 +140,8 @@ const template1 = {
         {
           id: '5b77f4df-b826-4954-9612-de0253b7b07f',
           position: {
-            x: 363.4000473022461,
-            y: 28.800003051757812,
+            x: 363,
+            y: 28,
           },
           type: 'textNode',
           data: {
@@ -123,8 +166,8 @@ const template1 = {
         {
           id: '29caa762-359f-48ea-813e-605e503b3c8d',
           position: {
-            x: 434.4000473022461,
-            y: 30.800003051757812,
+            x: 434,
+            y: 30,
           },
           type: 'textNode',
           data: {

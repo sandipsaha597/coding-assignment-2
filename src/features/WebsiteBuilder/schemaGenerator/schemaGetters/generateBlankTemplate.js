@@ -26,15 +26,15 @@ export const generateBlankTemplate = (id) => {
         height: 'auto',
         backgroundColor: getColorStructure({
           type: COLOR_TYPES.CUSTOM,
-          customColor: '#2ecc71',
+          value: '#2ecc71',
         }),
         itemColor: getColorStructure({
           type: COLOR_TYPES.CUSTOM,
-          customColor: '#fff',
+          value: '#fff',
         }),
         activeItemColor: getColorStructure({
           type: COLOR_TYPES.CUSTOM,
-          customColor: '#f1c40f',
+          value: '#f1c40f',
         }),
         gap: '10px',
       },

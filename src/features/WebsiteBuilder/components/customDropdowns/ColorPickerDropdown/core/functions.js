@@ -1,5 +1,17 @@
-import { COLOR_TYPES } from '../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import { COLOR_TYPES } from '../../../../schemaGenerator/types/colorTypes'
 
+// {
+//   type: 'custom',
+//   value: 'a hex color'
+// },
+// {
+//   type: 'inherit',
+//   value: 'inherit',
+// }
+// {
+//   type: 'id',
+//   value: 'id of theme color'
+// }
 export const getColorPickerDropdownValueFromColorStructure = (
   colorStructure
 ) => {

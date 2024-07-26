@@ -16,14 +16,14 @@ import {
 import { produce } from 'immer'
 import _ from 'lodash'
 import { useMemo, useState } from 'react'
-import ColorPickerDropdown from '../../../../components/ColorPickerDropdown/components/ColorPickerDropdown'
 import { Counter } from '../../../../components/Counter'
 import { detectDuplicateSlug } from '../../../../core/utilFunctions'
-import { homePageId } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 import { doesItemExist } from '../../../../utils/functions'
 import { useNavbar } from '../../hooks/useNavbar/useNavbar'
 import { usePages } from '../../hooks/usePages/usePages'
-import { getColorPickerDropdownValueFromColorStructure } from '../../../../components/ColorPickerDropdown/core/functions'
+import { homePageId } from '../../schemaGenerator/constants'
+import { ColorPickerDropdown } from '../customDropdowns/ColorPickerDropdown'
+import { getColorPickerDropdownValueFromColorStructure } from '../customDropdowns/ColorPickerDropdown/core/functions'
 // import { detectDuplicateSlug } from '../../../../core/utilFunctions'
 
 const NavigationSettings = () => {

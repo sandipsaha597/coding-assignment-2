@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
-import { getColor2 } from './utils'
+import { getColor } from '../schemaGenerator/valueGetters/getColor'
 
 export const useColor = (colorStructure, project) => {
   const color = useMemo(
-    () => getColor2(colorStructure, project.themeAndGlobalStyles.theme),
+    () => getColor(colorStructure, project.themeAndGlobalStyles.theme),
     [colorStructure, project.themeAndGlobalStyles.theme]
   )
   return color

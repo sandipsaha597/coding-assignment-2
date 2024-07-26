@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { generateBlankTemplate } from '../schemaGenerator/schemaGetters/generateBlankTemplate'
 import { getNodeInProjectById, getPageById } from '../../../core/utilFunctions'
 import { getItemById } from '../../../utils/functions'
-import { generateBlankTemplate } from '../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 /*
   This state contains the nodes and edges for the websiteBuilder.

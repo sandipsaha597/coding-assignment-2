@@ -9,11 +9,13 @@ import {
   isElementsOverlappingByMargin,
 } from '../../../../utils/functions'
 import { zIndexManagement } from '../../constants'
-import { getNewNodeObject } from '../../utils/utils.js'
-import { nodesInNodesPanel } from './constants.jsx'
 import NodeInNodesPanel from './NodeInNodesPanel'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
 import { useNodes } from '../../hooks/useNodes/useNodes.js'
+import { getNewNodeObject } from '../../schemaGenerator/schemaGetters/getNewNodeObj.js'
+import { websiteBuilderPagesSelector } from '../../redux/websiteBuilderSlice.js'
+import { store } from '../../../../store/store.js'
+import { nodesInNodesPanel } from './constants/nodesInNodesPanel.jsx'
 
 const NodesInPanelList = () => {
   const { addNode } = useNodes()
@@ -75,7 +77,9 @@ const NodesInPanelList = () => {
       width: defaultWidth,
       height: defaultHeight,
     })
-    const [activePage] = getActivePage()
+    const [activePage] = getActivePage(
+      websiteBuilderPagesSelector(store.getState())
+    )
     const activePageId = activePage.id
     addNode(newNode, activePageId)
 

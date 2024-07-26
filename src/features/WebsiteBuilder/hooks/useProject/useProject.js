@@ -1,10 +1,12 @@
+import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getProjectById } from '../../../../core/utilFunctions'
+import { projectsSelector } from '../../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import { store } from '../../../../store/store'
 import {
   websiteBuilderSelector,
   websiteBuilderSliceActions,
 } from '../../redux/websiteBuilderSlice'
-import { useCallback } from 'react'
-import { getProjectById } from '../../../../core/utilFunctions'
 
 export const useProject = () => {
   const websiteBuilderState = useSelector(websiteBuilderSelector)
@@ -12,7 +14,7 @@ export const useProject = () => {
 
   const setProject = useCallback(
     (id) => {
-      const [project] = getProjectById(id)
+      const [project] = getProjectById(id, projectsSelector(store.getState()))
       dispatch(
         websiteBuilderSliceActions.setProject({
           project,

@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 import { useColor } from '../../../utils/hooks'
-import { getFontFamily } from '../../../utils/utils'
 import { renderMode } from '../../../../../constants/renderMode'
+import { getFontFamily } from '../../../schemaGenerator/valueGetters/getFontFamily'
 
 // Text node to show in website
 const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {
@@ -25,33 +25,20 @@ const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {
   return (
     <Button
       {...tabIndexObject}
+      component={mode === renderMode.editor ? 'div' : undefined}
       sx={{
         width: '100%',
         height: '100%',
         textTransform: 'none',
 
         fontSize: data.styles.fontSize,
-        fontFamily: getFontFamily(data),
+        fontFamily: getFontFamily(data.styles.fontFamily),
         color: buttonTextColor,
         ...variant,
       }}
     >
       {data.buttonText}
     </Button>
-    // <Box
-    //   component={'button'}
-    //   sx={{
-    //     width: '100%',
-    //     height: '100%',
-    //     fontSize: data.styles.fontSize,
-    //     fontFamily: data.styles.fontFamily,
-    //     color: buttonTextColor,
-    //     borderRadius: '4px',
-    //     ...variant,
-    //   }}
-    // >
-    //   {data.buttonText}
-    // </Box>
   )
 }
 

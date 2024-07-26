@@ -2,10 +2,10 @@ import { Box, Grid, TextField } from '@mui/material'
 import { produce } from 'immer'
 import _ from 'lodash'
 import { memo } from 'react'
-import ColorPickerDropdown from '../../../../../components/ColorPickerDropdown/components/ColorPickerDropdown'
-import FontPickerDropdown from '../../../../../components/FontPickerDropdown/FontPickerDropdown'
-import { getFontFamily } from '../../../utils/utils'
-import { getColorPickerDropdownValueFromColorStructure } from '../../../../../components/ColorPickerDropdown/core/functions'
+import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
+import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
+import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPickerDropdown'
+import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
@@ -34,13 +34,14 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
   data = {},
   onChange,
 }) {
-  const handleFormChange = (changedValues) => {
+  const handleFormChange = (changedValues, changed) => {
     /* lodash merge function changes the original object that's why we need to create a 
     draftState to merge changedValues with it */
     const newDataObj = produce(data, (draftState) => {
       return _.merge(draftState, changedValues)
     })
     // calling the props.onChange callback function with new values
+    console.log('newDataObj', JSON.stringify(newDataObj, null, 2))
     onChange(newDataObj)
   }
 
@@ -60,20 +61,20 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
       </Grid>
       <Grid item xs={12}>
         <FontPickerDropdown
-          value={getFontFamily(data.styles.fontFamily)}
+          value={data.styles.fontFamily.value}
           onChange={handleFormChange}
         />
       </Grid>
       <Grid item xs={12}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {/* <CounterWithLabel /> */}
-          {/* <FontSizeChangeCounter
-          inputId="font-size-counter-textNode"
+          <FontSizeChangeCounter
+            inputId="font-size-counter-textNode"
             value={data.styles.fontSize}
             onChange={(fontSizeObj) =>
               handleFormChange({ styles: fontSizeObj })
             }
-          /> */}
+          />
         </Box>
       </Grid>
       <Grid item xs={12}>
@@ -84,6 +85,7 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
           )}
           customColor={data.styles.color.value}
           onChange={(changeObj) => {
+            console.log('change', changeObj)
             handleFormChange({
               styles: { color: changeObj },
             })

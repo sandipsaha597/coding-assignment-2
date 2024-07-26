@@ -1,8 +1,8 @@
 import { styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { getActivePage, getPageById } from '../../core/utilFunctions'
-import { getColor2 } from '../../features/WebsiteBuilder/utils/utils'
 import { renderMode } from '../../constants/renderMode'
+import { getColor } from '../../features/WebsiteBuilder/schemaGenerator/valueGetters/getColor'
 
 //  navbar.styles = {
 //   background: getColorStructure(),
@@ -51,13 +51,13 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode, project }) => {
 
 const StyledWebsiteBuilderNavbar = styled('nav')(
   ({ navbarStyles, project }) => ({
-    backgroundColor: getColor2(navbarStyles.backgroundColor, project),
+    backgroundColor: getColor(navbarStyles.backgroundColor, project),
     gap: navbarStyles.gap,
     a: {
-      color: getColor2(navbarStyles.itemColor, project),
+      color: getColor(navbarStyles.itemColor, project),
     },
     '.website-builder-navbar-active': {
-      color: getColor2(navbarStyles.activeItemColor, project),
+      color: getColor(navbarStyles.activeItemColor, project),
     },
     display: 'flex',
     alignItems: 'center',

@@ -4,7 +4,7 @@ import {
   websiteBuilderSliceActions,
 } from '../../redux/websiteBuilderSlice'
 import { useCallback } from 'react'
-import { getNewNavbarItemObj } from '../../utils/utils'
+import { getNewNavbarItemObj } from '../../schemaGenerator/schemaGetters/getNewNavbarItemObj'
 
 export const useNavbar = () => {
   const navbar = useSelector(websiteBuilderNavbarSelector)

@@ -5,6 +5,7 @@ import {
   getSavedProjectsAndTemplates,
 } from '../../core/utilFunctions'
 import { getItemById } from '../../utils/functions'
+import { generateBlankTemplate } from '../../features/WebsiteBuilder/schemaGenerator/schemaGetters/generateBlankTemplate'
 
 const savedProjectsAndTemplates = getSavedProjectsAndTemplates()
 /*

@@ -5,7 +5,7 @@ import {
 } from '../../redux/websiteBuilderSlice'
 import { getActivePage } from '../../../../core/utilFunctions'
 import { useCallback } from 'react'
-import { getNewPageObj } from '../../utils/utils'
+import { getNewPageObj } from '../../schemaGenerator/schemaGetters/getNewPageObj'
 
 export const usePages = () => {
   const pages = useSelector(websiteBuilderPagesSelector)

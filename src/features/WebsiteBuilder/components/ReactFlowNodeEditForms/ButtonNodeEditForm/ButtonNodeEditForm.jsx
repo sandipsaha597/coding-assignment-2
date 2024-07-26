@@ -10,26 +10,21 @@ import {
 import { produce } from 'immer'
 import _ from 'lodash'
 import { memo } from 'react'
-import ColorPickerDropdown from '../../../../../components/ColorPickerDropdown/components/ColorPickerDropdown'
-import FontPickerDropdown from '../../../../../components/FontPickerDropdown/FontPickerDropdown'
-import { BUTTON_VARIANTS } from '../../NodesPanel/constants'
-import { getColorPickerDropdownValueFromColorStructure } from '../../../../../components/ColorPickerDropdown/core/functions'
+import { BUTTON_VARIANTS } from '../../../schemaGenerator/types/buttonVariants'
+import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
+import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
+import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPickerDropdown'
+import ButtonNodeInWebsiteBuilder from '../../ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
+import { renderMode } from '../../../../../constants/renderMode'
+import Disable from '../../../../../components/Disable/Disable'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
 const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
   data = {},
   onChange,
+  websiteBuilderState,
 }) {
-  // const handleFormChange = (key, value) => {
-  //   const values = {
-  //     ...data,
-  //     [key]: value,
-  //   }
-  //   // calling the props.onChange callback function with new values
-  //   onChange(values)
-  // }
-
   const handleFormChange = (changedValues) => {
     /* lodash merge function changes the original object that's why we need to create a 
     draftState to merge changedValues with it */
@@ -40,6 +35,15 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
 
     onChange(newDataObj)
   }
+
+  const outlinedButtonDataObj = produce(data, (draft) => {
+    draft.buttonText = 'Outlined'
+    draft.styles.variant = BUTTON_VARIANTS.OUTLINED
+  })
+  const containedButtonDataObj = produce(data, (draft) => {
+    draft.buttonText = 'Contained'
+    draft.styles.variant = BUTTON_VARIANTS.CONTAINED
+  })
 
   return (
     // default submit is prevented because pressing enter key submits the form
@@ -56,7 +60,7 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
       </Grid>
       <Grid item xs={12}>
         <FontPickerDropdown
-          value={data.styles.fontFamily}
+          value={data.styles.fontFamily.value}
           onChange={handleFormChange}
         />
       </Grid>
@@ -82,16 +86,29 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
           <ToggleButtonGroup
             value={data.styles.variant}
             exclusive
-            onChange={(e, value) =>
-              handleFormChange({ styles: { variant: value } })
-            }
+            onChange={(e, value) => {
+              if (value !== null) {
+                handleFormChange({ styles: { variant: value } })
+              }
+            }}
             fullWidth
           >
             <ToggleButton value={BUTTON_VARIANTS.OUTLINED}>
-              <Typography textTransform={'none'}>Outlined</Typography>
+              <ButtonNodeInWebsiteBuilder
+                data={outlinedButtonDataObj}
+                mode={renderMode.editor}
+                project={websiteBuilderState}
+              />
             </ToggleButton>
             <ToggleButton value={BUTTON_VARIANTS.CONTAINED}>
-              <Typography textTransform={'none'}>Contained</Typography>
+              {/* <Disable> */}
+              <ButtonNodeInWebsiteBuilder
+                data={containedButtonDataObj}
+                mode={renderMode.editor}
+                project={websiteBuilderState}
+              />
+              {/* </Disable> */}
+              {/* <Typography textTransform={'none'}>Contained</Typography> */}
             </ToggleButton>
           </ToggleButtonGroup>
         </Grid>

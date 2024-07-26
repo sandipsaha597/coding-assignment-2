@@ -1,6 +1,6 @@
 import ButtonNodeInWebsiteBuilder from '../features/WebsiteBuilder/components/ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
 import ImageNodeInReactFlow from '../features/WebsiteBuilder/components/ReactFlowNodes/ImageNode/ImageNodeInReactFlow'
-import TextNodeInWebsiteBuilder from '../features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInReactFlow'
+import TextNodeInWebsiteBuilder from '../features/WebsiteBuilder/components/ReactFlowNodes/TextNode/TextNodeInWebsiteBuilder'
 import VideoNodeInWebsiteBuilder from '../features/WebsiteBuilder/components/ReactFlowNodes/VideoNode/VideoNodeInReactFlow'
 import { NODE_TYPE_MAP } from './nodeTypesMap'
 

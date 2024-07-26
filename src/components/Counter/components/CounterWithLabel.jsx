@@ -21,7 +21,12 @@ const CounterWithLabel = ({
       columnSpacing={2}
       {...wrapperComponentProps}
     >
-      <Grid item xs {...counterWrapperProps}>
+      <Grid item xs="auto" {...counterWrapperProps}>
+        <Typography htmlFor={inputId} component={'label'} {...labelProps}>
+          {label}
+        </Typography>
+      </Grid>
+      <Grid item xs {...labelWrapperProps}>
         <Counter
           inputId={inputId}
           min={0}
@@ -29,11 +34,6 @@ const CounterWithLabel = ({
           onChange={onChange}
           {...counterProps}
         />
-      </Grid>
-      <Grid item xs {...labelWrapperProps}>
-        <Typography htmlFor={inputId} {...labelProps}>
-          {label}
-        </Typography>
       </Grid>
     </Grid>
   )

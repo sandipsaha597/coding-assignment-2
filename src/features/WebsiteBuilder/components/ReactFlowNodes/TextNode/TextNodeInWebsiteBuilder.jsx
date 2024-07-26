@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import { useColor } from '../../../utils/hooks'
-import { getFontFamily } from '../../../utils/utils'
+import { getFontFamily } from '../../../schemaGenerator/valueGetters/getFontFamily'
 
 // Text node to show in website
 const TextNodeInWebsiteBuilder = ({ data, project }) => {
@@ -11,7 +11,7 @@ const TextNodeInWebsiteBuilder = ({ data, project }) => {
       sx={{
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
-        fontFamily: getFontFamily(data),
+        fontFamily: getFontFamily(data.styles.fontFamily),
         fontSize: data.styles.fontSize,
         color,
       }}

@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
-import ColorPicker from '../../ColorPicker/ColorPicker'
 import { ColorDropdown } from './ColorDropdown'
-import { COLOR_TYPES } from '../../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
+import { COLOR_TYPES } from '../../../../schemaGenerator/types/colorTypes'
+import ColorPicker from '../../../../../../components/ColorPicker/ColorPicker'
 
 const ColorPickerDropdown = ({
   value,
@@ -21,16 +21,16 @@ const ColorPickerDropdown = ({
           onChange={onChange}
         />
       </Grid>
-      <Grid item xs={'auto'}>
-        {value === COLOR_TYPES.CUSTOM && (
+      {value === COLOR_TYPES.CUSTOM && (
+        <Grid item xs={'auto'}>
           <ColorPicker
             color={customColor}
             onChange={({ hexa }) => {
               onChange({ type: COLOR_TYPES.CUSTOM, value: hexa })
             }}
           />
-        )}
-      </Grid>
+        </Grid>
+      )}
     </Grid>
   )
 }

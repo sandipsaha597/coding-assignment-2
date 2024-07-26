@@ -1,6 +1,8 @@
 import { homePageId } from '../constants'
 import { COLOR_TYPES } from '../types/colorTypes'
+import { FONT_FAMILY_TYPES } from '../types/fontFamilyTypes'
 import { getColorStructure } from './getColorStructure'
+import { getFontFamilyStructure } from './getFontFamilyStructure'
 
 export const generateBlankTemplate = (id) => {
   return {
@@ -19,6 +21,20 @@ export const generateBlankTemplate = (id) => {
           color: '#f1c40f',
         },
       ],
+      globalStyles: {
+        fontFamily: getFontFamilyStructure({
+          type: FONT_FAMILY_TYPES.CUSTOM,
+          value: 'Roboto',
+        }),
+        color: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          value: '#000',
+        }),
+        backgroundColor: getColorStructure({
+          type: COLOR_TYPES.CUSTOM,
+          value: '#fff',
+        }),
+      },
     },
     navbar: {
       styles: {

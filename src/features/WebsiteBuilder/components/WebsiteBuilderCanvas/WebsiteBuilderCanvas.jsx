@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import Canvas from '../../../../components/Canvas/Canvas'
 import NodesRenderer from '../../../../components/NodeRenderer/NodeRenderer'
 import PreviewAndWebsiteBuilderCanvasContainer from '../../../../components/PreviewAndWebsiteBuilderCanvasContainer/PreviewAndWebsiteBuilderCanvasContainer'
-import { WebsiteBuilderNavbar } from '../../../../components/WebsiteBuilderNavbar/WebsiteBuilderNavbar'
+import { WebsiteBuilderNavbar } from '../../../shared/components/WebsiteBuilderNavbar/WebsiteBuilderNavbar'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { nodeResizingMap } from '../../constants'
 import { useProjectThemeAndGlobalStyle } from '../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
@@ -30,7 +30,6 @@ const WebsiteBuilderCanvas = () => {
   return (
     <Canvas
       ref={websiteBuilderRef}
-      height={1000}
       project={websiteBuilderState}
       navbar={navbar}
       pages={pages}
@@ -42,35 +41,38 @@ const WebsiteBuilderCanvas = () => {
       nodeResize={nodeResizingMap}
     >
       {(canvasProps) => (
-        <>
-          <Disable>
+        <GlobalStyleWrapper project={websiteBuilderState}>
+          <Box sx={{ pointerEvents: 'none' }}>
             <WebsiteBuilderNavbar
               navbar={navbar}
               pages={pages}
               project={websiteBuilderState}
               mode={renderMode.editor}
             />
-          </Disable>
-          {/* </Box> */}
-          <PreviewAndWebsiteBuilderCanvasContainer>
+          </Box>
+          <PreviewAndWebsiteBuilderCanvasContainer height={1000}>
             <NodesRenderer {...canvasProps} />
           </PreviewAndWebsiteBuilderCanvasContainer>
-        </>
+        </GlobalStyleWrapper>
       )}
     </Canvas>
   )
 }
 
-const GlobalStyleWrapper = () => {
-  const { themeAndGlobalStyles } = useProjectThemeAndGlobalStyle()
-  const { styles } = themeAndGlobalStyles
+const GlobalStyleWrapper = ({ project, children }) => {
+  // const { globalStyles } = project.themeAndGlobalStyles
   return (
     <Box
-      sx={{
-        fontFamily: styles.fontFamily,
-        color: styles.color,
-      }}
-    ></Box>
+      sx={
+        {
+          // fontFamily: globalStyles.fontFamily,
+          // color: globalStyles.color,
+          // backgroundColor: globalStyles.backgroundColor,
+        }
+      }
+    >
+      {children}
+    </Box>
   )
 }
 

@@ -17,6 +17,7 @@ import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPic
 import ButtonNodeInWebsiteBuilder from '../../ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
 import { renderMode } from '../../../../../constants/renderMode'
 import Disable from '../../../../../components/Disable/Disable'
+import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
@@ -39,51 +40,33 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
   const outlinedButtonDataObj = produce(data, (draft) => {
     draft.buttonText = 'Outlined'
     draft.styles.variant = BUTTON_VARIANTS.OUTLINED
+    draft.styles.fontSize = 15
   })
   const containedButtonDataObj = produce(data, (draft) => {
     draft.buttonText = 'Contained'
     draft.styles.variant = BUTTON_VARIANTS.CONTAINED
+    draft.styles.fontSize = 15
   })
 
   return (
     // default submit is prevented because pressing enter key submits the form
     <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TextField
-          type="text"
-          value={data.buttonText}
-          onChange={(e) => handleFormChange({ buttonText: e.target.value })}
-          label="Button Text"
-          variant="outlined"
-          fullWidth
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FontPickerDropdown
-          value={data.styles.fontFamily.value}
-          onChange={handleFormChange}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <InputLabel htmlFor="font-size-counter-textNode">
-            Font size:
-          </InputLabel>
-          {/* <FontSizeChangeCounter
-            inputId={'font-size-counter-buttonNode'}
-            value={data.styles.fontSize}
-            onChange={(fontSizeObj) =>
-              handleFormChange({ styles: fontSizeObj })
-            }
-          /> */}
-        </Box>
-      </Grid>
       <Grid container item xs={12} alignItems={'center'} gap={2}>
         <Grid item xs="auto">
           Variant:
         </Grid>
         <Grid item xs>
           <ToggleButtonGroup
+            sx={{
+              '> .Mui-selected': {
+                backgroundColor: 'transparent !important',
+                outline: '2px solid dodgerblue',
+              },
+              '> .MuiButtonBase-root:hover': {
+                backgroundColor: 'transparent !important',
+                outline: '2px solid dodgerblue',
+              },
+            }}
             value={data.styles.variant}
             exclusive
             onChange={(e, value) => {
@@ -112,6 +95,29 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
             </ToggleButton>
           </ToggleButtonGroup>
         </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          type="text"
+          value={data.buttonText}
+          onChange={(e) => handleFormChange({ buttonText: e.target.value })}
+          label="Button Text"
+          variant="outlined"
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FontPickerDropdown
+          value={data.styles.fontFamily.value}
+          onChange={handleFormChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FontSizeChangeCounter
+          inputId={'font-size-counter-buttonNode'}
+          value={data.styles.fontSize}
+          onChange={(fontSizeObj) => handleFormChange({ styles: fontSizeObj })}
+        />
       </Grid>
 
       <Grid item xs={12}>

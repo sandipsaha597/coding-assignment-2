@@ -42,6 +42,8 @@ export const generateBlankTemplate = (id) => {
         {
           id: crypto.randomUUID(),
           title: 'Home',
+          /* "to" does not points to a path like /contact-us. It points to a pageId.
+          Why page id? Because page details can change like a slug changing from /contact-us to /get-in-touch */
           to: homePageId,
         },
       ],
@@ -55,6 +57,7 @@ export const generateBlankTemplate = (id) => {
           slug: '',
         },
         nodes: [],
+        isActive: true,
       },
     ],
   }

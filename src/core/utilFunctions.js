@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from '../constants'
+import jsonStringifyAsync from '../customLibraries/jsonStringifyAsync/jsonStringifyAsync'
 import { getItemById, getValueFromLocalStorage } from '../utils/functions'
 
 /**
@@ -107,7 +108,7 @@ export const getSavedProjectsAndTemplates = () =>
   )
 
 // saves the current websiteBuilder state to local storage
-export const saveProjectsAndTemplatesToLocalStorage = (
+export const saveProjectsAndTemplatesToLocalStorage = async (
   projectsAndTemplates
 ) => {
   /* in case the store.getState().websiteBuilder contains non-serializable values or/and bigInt
@@ -117,11 +118,16 @@ export const saveProjectsAndTemplatesToLocalStorage = (
   //   draft.projects.forEach((v) => delete v.activePageId)
   //   draft.templates.forEach((v) => delete v.activePageId)
   // })
+  // console.time('project Saved 2')
+  // const stringifiedJSON = await jsonStringifyAsync(projectsAndTemplates)
+  const stringifiedJSON = JSON.stringify(projectsAndTemplates)
   try {
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE,
-      JSON.stringify(projectsAndTemplates)
+      stringifiedJSON
     )
+    // console.timeEnd('project Saved 2')
+
     return [true, 'Flow saved']
   } catch (err) {
     console.error(err)

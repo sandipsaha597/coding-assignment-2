@@ -1,7 +1,7 @@
 import { styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import { getActivePage, getPageById } from '../../core/utilFunctions'
 import { renderMode } from '../../constants/renderMode'
+import { getActivePage, getPageById } from '../../core/utilFunctions'
 import { getColor } from '../../features/WebsiteBuilder/schemaGenerator/valueGetters/getColor'
 
 //  navbar.styles = {
@@ -19,6 +19,7 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode, project }) => {
 
   const editorPreview = {
     isActiveFunc(isActive, to) {
+      // debugger
       if (mode === renderMode.editor && activePageId === to) return true
       if (mode === renderMode.previewOrLive && isActive) return true
       return false
@@ -50,19 +51,30 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode, project }) => {
 }
 
 const StyledWebsiteBuilderNavbar = styled('nav')(
-  ({ navbarStyles, project }) => ({
-    backgroundColor: getColor(navbarStyles.backgroundColor, project),
-    gap: navbarStyles.gap,
-    a: {
-      color: getColor(navbarStyles.itemColor, project),
-    },
-    '.website-builder-navbar-active': {
-      color: getColor(navbarStyles.activeItemColor, project),
-    },
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '50px',
-    width: '100%',
-  })
+  ({ navbarStyles, project }) => {
+    return {
+      backgroundColor: getColor(
+        navbarStyles.backgroundColor,
+        project.themeAndGlobalStyles.theme
+      ),
+      gap: navbarStyles.gap,
+      a: {
+        color: getColor(
+          navbarStyles.itemColor,
+          project.themeAndGlobalStyles.theme
+        ),
+      },
+      '.website-builder-navbar-active': {
+        color: getColor(
+          navbarStyles.activeItemColor,
+          project.themeAndGlobalStyles.theme
+        ),
+      },
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '50px',
+      width: '100%',
+    }
+  }
 )

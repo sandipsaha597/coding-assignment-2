@@ -11,7 +11,6 @@ import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCount
 // when form value changes it calls the onChange callback function with new values
 
 // const ColorMenuItem = ({ value, text, color }) => {
-//   console.log(value, text, color)
 
 //   return (
 //     <MenuItem
@@ -34,14 +33,13 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
   data = {},
   onChange,
 }) {
-  const handleFormChange = (changedValues, changed) => {
+  const handleFormChange = (changedValues) => {
     /* lodash merge function changes the original object that's why we need to create a 
     draftState to merge changedValues with it */
     const newDataObj = produce(data, (draftState) => {
       return _.merge(draftState, changedValues)
     })
     // calling the props.onChange callback function with new values
-    console.log('newDataObj', JSON.stringify(newDataObj, null, 2))
     onChange(newDataObj)
   }
 
@@ -85,7 +83,6 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
           )}
           customColor={data.styles.color.value}
           onChange={(changeObj) => {
-            console.log('change', changeObj)
             handleFormChange({
               styles: { color: changeObj },
             })

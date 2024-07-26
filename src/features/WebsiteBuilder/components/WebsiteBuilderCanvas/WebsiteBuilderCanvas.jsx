@@ -8,6 +8,7 @@ import { nodeResizingMap } from '../../constants'
 import { useProjectThemeAndGlobalStyle } from '../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
 import { nodeTypeWebsiteBuilderComponentMap } from '../../../../constants/nodeTypeWebsiteBuilderComponentMap'
 import { renderMode } from '../../../../constants/renderMode'
+import Disable from '../../../../components/Disable/Disable'
 
 // const nodeRelativePositionTypeMap = {
 //   INSIDE_CONTAINER: 'INSIDE_CONTAINER',
@@ -42,14 +43,14 @@ const WebsiteBuilderCanvas = () => {
     >
       {(canvasProps) => (
         <>
-          <Box sx={{ pointerEvents: 'none' }}>
+          <Disable>
             <WebsiteBuilderNavbar
               navbar={navbar}
               pages={pages}
               project={websiteBuilderState}
               mode={renderMode.editor}
             />
-          </Box>
+          </Disable>
           {/* </Box> */}
           <PreviewAndWebsiteBuilderCanvasContainer>
             <NodesRenderer {...canvasProps} />

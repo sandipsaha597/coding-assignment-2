@@ -162,7 +162,7 @@ const PagesDropdownSelect = ({ value, onChange }) => {
           const pageId = page.id
           const { title, slug } = page.pageDetails
           return (
-            <MenuItem key={page.id} value={pageId}>
+            <MenuItem key={pageId} value={pageId}>
               {`${title} -  /${slug}`}
             </MenuItem>
           )

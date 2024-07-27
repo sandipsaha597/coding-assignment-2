@@ -123,6 +123,11 @@ const websiteBuilderSlice = createSlice({
       )
       themeItem.color = payload.color
     },
+
+    changeGlobalStyle: (state, { payload }) => {
+      const { styleProperty, value } = payload
+      state.themeAndGlobalStyles.globalStyles[styleProperty] = value
+    },
   },
 })
 

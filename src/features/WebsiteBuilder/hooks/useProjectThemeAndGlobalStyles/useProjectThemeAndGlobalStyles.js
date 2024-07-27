@@ -30,8 +30,18 @@ export const useProjectThemeAndGlobalStyle = () => {
     [dispatch]
   )
 
+  const changeGlobalStyle = useCallback(
+    (styleProperty, value) => {
+      dispatch(
+        websiteBuilderSliceActions.changeGlobalStyle({ styleProperty, value })
+      )
+    },
+    [dispatch]
+  )
+
   return {
     themeAndGlobalStyles,
     changeThemeColor,
+    changeGlobalStyle,
   }
 }

@@ -5,6 +5,7 @@ const ColorPickerWithLabel = ({
   color,
   onChange,
   label,
+
   wrapperComponentProps,
   colorPickerWrapperProps,
   colorPickerProps,

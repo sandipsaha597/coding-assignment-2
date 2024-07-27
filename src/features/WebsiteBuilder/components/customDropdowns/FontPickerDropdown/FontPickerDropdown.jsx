@@ -3,17 +3,23 @@ import { FONT_FAMILY_TYPES } from '../../../schemaGenerator/types/fontFamilyType
 import { availableFonts } from '../../../../../constants'
 import { handleTempChange } from '../functions/handleTempChange'
 
-const FontPickerDropdown = ({ value, onChange }) => {
+const FontPickerDropdown = ({
+  value,
+  label = 'Select Font',
+  onChange,
+  showGlobal = true,
+}) => {
   const tempChange = (value) => {
     onChange({ styles: { fontFamily: value } })
   }
 
+  console.log('value', value)
   return (
     <FormControl fullWidth>
       <InputLabel>Select Font</InputLabel>
       <Select
         value={value}
-        label="Select Font"
+        label={label}
         onChange={(e) => {
           onChange(
             {
@@ -32,12 +38,14 @@ const FontPickerDropdown = ({ value, onChange }) => {
           )
         }}
       >
-        <MenuItem
-          value={'inherit'}
-          {...handleTempChange('inherit', tempChange)}
-        >
-          <Box sx={{ fontFamily: 'inherit' }}>Global font</Box>
-        </MenuItem>
+        {showGlobal && (
+          <MenuItem
+            value={'inherit'}
+            {...handleTempChange('inherit', tempChange)}
+          >
+            <Box sx={{ fontFamily: 'inherit' }}>Global font</Box>
+          </MenuItem>
+        )}
         {availableFonts.map(({ id, font }) => (
           <MenuItem
             key={id}

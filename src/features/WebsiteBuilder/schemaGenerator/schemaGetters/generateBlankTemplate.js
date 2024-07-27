@@ -26,14 +26,8 @@ export const generateBlankTemplate = (id) => {
           type: FONT_FAMILY_TYPES.CUSTOM,
           value: 'Roboto',
         }),
-        color: getColorStructure({
-          type: COLOR_TYPES.CUSTOM,
-          value: '#000',
-        }),
-        backgroundColor: getColorStructure({
-          type: COLOR_TYPES.CUSTOM,
-          value: '#fff',
-        }),
+        color: '#000',
+        backgroundColor: '#fff',
       },
     },
     navbar: {

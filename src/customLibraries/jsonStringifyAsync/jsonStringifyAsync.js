@@ -6,7 +6,6 @@ const jsonStringifyAsync = (data) => {
       resolve(event.data)
     }
     worker.onerror = function (error) {
-      console.log(error)
       reject(error)
     }
     worker.postMessage(data)

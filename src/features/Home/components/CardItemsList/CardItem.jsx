@@ -8,7 +8,7 @@ import {
 
 const CardItem = ({ cardData, renderCardActions }) => {
   return (
-    <Card sx={{ p: 1 }}>
+    <Card sx={{ p: 1, textAlign: 'center' }} elevation={4}>
       <CardMedia
         sx={{ height: 140 }}
         image="/static/images/cards/contemplative-reptile.jpg"
@@ -19,7 +19,9 @@ const CardItem = ({ cardData, renderCardActions }) => {
           {cardData.projectName}
         </Typography>
       </CardContent>
-      <CardActions>{renderCardActions(cardData)}</CardActions>
+      <CardActions sx={{ justifyContent: 'center' }}>
+        {renderCardActions(cardData)}
+      </CardActions>
     </Card>
   )
 }

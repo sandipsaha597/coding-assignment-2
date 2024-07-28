@@ -160,3 +160,22 @@ export const isValidNumber = (input) => {
   const numberRegex = /^-?\d+(\.\d+)?$/
   return input === '' || numberRegex.test(input)
 }
+
+export const handleDownload = (fileUrl) => {
+  if (!fileUrl) {
+    return [false, 'noFileURL', 'No file uploaded to download.']
+  }
+  try {
+    const link = document.createElement('a')
+    link.href = fileUrl
+    link.download = ''
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (err) {
+    console.error(err)
+    return [false, err.name || 'unknownError', err.message]
+  }
+
+  return [true]
+}

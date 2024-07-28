@@ -1,12 +1,18 @@
 import { Button } from '@mui/material'
-import { useColor } from '../../../utils/hooks'
 import { renderMode } from '../../../../../constants/renderMode'
 import { getFontFamily } from '../../../schemaGenerator/valueGetters/getFontFamily'
+import { useColor } from '../../../utils/hooks'
+import { useTriggerButtonAction } from '../../ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonActions/hooks/useTriggerButtonAction'
 
 // Text node to show in website
 const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {
   const buttonTextColor = useColor(data.styles.textColor, project)
   const buttonColor = useColor(data.styles.buttonColor, project)
+
+  const { triggerButtonAction } = useTriggerButtonAction()
+
+  const buttonActionType = data.action.buttonActionType
+  const buttonActionValue = data.action.buttonActionValue
 
   const variant =
     data.styles.variant === 'outlined'
@@ -21,11 +27,19 @@ const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {
         }
       : {}
 
-  const tabIndexObject = mode === renderMode.editor ? { tabIndex: -1 } : {}
+  const editorProps = {
+    tabIndex: -1,
+    onClick: (e) => e.preventDefault(),
+    component: 'div',
+  }
+  const previewProps = {
+    onClick: () => triggerButtonAction(buttonActionType, buttonActionValue),
+  }
+
+  const buttonProps = mode === renderMode.editor ? editorProps : previewProps
   return (
     <Button
-      {...tabIndexObject}
-      component={mode === renderMode.editor ? 'div' : undefined}
+      {...buttonProps}
       sx={{
         width: '100%',
         height: '100%',

@@ -8,16 +8,13 @@ const CreateNewProject = () => {
     <Paper
       elevation={2}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        textAlign: 'center',
         pb: 4,
-        height: '200px',
         cursor: 'pointer',
       }}
       onClick={() => initializeProjectAndRedirect()}
     >
-      <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ padding: 8 }}>
         <AddCircle sx={{ fontSize: '60px', color: 'dodgerblue' }} />
       </Box>
       <Box>

@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import PreviewButton from '../../../../components/PreviewButton/PreviewButton'
@@ -17,6 +17,7 @@ const useSections = () => {
         name: 'Projects',
         cardData: {
           listItems: projectsAndTemplates.projects,
+          emptyListMessage: 'No projects yet',
           renderActions: (data) => (
             <>
               <PreviewButton id={data.id} />
@@ -36,6 +37,7 @@ const useSections = () => {
         name: 'Templates',
         cardData: {
           listItems: projectsAndTemplates.templates,
+          emptyListMessage: 'No template available',
           renderActions: (data) => (
             <>
               <PreviewButton data={data.id} />
@@ -52,7 +54,7 @@ const useSections = () => {
         },
       },
     ],
-    [projectsAndTemplates]
+    [projectsAndTemplates, initializeProjectAndRedirect]
   )
 
   return sections
@@ -62,19 +64,33 @@ const ProjectsAndTemplates = () => {
   const sections = useSections()
 
   return (
-    <Grid container spacing={4}>
+    <Grid container rowSpacing={4}>
       {sections.map((section) => (
-        <Grid key={section.id} item xs={12} component={'section'}>
-          <Typography variant="h3" mb={2}>
-            {section.name}
-          </Typography>
-          <CardItemList
-            items={section.cardData.listItems}
-            renderCardActions={section.cardData.renderActions}
-          />
+        <Grid key={section.id} item xs={12}>
+          <Section section={section} />
         </Grid>
       ))}
     </Grid>
+  )
+}
+
+const Section = ({ section }) => {
+  return (
+    <section>
+      <Typography variant="h3" gutterBottom>
+        {section.name}
+      </Typography>
+      {section.cardData.listItems.length === 0 ? (
+        <Typography p={2} textAlign={'center'}>
+          {section.cardData.emptyListMessage}
+        </Typography>
+      ) : (
+        <CardItemList
+          items={section.cardData.listItems}
+          renderCardActions={section.cardData.renderActions}
+        />
+      )}
+    </section>
   )
 }
 

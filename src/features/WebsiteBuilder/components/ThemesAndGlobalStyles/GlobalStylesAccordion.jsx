@@ -18,13 +18,11 @@ const GlobalStylesAccordion = () => {
   const globalStyles = themeAndGlobalStyles.globalStyles
 
   const handleFontChange = (changedValues) => {
-    console.log('changedValues', changedValues)
     /* lodash merge function changes the original object that's why we need to create a 
     draftState to merge changedValues with it */
     const newDataObj = produce(globalStyles.fontFamily, (draftState) => {
       return _.merge(draftState, changedValues.styles.fontFamily)
     })
-    console.log('newDataObj', newDataObj, globalStyles.fontFamily)
 
     // debugger
     // calling the props.onChange callback function with new values

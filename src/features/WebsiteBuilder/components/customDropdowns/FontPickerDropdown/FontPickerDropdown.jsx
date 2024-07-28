@@ -13,7 +13,6 @@ const FontPickerDropdown = ({
     onChange({ styles: { fontFamily: value } })
   }
 
-  console.log('value', value)
   return (
     <FormControl fullWidth>
       <InputLabel>Select Font</InputLabel>

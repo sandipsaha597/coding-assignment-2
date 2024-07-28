@@ -5,13 +5,11 @@ import ProjectsAndTemplates from '../components/ProjectsAndTemplates/ProjectsAnd
 const HomePage = () => {
   return (
     <Container component="main" sx={{ py: 4 }}>
-      <Grid container direction="column">
-        <Grid container item justifyContent="center">
-          <Grid item xs={3}>
-            <CreateNewProject />
-          </Grid>
+      <Grid container spacing={4} justifyContent={'center'}>
+        <Grid item xs={12} sm={6} md={3}>
+          <CreateNewProject />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <ProjectsAndTemplates />
         </Grid>
       </Grid>

@@ -1,5 +1,6 @@
+import { Box, TextField } from '@mui/material'
 import { memo } from 'react'
-import { Box, TextField, Typography, styled } from '@mui/material'
+import ImageUpload from '../../FileUploads/ImageUpload'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
@@ -25,7 +26,6 @@ const ImageNodeEditForm = memo(function ImageNodeEditForm({
       }}
     >
       <TextField
-        id="image-url"
         type="url"
         value={data.src}
         onChange={(e) => handleFormChange('src', e.target.value)}
@@ -41,6 +41,12 @@ const ImageNodeEditForm = memo(function ImageNodeEditForm({
         variant="outlined"
         fullWidth
       />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <ImageUpload
+          inputId="image-upload-node"
+          onUpload={(url) => handleFormChange('src', url)}
+        />
+      </Box>
     </Box>
   )
 })
@@ -48,10 +54,18 @@ const ImageNodeEditForm = memo(function ImageNodeEditForm({
 export default ImageNodeEditForm
 
 // ideally the colors, gaps etc should come from theme
-const Label = styled(Typography)({ color: '#d8d8d8', fontSize: '14px' })
-const Textarea = styled('textarea')({
-  padding: '10px',
-  borderRadius: '4px',
-  borderColor: '#dedede',
-  resize: 'vertical',
-})
+
+{
+  /* <video controls width="600">
+  <source src={blobURL} type="video/mp4" />
+  Your browser does not support the video tag.
+</video> */
+}
+{
+  /* <a href={blobURL} download="video.mp4">
+  Download Video
+</a> */
+}
+{
+  /* <button onClick={handleFileReset}>Remove Video</button> */
+}

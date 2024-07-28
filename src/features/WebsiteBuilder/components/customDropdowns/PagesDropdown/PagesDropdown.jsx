@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { doesItemExist } from '../../../../../utils/functions'
 import { usePages } from '../../../hooks/usePages/usePages'
 
-const PagesDropdownSelect = ({ value, onChange }) => {
+const PagesDropdown = ({ value, onChange }) => {
   const { pages } = usePages()
 
   const doesPageExist = useMemo(
@@ -34,4 +34,4 @@ const PagesDropdownSelect = ({ value, onChange }) => {
   )
 }
 
-export default PagesDropdownSelect
+export default PagesDropdown

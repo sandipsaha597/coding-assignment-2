@@ -1,7 +1,11 @@
 import {
   Box,
+  Button,
+  FormControl,
   Grid,
   InputLabel,
+  MenuItem,
+  Select,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
@@ -9,7 +13,7 @@ import {
 } from '@mui/material'
 import { produce } from 'immer'
 import _ from 'lodash'
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { BUTTON_VARIANTS } from '../../../schemaGenerator/types/buttonVariants'
 import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
 import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
@@ -18,6 +22,18 @@ import ButtonNodeInWebsiteBuilder from '../../ReactFlowNodes/ButtonNode/ButtonNo
 import { renderMode } from '../../../../../constants/renderMode'
 import Disable from '../../../../../components/Disable/Disable'
 import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
+import PagesDropdown from '../../customDropdowns/PagesDropdown/PagesDropdown'
+import FileUploadAny from '../../FileUploads/FileUploadAny'
+import { redirect } from 'react-router-dom'
+import { toast } from '../../../../../customLibraries/MyReactToastify/toast'
+import { getPageById } from '../../../../../core/utilFunctions'
+import { getItemById } from '../../../../../utils/functions'
+import { store } from '../../../../../store/store'
+import { websiteBuilderPagesSelector } from '../../../redux/websiteBuilderSlice'
+import ButtonActionsSelect from './ButtonActions/ButtonActionsSelect'
+import ButtonActionForm from './ButtonActions/ButtonActionForm'
+import { BUTTON_ACTION_TYPE_TO_FUNCTION_MAP } from './ButtonActions/constants/buttonActionTypeToFunctionMap'
+import ButtonActions from './ButtonActions/ButtonActions'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
@@ -33,7 +49,6 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
       return _.merge(draftState, changedValues)
     })
     // calling the props.onChange callback function with new values
-
     onChange(newDataObj)
   }
 
@@ -148,6 +163,14 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
               },
             })
           }
+        />
+      </Grid>
+
+      <Grid container item xs={12} spacing={2} alignItems="center">
+        <ButtonActions
+          buttonActionType={data.action.buttonActionType}
+          buttonActionValue={data.action.buttonActionValue}
+          onChange={(changeObj) => handleFormChange({ action: changeObj })}
         />
       </Grid>
     </Grid>

@@ -11,7 +11,6 @@ const Preview = ({ project }) => {
   const pages = project.pages
   const navbar = project.navbar
   const fontsGettingUsedInProject = getFontFamiliesUsedInProject(project)
-  console.log(fontsGettingUsedInProject)
   return (
     <GlobalStyleWrapper project={project}>
       <WebsiteBuilderNavbar

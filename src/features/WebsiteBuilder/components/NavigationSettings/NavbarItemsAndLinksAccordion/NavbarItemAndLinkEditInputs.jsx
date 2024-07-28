@@ -1,5 +1,5 @@
 import { Box, TextField } from '@mui/material'
-import PagesDropdownSelect from '../PagesDetailsAccordion/PagesDropdownSelect'
+import PagesDropdown from '../../customDropdowns/PagesDropdown/PagesDropdown'
 
 const NavbarItemAndLinkEditInputs = ({ item, onChange }) => {
   const handleChange = (key, value) => {
@@ -19,7 +19,7 @@ const NavbarItemAndLinkEditInputs = ({ item, onChange }) => {
         fullWidth
         onChange={(e) => handleChange('title', e.target.value)}
       />
-      <PagesDropdownSelect
+      <PagesDropdown
         value={item.to}
         onChange={(e) => {
           handleChange('to', e.target.value)

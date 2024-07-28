@@ -33,6 +33,10 @@ export const videoNodeDefaultDataObj = {
 
 export const buttonNodeDefaultDataObj = {
   buttonText: 'Click',
+  action: {
+    buttonActionType: '',
+    buttonActionValue: '',
+  },
   styles: {
     textColor: getColorStructure({
       type: COLOR_TYPES.CUSTOM,

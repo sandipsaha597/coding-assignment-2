@@ -1,19 +1,17 @@
-import { produce } from 'immer'
-import { useNavbar } from '../../../hooks/useNavbar/useNavbar'
+import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Grid,
-  InputLabel,
 } from '@mui/material'
-import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
-import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
-import Counter from '../../../../../components/Counter/components/Counter'
-import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
+import { produce } from 'immer'
 import _ from 'lodash'
 import CounterWithLabel from '../../../../../components/Counter/components/CounterWithLabel'
+import { useNavbar } from '../../../hooks/useNavbar/useNavbar'
+import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
+import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
 
 const colorChangeArr = [
   {

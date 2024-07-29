@@ -1,13 +1,13 @@
+import { Box } from '@mui/material'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProjectOrTemplateById } from '../../../core/utilFunctions'
-import Preview from '../components/Preview'
-import { useMemo, useState } from 'react'
 import { useProjectsAndTemplates } from '../../../hooks/useProjectsAndTemplates/useProjectsAndTemplates'
-import { Box, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
+import Preview from '../components/Preview'
 
+import PreviewPageHeader from '../components/PreviewHeader'
 import { deviceWidthHeightMap } from '../constants/deviceWidthHeightMap'
 import { devices } from '../constants/devices'
-import PreviewPageHeader from '../components/PreviewHeader'
 
 const PreviewPage = () => {
   const { projectOrTemplateId } = useParams()

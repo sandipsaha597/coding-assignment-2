@@ -6,10 +6,9 @@ import {
   Select,
   Typography,
 } from '@mui/material'
+import { ColoredBox } from '../../../../../../components/ColoredBox/ColoredBox'
 import { useProjectThemeAndGlobalStyle } from '../../../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
 import { COLOR_TYPES } from '../../../../schemaGenerator/types/colorTypes'
-import { getItemById } from '../../../../../../utils/functions'
-import { ColoredBox } from '../../../../../../components/ColoredBox/ColoredBox'
 import { handleTempChange } from '../../functions/handleTempChange'
 
 const MenuItemBox = ({ color, name }) => {

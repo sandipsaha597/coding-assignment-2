@@ -1,5 +1,4 @@
 import { LOCAL_STORAGE_KEYS } from '../constants'
-import jsonStringifyAsync from '../customLibraries/jsonStringifyAsync/jsonStringifyAsync'
 import { getItemById, getValueFromLocalStorage } from '../utils/functions'
 
 /**
@@ -83,13 +82,13 @@ export const getProjectOrTemplateById = (id, projects, templates) => {
 }
 
 /**
- * Retrieves the saved state of the chatbot flow builder from local storage.
+ * Retrieves the saved state of the website builder from local storage.
  *
  * This function uses the getValueFromLocalStorage utility function to access
  * the saved state from local storage using the predefined key
- * LOCAL_STORAGE_KEYS.SAVED_CHATBOT_FLOW_BUILDER_STATE.
+ * LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE.
  *
- * @returns {Object|null} The saved state of the chatbot flow builder if it exists in local storage,
+ * @returns {Object|null} The saved state of the websiteBuilder if it exists in local storage,
  * or null if not found or if the key does not exist.
  */
 
@@ -102,14 +101,10 @@ export const getSavedProjectsAndTemplates = () =>
 export const saveProjectsAndTemplatesToLocalStorage = async (
   projectsAndTemplates
 ) => {
-  /* in case the store.getState().websiteBuilder contains non-serializable values or/and bigInt
+  /* in case the projectsAndTemplates contains non-serializable values or/and bigInt
   numbers or/and circular object the JSON.stringify will fail that's why wrapped the whole thing in
   a try catch block */
-  // projectsAndTemplates = produce(projectsAndTemplates, (draft) => {
-  //   draft.projects.forEach((v) => delete v.activePageId)
-  //   draft.templates.forEach((v) => delete v.activePageId)
-  // })
-  // console.time('project Saved 2')
+
   // const stringifiedJSON = await jsonStringifyAsync(projectsAndTemplates)
   const stringifiedJSON = JSON.stringify(projectsAndTemplates)
   try {
@@ -117,9 +112,8 @@ export const saveProjectsAndTemplatesToLocalStorage = async (
       LOCAL_STORAGE_KEYS.SAVED_PROJECTS_AND_TEMPLATES_STATE,
       stringifiedJSON
     )
-    // console.timeEnd('project Saved 2')
 
-    return [true, 'Flow saved']
+    return [true, 'Project saved']
   } catch (err) {
     console.error(err)
     return [false, err.message]

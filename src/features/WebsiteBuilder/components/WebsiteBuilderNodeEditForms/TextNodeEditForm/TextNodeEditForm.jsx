@@ -1,11 +1,11 @@
-import { Box, Button, Grid, TextField } from '@mui/material'
+import { Box, Grid, TextField } from '@mui/material'
 import { produce } from 'immer'
 import _ from 'lodash'
 import { memo } from 'react'
+import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
 import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
 import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
 import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPickerDropdown'
-import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
 import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
 import { formInputRowSpacing } from '../constants/formInputRowSpacing'
 

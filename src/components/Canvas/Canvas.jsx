@@ -14,9 +14,12 @@ const Canvas = forwardRef(function Canvas(props, ref) {
     <Box
       ref={ref}
       component={component}
+      // If clicked on Canvas every node becomes unselected
       onClick={() => onNodeSelect(false)}
       sx={{ width, height }}
     >
+      {/* using render props pattern to make it reusable for any similar feature like
+      graphic design, resume design, whiteboard, flow builder etc */}
       {children ? children(props) : <NodesRenderer {...props} />}
     </Box>
   )

@@ -3,6 +3,17 @@ import { isResizeEnabled } from '../ResizeAndDrag'
 import StyledResizeAndDrag from '../StyledResizeAndDrag/StyledResizeAndDrag'
 import Disable from './../Disable/Disable'
 
+/* This structure is inspired by reactFlow library. Please refer to first few minutes
+of this video to get a better understanding https://youtu.be/EvgdirLeYaQ?si=FduxfR6ZfF-rh567
+
+In short: nodes props receives an array of objects. It contains all the data about a particular node (getNewNodeObject).
+It contains width, height, node's data which we use in forms and most importantly the "type".
+
+The nodeType receives an Object. This object maps the "type" with a component and 
+that component gets rendered. eg. nodeTypeWebsiteBuilderComponentMap
+
+  
+ */
 const NodesRenderer = ({
   nodes,
   nodeTypes,

@@ -9,7 +9,6 @@ import { produce } from 'immer'
 import _ from 'lodash'
 import ColorPickerWithLabel from '../../../../components/ColorPicker/ColorPickerWithLabel'
 import { useProjectThemeAndGlobalStyle } from '../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
-import { getFontFamily } from '../../schemaGenerator/valueGetters/getFontFamily'
 import FontPickerDropdown from '../customDropdowns/FontPickerDropdown/FontPickerDropdown'
 
 const GlobalStylesAccordion = () => {
@@ -24,8 +23,6 @@ const GlobalStylesAccordion = () => {
       return _.merge(draftState, changedValues.styles.fontFamily)
     })
 
-    //
-    // calling the props.onChange callback function with new values
     changeGlobalStyle('fontFamily', newDataObj)
   }
 

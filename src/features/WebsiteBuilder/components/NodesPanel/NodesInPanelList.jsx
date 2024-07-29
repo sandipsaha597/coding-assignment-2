@@ -30,11 +30,11 @@ const NodesInPanelList = () => {
     // dimensions of the node in nodes panel
     const draggedItemBoundingClientRect = draggedItem.getBoundingClientRect()
 
-    // check if the chatBotFlow box and node in panel box are overlapping of not
+    // check if the websiteBuilderCanvas and node in panel box are overlapping of not
     const isOverlapping = isElementsOverlappingByMargin(
       websiteBuilderRef.current,
       draggedItem,
-      // the draggedItem(node in panel) should be 50% or more inside of the chatBotFlow
+      // the draggedItem(node in panel) should be 50% or more inside of the websiteBuilderCanvas
       draggedItemBoundingClientRect.width / 2,
       draggedItemBoundingClientRect.height / 2
     )

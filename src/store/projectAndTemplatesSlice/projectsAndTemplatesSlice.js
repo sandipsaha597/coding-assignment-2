@@ -1,27 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
-  getPageById,
   getProjectById,
   getSavedProjectsAndTemplates,
 } from '../../core/utilFunctions'
-import { getItemById } from '../../utils/functions'
 import { generateBlankTemplate } from '../../features/WebsiteBuilder/schemaGenerator/schemaGetters/generateBlankTemplate'
+import { getItemById } from '../../utils/functions'
 
 const savedProjectsAndTemplates = getSavedProjectsAndTemplates()
 /*
-  This state contains the nodes and edges for the websiteBuilder.
-  It should only include values that:
-  - Continuously change,
-  - Are serializable,
-  - Trigger re-renders upon change.
-  
-  References to ReactFlow, reactFlowInstance, and all other non-serializable values are stored in the AppContext.
-  This separation ensures that the Redux state remains serializable and suitable for debugging and testing, 
-  while non-serializable values are managed within the application context.
-
-  Initially, I was cautious about whether to use Context API and Redux together in the same application.
-  After consulting ChatGPT, I learned that it is not only okay to use them together but also considered a very good practice 
-  since they serve different purposes. The react-redux library itself uses Context API under the hood.
+  This state contains all the available projects and templates.
 */
 
 const initialState =
@@ -56,9 +43,9 @@ const projectsAndTemplatesSlice = createSlice({
 
       state.projects[projectIndex] = payload.updatedProject
     },
-    deleteTemplateOrProject: (state, { payload }) => {
-      // const {id }=  payload
-    },
+
+    /* If a valid template id is provided it creates a new project using that template
+    If not provided it creates new project using a blank template */
     initializeProject: (state, { payload }) => {
       let [template, index] = getItemById(payload.templateId, state.templates)
       if (index === -1) template = generateBlankTemplate(payload.newProjectId)

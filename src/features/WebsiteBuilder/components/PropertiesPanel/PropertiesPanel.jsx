@@ -49,5 +49,5 @@ const StyledPropertiesPanel = styled('section')(({ propertiesPanelShow }) => ({
   transform: propertiesPanelShow ? 'translate(0%, 0)' : 'translate(-100%, 0)',
   transition: '.4s ease-in-out',
   zIndex: zIndexManagement.propertiesPanel,
-  overflow: 'scroll',
+  overflowY: 'scroll',
 }))

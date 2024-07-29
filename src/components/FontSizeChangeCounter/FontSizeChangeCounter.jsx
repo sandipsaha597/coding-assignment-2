@@ -7,6 +7,7 @@ const FontSizeChangeCounter = ({ value, onChange, inputId }) => {
       inputId={inputId}
       label={'Font size:'}
       onChange={(value) => onChange({ fontSize: value })}
+      counterProps={{ max: 200 }}
     />
   )
 }

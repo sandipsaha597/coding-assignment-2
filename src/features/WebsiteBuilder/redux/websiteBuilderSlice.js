@@ -4,13 +4,13 @@ import { getNodeInProjectById, getPageById } from '../../../core/utilFunctions'
 import { getItemById } from '../../../utils/functions'
 
 /*
-  This state contains the nodes and edges for the websiteBuilder.
+  This state contains all the data for the for the current project loaded in the websiteBuilder.
   It should only include values that:
   - Continuously change,
   - Are serializable,
   - Trigger re-renders upon change.
   
-  References to ReactFlow, reactFlowInstance, and all other non-serializable values are stored in the AppContext.
+  References to websiteBuilder and all other non-serializable values are stored in the websiteBuilderContext.
   This separation ensures that the Redux state remains serializable and suitable for debugging and testing, 
   while non-serializable values are managed within the application context.
 
@@ -41,6 +41,7 @@ const websiteBuilderSlice = createSlice({
      * @param {Object} payload.newNode - a valid new node
      */
     addNode: (state, { payload }) => {
+      // upon new node add it unselects all the nodes, and makes the newly added node selected
       unSelectAllNodes(state.pages)
       const [page] = getPageById(payload.pageId, state.pages)
       page.nodes.push({ ...payload.newNode, selected: true })
@@ -55,6 +56,9 @@ const websiteBuilderSlice = createSlice({
     addPage: (state, { payload }) => {
       state.pages.push(payload.newPage)
     },
+
+    /* changes active page in the website builder. The isActive field does nothing 
+    in preview or publish mode */
     changeActivePage: (state, { payload }) => {
       state.pages.forEach((page) => (page.isActive = false))
       const [page] = getPageById(payload.pageId, state.pages)
@@ -64,9 +68,8 @@ const websiteBuilderSlice = createSlice({
       const [page] = getPageById(payload.pageId, state.pages)
       page.pageDetails = payload.details
     },
-    /* reactFlow prop */
-    /* upon selecting a node and pressing backspace deletes that node
-    If onNodeChange is not there changes won't be applied, unless we are using uncontrolled reactFlow component */
+
+    /* payload.id can be a node.id or false. If false all nodes becomes unselected */
     onNodeSelect: (state, { payload }) => {
       unSelectAllNodes(state.pages)
       const nodeId = payload.id
@@ -75,9 +78,13 @@ const websiteBuilderSlice = createSlice({
         node.selected = true
       }
     },
+
+    /* update node size updates position as well because if dragged from top, top-left, top-right,
+    or left it will change x,y coordinates of the node */
     updateNodeSize: (state, { payload }) => {
       const { node } = getNodeInProjectById(payload.id, state)
       const { changedWidth, changedHeight, position } = payload
+      /* changedWidth / changedHeight can be false as well if resizing is not enabled for that part */
       if (changedWidth) node.width += changedWidth
       if (changedHeight) node.height += changedHeight
 
@@ -102,13 +109,6 @@ const websiteBuilderSlice = createSlice({
     },
     addItemInNavbar: (state, { payload }) => {
       state.navbar.items.push(payload.newItem)
-      // return {
-      //   ...state,
-      //   navbar: {
-      //     ...state.navbar,
-      //     items: [...state.navbar.items, payload.newItem],
-      //   },
-      // }
     },
     updateItemInNavbar: (state, { payload }) => {
       const itemId = payload.itemId

@@ -41,6 +41,8 @@ const WebsiteBuilderCanvas = () => {
     >
       {(canvasProps) => (
         <GlobalStyleWrapper project={websiteBuilderState}>
+          {/* Anything that needs to be full-width goes outside the container. Like Navbar, 
+          background-image etc */}
           <Box sx={{ pointerEvents: 'none' }}>
             <WebsiteBuilderNavbar
               navbar={navbar}
@@ -49,6 +51,7 @@ const WebsiteBuilderCanvas = () => {
               mode={renderMode.editor}
             />
           </Box>
+
           <PreviewAndWebsiteBuilderCanvasContainer height={1000}>
             <NodesRenderer {...canvasProps} />
           </PreviewAndWebsiteBuilderCanvasContainer>

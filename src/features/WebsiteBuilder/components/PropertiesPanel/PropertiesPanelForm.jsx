@@ -57,8 +57,8 @@ const PropertiesPanelEditForm = () => {
       {/* if propertiesPanelFormVisible is true show the form component */}
       {propertiesPanelFormVisible && (
         <FormComponent
-          // passing the current selected node data so the form can show it
           id={selectedNodeDetails.id}
+          // passing the current selected node data so the form can show it
           data={selectedNodeDetails.data}
           websiteBuilderState={websiteBuilderState}
           // when the form value changes it calls the onChange callback function with new values

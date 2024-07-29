@@ -26,6 +26,9 @@ const FileUploadAny = ({
       )
       return
     }
+    /* LocalStorage only has 5MB limit. Can't store large files there. IndexDB is a 
+    good alternative. With URL.createObjectURL(file) I'm mimicking backend service which returns a 
+    URL */
     onUpload(URL.createObjectURL(file))
   }
 

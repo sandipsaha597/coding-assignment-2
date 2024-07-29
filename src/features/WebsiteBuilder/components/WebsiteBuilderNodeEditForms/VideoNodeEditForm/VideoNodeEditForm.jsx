@@ -1,7 +1,7 @@
-import { Box, Grid, TextField, styled } from '@mui/material'
+import { Box, Grid, TextField } from '@mui/material'
 import { memo } from 'react'
-import VideoUpload from '../../FileUploads/VideoUpload'
 import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
+import VideoUpload from '../../FileUploads/VideoUpload'
 import { formInputRowSpacing } from '../constants/formInputRowSpacing'
 
 // take data object as input and shows it in the form
@@ -70,9 +70,3 @@ const VideoNodeEditForm = memo(function VideoNodeEditForm({
 })
 
 export default VideoNodeEditForm
-
-const Form = styled('form')({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-})

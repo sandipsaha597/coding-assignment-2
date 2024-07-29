@@ -7,15 +7,8 @@
  *  - {Array} nodes: The nodes currently present in the websiteBuilder.
  *  - {Function} addNode: A function to add a node to the flow.
  *  - {Array} selectedNodes: Nodes that are currently selected in the flow.
- *  - {Function} onNodesChange: A React Flow prop. Pass the values as they are.
  *  - {Function} editNodeData: A function to edit the data of an existing node.
- *  - {Array} edges: The edges currently present in the websiteBuilder.
- *  - {Function} onEdgesChange: A React Flow prop. Pass the values as they are.
- *  - {Function} onConnect: A React Flow prop. Pass the values as they are.
- *  - {Ref} chatbotReactFlowRef: HTML element reference of the websiteBuilder.
- *  - {Object} chatbotReactFlowInstance: The instance of chatbotReactFlow, initialized upon website (reactFlow) initialization.
- *        This includes methods like addNodes, screenToFlowPosition, etc. Refer to the React Flow documentation for more info: https://reactflow.dev/api-reference/types/react-flow-instance
- *  - {Function} setChatbotReactFlowInstance: Sets the chatbotReactFlowInstance. Pass it in the onInit prop of React Flow.
+ *  - {Ref} websiteBuilderRef: HTML element reference of the websiteBuilder.
  */
 
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext'

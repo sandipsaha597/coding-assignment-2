@@ -6,6 +6,8 @@ import { getFontFamilyStructure } from './getFontFamilyStructure'
 
 export const generateBlankTemplate = (id) => {
   return {
+    /* If called in a reducer, useMemo callback or any other pure function, an
+    id should be provided */
     id: id ?? crypto.randomUUID(),
     projectName: 'Blank template',
     themeAndGlobalStyles: {

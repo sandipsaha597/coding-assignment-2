@@ -44,7 +44,6 @@ export const useProjectsAndTemplates = () => {
           entireTemplateObject,
         })
       )
-      return newProjectId
     },
     [dispatch]
   )

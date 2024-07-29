@@ -16,7 +16,7 @@ import { availableFonts } from '../../shared/constants/availableFonts.js'
 
 const WebsiteBuilder = memo(function WebsiteBuilder() {
   return (
-    <ChatbotFlowBuilder>
+    <StyledWebsiteBuilder>
       <GoogleFontLoader fonts={availableFonts} />
       {/* header of the app */}
       <Header />
@@ -32,7 +32,7 @@ const WebsiteBuilder = memo(function WebsiteBuilder() {
         <PropertiesPanel />
         <NodesPanel />
       </RightSidePanel>
-    </ChatbotFlowBuilder>
+    </StyledWebsiteBuilder>
   )
 })
 
@@ -57,7 +57,7 @@ const WebsiteBuilderPage = memo(function WebsiteBuilderPage() {
 
 export default WebsiteBuilderPage
 
-const ChatbotFlowBuilder = styled('div')(() => ({
+const StyledWebsiteBuilder = styled('div')(() => ({
   display: 'grid',
   height: '100vh',
   gridTemplateRows: '55px 1fr',

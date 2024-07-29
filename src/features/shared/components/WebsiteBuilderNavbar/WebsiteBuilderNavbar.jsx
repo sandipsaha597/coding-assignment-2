@@ -19,7 +19,7 @@ export const WebsiteBuilderNavbar = ({ navbar, pages, mode, project }) => {
 
   const editorPreview = {
     isActiveFunc(isActive, to) {
-      // debugger
+      //
       if (mode === renderMode.editor && activePageId === to) return true
       if (mode === renderMode.previewOrLive && isActive) return true
       return false

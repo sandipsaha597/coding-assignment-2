@@ -1,4 +1,11 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material'
 import { useProjectThemeAndGlobalStyle } from '../../../../hooks/useProjectThemeAndGlobalStyles/useProjectThemeAndGlobalStyles'
 import { COLOR_TYPES } from '../../../../schemaGenerator/types/colorTypes'
 import { getItemById } from '../../../../../../utils/functions'
@@ -7,9 +14,23 @@ import { handleTempChange } from '../../functions/handleTempChange'
 
 const MenuItemBox = ({ color, name }) => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-      <ColoredBox color={color} />
-      <span>{name}</span>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+      }}
+    >
+      <ColoredBox color={color} sx={{ minWidth: 25 }} />
+      <Typography
+        sx={{
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {name}
+      </Typography>
     </Box>
   )
 }
@@ -19,7 +40,6 @@ export const ColorDropdown = ({
   onChange,
   customColor,
   dropdownLabel = 'Color',
-  showGlobal = true,
 }) => {
   const { themeAndGlobalStyles } = useProjectThemeAndGlobalStyle()
 

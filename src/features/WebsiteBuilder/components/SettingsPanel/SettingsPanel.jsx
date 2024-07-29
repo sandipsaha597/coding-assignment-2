@@ -1,53 +1,53 @@
 import { styled } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { zIndexManagement } from '../../constants'
 import { useNodes } from '../../hooks/useNodes/useNodes'
-import SettingsPanelEditForm from './SettingsPanelForm'
-import SettingsPanelHeader from './SettingsPanelHeader'
-import { settingsPanelTypeToTitleMap } from './constants'
+import PropertiesPanelEditForm from './SettingsPanelForm'
+import PropertiesPanelHeader from './SettingsPanelHeader'
+import { propertiesPanelTypeToTitleMap } from './constants'
+import { zIndexManagement } from '../../../shared/constants/zIndexManagement'
 
-const useSettingsPanel = () => {
+const usePropertiesPanel = () => {
   const { selectedNodes } = useNodes()
-  const [settingsPanelShow, setSettingsPanelShow] = useState(false)
+  const [propertiesPanelShow, setPropertiesPanelShow] = useState(false)
 
   useEffect(() => {
-    /* if exactly one node is selected, settings panel will be shown
+    /* if exactly one node is selected, properties panel will be shown
     by pressing ctrl/cmd + shift user can do multi-selection (not implemented yet) */
     if (selectedNodes.length === 1) {
-      setSettingsPanelShow(true)
+      setPropertiesPanelShow(true)
     } else {
-      setSettingsPanelShow(false)
+      setPropertiesPanelShow(false)
     }
   }, [selectedNodes])
-  return { selectedNodes, settingsPanelShow, setSettingsPanelShow }
+  return { selectedNodes, propertiesPanelShow, setPropertiesPanelShow }
 }
 
-const SettingsPanel = () => {
-  const { selectedNodes, settingsPanelShow, setSettingsPanelShow } =
-    useSettingsPanel()
+const PropertiesPanel = () => {
+  const { selectedNodes, propertiesPanelShow, setPropertiesPanelShow } =
+    usePropertiesPanel()
 
   return (
-    <StyledSettingsPanel settingsPanelShow={settingsPanelShow}>
-      <SettingsPanelHeader
-        // settings panel header title should be different for different node types
-        title={settingsPanelTypeToTitleMap[selectedNodes[0]?.type]}
-        // hiding the settings panel upon back arrow button click
-        hideSettingsPanel={() => setSettingsPanelShow(false)}
+    <StyledPropertiesPanel propertiesPanelShow={propertiesPanelShow}>
+      <PropertiesPanelHeader
+        // properties panel header title should be different for different node types
+        title={propertiesPanelTypeToTitleMap[selectedNodes[0]?.type]}
+        // hiding the properties panel upon back arrow button click
+        hidePropertiesPanel={() => setPropertiesPanelShow(false)}
       />
-      <SettingsPanelEditForm />
-    </StyledSettingsPanel>
+      <PropertiesPanelEditForm />
+    </StyledPropertiesPanel>
   )
 }
 
-export default SettingsPanel
+export default PropertiesPanel
 
-const StyledSettingsPanel = styled('section')(({ settingsPanelShow }) => ({
+const StyledPropertiesPanel = styled('section')(({ propertiesPanelShow }) => ({
   background: '#fff',
   position: 'absolute',
   width: '100%',
   height: '100%',
-  transform: settingsPanelShow ? 'translate(0%, 0)' : 'translate(-100%, 0)',
+  transform: propertiesPanelShow ? 'translate(0%, 0)' : 'translate(-100%, 0)',
   transition: '.4s ease-in-out',
-  zIndex: zIndexManagement.settingsPanel,
+  zIndex: zIndexManagement.propertiesPanel,
   overflow: 'scroll',
 }))

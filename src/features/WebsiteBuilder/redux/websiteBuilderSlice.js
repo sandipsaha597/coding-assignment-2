@@ -32,6 +32,9 @@ const websiteBuilderSlice = createSlice({
     setProject: (state, { payload }) => {
       return payload.project
     },
+    editProjectName: (state, { payload }) => {
+      state.projectName = payload.name
+    },
     /**
      * Adds a new node to the state.
      * @param {Object} action.payload - The payload containing the new node to add.
@@ -42,8 +45,12 @@ const websiteBuilderSlice = createSlice({
       const [page] = getPageById(payload.pageId, state.pages)
       page.nodes.push({ ...payload.newNode, selected: true })
     },
-    removeNode: (state, { payload }) => {
-      state.nodes = state.nodes.filter((v) => v.id !== payload.id)
+    deleteNode: (state, { payload }) => {
+      const { page, pagesIndex } = getNodeInProjectById(payload.id, state)
+
+      if (pagesIndex !== -1) {
+        page.nodes = page.nodes.filter((v) => v.id !== payload.id)
+      }
     },
     addPage: (state, { payload }) => {
       state.pages.push(payload.newPage)

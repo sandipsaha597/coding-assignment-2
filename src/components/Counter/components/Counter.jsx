@@ -13,7 +13,7 @@ const Counter = ({ value, defaultValue, onChange, min, max, inputId }) => {
   } = useCounter({ controlledValue: value, onChange, defaultValue, min, max })
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <IconButton disabled={isSubtractDisabled} onClick={decrement}>
         <Remove />
       </IconButton>

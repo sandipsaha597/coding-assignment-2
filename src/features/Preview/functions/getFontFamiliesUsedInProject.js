@@ -12,7 +12,7 @@ export const getFontFamiliesUsedInProject = (project) => {
     for (let j = 0; j < nodes.length; j++) {
       /* The below code won't break because every valid page and node structure 
         has all the values below */
-      // debugger
+      //
       const font = pages[i].nodes[j].data.styles?.fontFamily?.value
 
       if (font) fontsInNodes.push(font)

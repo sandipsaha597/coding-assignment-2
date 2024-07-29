@@ -7,12 +7,12 @@ import { availableFonts } from '../../../constants.js'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'
-import SettingsPanel from '../components/SettingsPanel/SettingsPanel'
+import PropertiesPanel from '../components/SettingsPanel/SettingsPanel'
 import WebsiteBuilderCanvas from '../components/WebsiteBuilderCanvas/WebsiteBuilderCanvas'
-import { rightSidePanelWidth, zIndexManagement } from '../constants'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
 import { useAutoUpdateProject } from '../hooks/useAutoUpdateProject/useAutoUpdateProject.js'
 import { useProject } from '../hooks/useProject/useProject.js'
+import { zIndexManagement } from '../../shared/constants/zIndexManagement.js'
 
 const WebsiteBuilder = memo(function WebsiteBuilder() {
   return (
@@ -20,16 +20,16 @@ const WebsiteBuilder = memo(function WebsiteBuilder() {
       <GoogleFontLoader fonts={availableFonts} />
       {/* header of the app */}
       <Header />
-      <ReactFlowWrapper>
+      <WebsiteBuilderCanvasWrapper>
         <Box bgcolor={'#fff'}>
           <WebsiteBuilderCanvas />
         </Box>
         <PagesAndAddPagesWrapper>
           <PagesAndAddPages />
         </PagesAndAddPagesWrapper>
-      </ReactFlowWrapper>
+      </WebsiteBuilderCanvasWrapper>
       <RightSidePanel>
-        <SettingsPanel />
+        <PropertiesPanel />
         <NodesPanel />
       </RightSidePanel>
     </ChatbotFlowBuilder>
@@ -57,26 +57,26 @@ const WebsiteBuilderPage = memo(function WebsiteBuilderPage() {
 
 export default WebsiteBuilderPage
 
-const ChatbotFlowBuilder = styled('div')(({ theme }) => ({
+const ChatbotFlowBuilder = styled('div')(() => ({
   display: 'grid',
   height: '100vh',
-  gridTemplateRows: '45px 1fr',
+  gridTemplateRows: '55px 1fr',
   gridTemplateAreas: `
     'header header'
-    'react-flow right-side-panel'
+    'website-builder-canvas right-side-panel'
     `,
   overflow: 'hidden',
-  gridTemplateColumns: `1fr ${rightSidePanelWidth.sm}`,
-  [theme.breakpoints.up('md')]: {
-    gridTemplateColumns: `1fr ${rightSidePanelWidth.md}`,
-  },
-  [theme.breakpoints.up('lg')]: {
-    gridTemplateColumns: `1fr ${rightSidePanelWidth.lg}`,
-  },
+  gridTemplateColumns: `1fr 0.3fr`,
+  // [theme.breakpoints.up('md')]: {
+  //   gridTemplateColumns: `1fr ${rightSidePanelWidth.md}`,
+  // },
+  // [theme.breakpoints.up('lg')]: {
+  //   gridTemplateColumns: `1fr ${rightSidePanelWidth.lg}`,
+  // },
 }))
 
-const ReactFlowWrapper = styled('main')({
-  gridArea: 'react-flow',
+const WebsiteBuilderCanvasWrapper = styled('main')({
+  gridArea: 'website-builder-canvas',
   overflowY: 'scroll',
   overflowX: 'hidden',
   background: '#f3f3f3',

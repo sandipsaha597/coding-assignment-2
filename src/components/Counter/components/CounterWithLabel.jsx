@@ -19,6 +19,9 @@ const CounterWithLabel = ({
       item
       alignItems={'center'}
       columnSpacing={2}
+      sx={{
+        flexWrap: 'wrap',
+      }}
       {...wrapperComponentProps}
     >
       <Grid item xs="auto" {...counterWrapperProps}>
@@ -26,7 +29,12 @@ const CounterWithLabel = ({
           {label}
         </Typography>
       </Grid>
-      <Grid item xs {...labelWrapperProps}>
+      <Grid
+        item
+        xs
+        {...labelWrapperProps}
+        sx={{ pl: { md: '0px !important', lg: 2 } }}
+      >
         <Counter
           inputId={inputId}
           min={0}

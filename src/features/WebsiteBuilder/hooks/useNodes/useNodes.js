@@ -33,6 +33,12 @@ export const useNodes = () => {
     },
     [dispatch]
   )
+  const deleteNode = useCallback(
+    (id) => {
+      dispatch(websiteBuilderSliceActions.deleteNode({ id }))
+    },
+    [dispatch]
+  )
 
   /**
    * Edits the data of a node in the state based on the provided node ID.
@@ -80,6 +86,7 @@ export const useNodes = () => {
     nodes,
     selectedNodes,
     addNode,
+    deleteNode,
     editNodeData,
     onNodeSelect,
     updateNodeSize,

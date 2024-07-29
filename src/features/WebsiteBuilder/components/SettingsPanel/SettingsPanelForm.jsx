@@ -2,15 +2,16 @@ import { styled } from '@mui/material'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
 import { nodeTypeFormComponentMap } from '../../../../constants/nodeTypeFormComponentMap'
 
-// this hook implements the functionalities of SettingsPanelForm
-const useSettingsPanelForm = () => {
-  const { websiteBuilderState, selectedNodes, editNodeData } =
+// this hook implements the functionalities of PropertiesPanelForm
+const usePropertiesPanelForm = () => {
+  const { websiteBuilderState, selectedNodes, deleteNode, editNodeData } =
     useWebsiteBuilder()
-  // if exactly one node is selected only then settings panel form should be visible
-  const settingsPanelFormVisible = selectedNodes.length === 1 ? true : false
+  // if exactly one node is selected only then properties panel form should be visible
+  const propertiesPanelFormVisible = selectedNodes.length === 1 ? true : false
 
-  // if settingsPanelFormVisible is not visible we won't need any data
-  if (settingsPanelFormVisible === false) return { settingsPanelFormVisible }
+  // if propertiesPanelFormVisible is not visible we won't need any data
+  if (propertiesPanelFormVisible === false)
+    return { propertiesPanelFormVisible }
 
   // details of the selected node
   const selectedNodeDetails = selectedNodes[0]
@@ -31,8 +32,9 @@ const useSettingsPanelForm = () => {
 
   return {
     websiteBuilderState,
+    deleteNode,
 
-    settingsPanelFormVisible,
+    propertiesPanelFormVisible,
     selectedNodeDetails,
     selectedNodeType,
     FormComponent,
@@ -40,35 +42,37 @@ const useSettingsPanelForm = () => {
   }
 }
 
-const SettingsPanelEditForm = () => {
+const PropertiesPanelEditForm = () => {
   const {
     websiteBuilderState,
-
-    settingsPanelFormVisible,
+    deleteNode,
+    propertiesPanelFormVisible,
     selectedNodeDetails,
     FormComponent,
     handleFormChange,
-  } = useSettingsPanelForm()
+  } = usePropertiesPanelForm()
 
   return (
-    <StyledSettingsPanelEditForm>
-      {/* if settingsPanelFormVisible is true show the form component */}
-      {settingsPanelFormVisible && (
+    <StyledPropertiesPanelEditForm>
+      {/* if propertiesPanelFormVisible is true show the form component */}
+      {propertiesPanelFormVisible && (
         <FormComponent
           // passing the current selected node data so the form can show it
+          id={selectedNodeDetails.id}
           data={selectedNodeDetails.data}
           websiteBuilderState={websiteBuilderState}
           // when the form value changes it calls the onChange callback function with new values
           onChange={handleFormChange}
+          onDeleteNode={deleteNode}
         />
       )}
-    </StyledSettingsPanelEditForm>
+    </StyledPropertiesPanelEditForm>
   )
 }
 
-export default SettingsPanelEditForm
+export default PropertiesPanelEditForm
 
-const StyledSettingsPanelEditForm = styled('div')({
+const StyledPropertiesPanelEditForm = styled('div')({
   padding: '20px 10px',
   borderBottom: '1px solid #d8d8d8',
 })

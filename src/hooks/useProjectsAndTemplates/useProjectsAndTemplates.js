@@ -10,7 +10,6 @@ export const useProjectsAndTemplates = () => {
 
   const dispatch = useDispatch()
 
-  // const saveAsTemplate = () => {}
   const updateProject = useCallback(
     (updatedProject) => {
       dispatch(
@@ -36,5 +35,24 @@ export const useProjectsAndTemplates = () => {
     [dispatch]
   )
 
-  return { projectsAndTemplates, initializeProject, updateProject }
+  const saveAsTemplate = useCallback(
+    (entireTemplateObject) => {
+      const newTemplateId = crypto.randomUUID()
+      dispatch(
+        projectsAndTemplatesSliceActions.saveAsTemplate({
+          newTemplateId,
+          entireTemplateObject,
+        })
+      )
+      return newProjectId
+    },
+    [dispatch]
+  )
+
+  return {
+    projectsAndTemplates,
+    initializeProject,
+    updateProject,
+    saveAsTemplate,
+  }
 }

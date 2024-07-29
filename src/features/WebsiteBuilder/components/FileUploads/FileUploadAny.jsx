@@ -52,13 +52,3 @@ const FileUploadAny = ({
 }
 
 export default FileUploadAny
-
-// <FileUpload
-//   inputId={'file-upload'}
-//   acceptedFileTypes="*"
-//   maxFileSizeInKB={20 * 1024}
-//   fileTypeValidation={() => true}
-//   onUpload={(url) => console.log(url)}
-// >
-//   Upload any file
-// </FileUpload>

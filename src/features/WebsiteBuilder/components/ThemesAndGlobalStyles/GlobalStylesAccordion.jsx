@@ -24,7 +24,7 @@ const GlobalStylesAccordion = () => {
       return _.merge(draftState, changedValues.styles.fontFamily)
     })
 
-    // debugger
+    //
     // calling the props.onChange callback function with new values
     changeGlobalStyle('fontFamily', newDataObj)
   }

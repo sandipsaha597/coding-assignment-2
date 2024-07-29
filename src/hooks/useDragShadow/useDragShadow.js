@@ -111,10 +111,11 @@ export const useDragShadow = (onDrag = () => {}, onDrop = () => false) => {
   // dragItemProps contains onMouseDown event handler and styles to be applied in the dragItem element
   const dragItemProps = useMemo(
     () => ({
-      onMouseDown: handleOnMouseDown,
+      onPointerDown: handleOnMouseDown,
       style: {
         // width: 'fit-content',
         // height: 'fit-content',
+        touchAction: 'none',
         userSelect: 'none',
         cursor: 'pointer',
       },
@@ -125,6 +126,7 @@ export const useDragShadow = (onDrag = () => {}, onDrop = () => false) => {
   // draggedShadowProps contains styles to be applied in the shadow of the element
   const draggedShadowProps = {
     style: {
+      touchAction: 'none',
       display: isDragging ? 'block' : 'none',
       position: 'fixed',
       opacity: 0.7,
@@ -140,16 +142,16 @@ export const useDragShadow = (onDrag = () => {}, onDrop = () => false) => {
     /* there's no need to keep the event listeners attached all the time
     only adding the listener when dragging start and removing when dragging ends */
     if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove)
-      window.addEventListener('mouseup', handleMouseUp)
+      window.addEventListener('pointermove', handleMouseMove)
+      window.addEventListener('pointerup', handleMouseUp)
     } else {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
+      window.removeEventListener('pointermove', handleMouseMove)
+      window.removeEventListener('pointerup', handleMouseUp)
     }
     // attached event listeners should get removed upon component unmount
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
+      window.removeEventListener('pointermove', handleMouseMove)
+      window.removeEventListener('pointerup', handleMouseUp)
     }
   }, [isDragging, handleMouseMove, handleMouseUp])
 

@@ -42,14 +42,22 @@ const projectsAndTemplatesSlice = createSlice({
      * @param {Object} payload.newNode - a valid new node
      */
     saveAsTemplate: (state, { payload }) => {
-      const [page] = getPageById(state.activePageId, state.pages)
-      page.nodes.push(payload.newNode)
+      const { newTemplateId, entireTemplateObject } = payload
+      const templateName = entireTemplateObject.projectName + ' - template'
+      state.templates.push({
+        ...entireTemplateObject,
+        id: newTemplateId,
+        projectName: templateName,
+      })
     },
     updateProject: (state, { payload }) => {
       const projectId = payload.updatedProject.id
       const [, projectIndex] = getProjectById(projectId, state.projects)
 
       state.projects[projectIndex] = payload.updatedProject
+    },
+    deleteTemplateOrProject: (state, { payload }) => {
+      // const {id }=  payload
     },
     initializeProject: (state, { payload }) => {
       let [template, index] = getItemById(payload.templateId, state.templates)

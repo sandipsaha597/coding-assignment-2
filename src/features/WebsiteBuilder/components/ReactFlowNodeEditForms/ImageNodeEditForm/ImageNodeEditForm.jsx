@@ -1,10 +1,14 @@
-import { Box, TextField } from '@mui/material'
+import { Box, Grid, TextField } from '@mui/material'
 import { memo } from 'react'
 import ImageUpload from '../../FileUploads/ImageUpload'
+import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
+import { formInputRowSpacing } from '../constants/formInputRowSpacing'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
 const ImageNodeEditForm = memo(function ImageNodeEditForm({
+  id,
+  onDeleteNode,
   data = {},
   onChange,
 }) {
@@ -18,36 +22,41 @@ const ImageNodeEditForm = memo(function ImageNodeEditForm({
   }
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-      }}
-    >
-      <TextField
-        type="url"
-        value={data.src}
-        onChange={(e) => handleFormChange('src', e.target.value)}
-        label="Image URL"
-        variant="outlined"
-        fullWidth
-      />
-      <TextField
-        type="text"
-        value={data.alt}
-        onChange={(e) => handleFormChange('alt', e.target.value)}
-        label="Alt text"
-        variant="outlined"
-        fullWidth
-      />
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <ImageUpload
-          inputId="image-upload-node"
-          onUpload={(url) => handleFormChange('src', url)}
+    <Grid container spacing={formInputRowSpacing}>
+      <Grid item xs={12}>
+        <DeleteNodeButton id={id} onDeleteNode={onDeleteNode} />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          type="url"
+          value={data.src}
+          onChange={(e) => handleFormChange('src', e.target.value)}
+          label="Image URL"
+          variant="outlined"
+          fullWidth
         />
-      </Box>
-    </Box>
+      </Grid>
+
+      <Grid item xs={12}>
+        <TextField
+          type="text"
+          value={data.alt}
+          onChange={(e) => handleFormChange('alt', e.target.value)}
+          label="Alt text"
+          variant="outlined"
+          fullWidth
+        />
+      </Grid>
+
+      <Grid item xs={12}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <ImageUpload
+            inputId="image-upload-node"
+            onUpload={(url) => handleFormChange('src', url)}
+          />
+        </Box>
+      </Grid>
+    </Grid>
   )
 })
 

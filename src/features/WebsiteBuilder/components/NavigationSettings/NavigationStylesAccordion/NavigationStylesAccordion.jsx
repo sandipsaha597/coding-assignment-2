@@ -13,6 +13,7 @@ import { getColorPickerDropdownValueFromColorStructure } from '../../customDropd
 import Counter from '../../../../../components/Counter/components/Counter'
 import ExpandMoreIconMUI from '@mui/icons-material/ExpandMore'
 import _ from 'lodash'
+import CounterWithLabel from '../../../../../components/Counter/components/CounterWithLabel'
 
 const colorChangeArr = [
   {
@@ -77,15 +78,17 @@ const NavigationStylesAccordion = () => {
             })}
           </Grid>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <InputLabel htmlFor="navbar-items-gap-counter">Gap:</InputLabel>
-            <Counter
+            <CounterWithLabel
               inputId={'navbar-items-gap-counter'}
+              label={'Gap:'}
               min={0}
               value={Number(
                 navbarStyles['gap'].slice(0, navbarStyles['gap'].length - 2)
               )}
               onChange={(value) => updateNavbarStyles('gap', value + 'px')}
             />
+            {/* <InputLabel htmlFor="navbar-items-gap-counter"></InputLabel>
+            <Counter /> */}
           </Box>
         </Box>
       </AccordionDetails>

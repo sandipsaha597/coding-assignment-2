@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
-import { zIndexManagement } from '../../features/WebsiteBuilder/constants'
 import { ResizeAndDrag } from '../ResizeAndDrag'
+import { zIndexManagement } from '../../features/shared/constants/zIndexManagement'
 
 const resizeHandleClasses = {
   bottom: 'resize-handler resize-handler-bottom',

@@ -5,6 +5,6 @@ export const getFontFamily = (fontFamilyStructure) => {
   if (temp) return temp
   if (type === FONT_FAMILY_TYPES.CUSTOM) return value
   if (type === FONT_FAMILY_TYPES.INHERIT) return 'inherit'
-  // debugger
+  //
   console.error('fontFamily type not matching received ', type)
 }

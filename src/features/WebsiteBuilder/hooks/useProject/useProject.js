@@ -10,6 +10,8 @@ import {
 
 export const useProject = () => {
   const websiteBuilderState = useSelector(websiteBuilderSelector)
+  const projectId = websiteBuilderState.id
+  const projectName = websiteBuilderState.projectName
   const dispatch = useDispatch()
 
   const setProject = useCallback(
@@ -23,5 +25,23 @@ export const useProject = () => {
     },
     [dispatch]
   )
-  return { websiteBuilderState, setProject }
+
+  const editProjectName = useCallback(
+    (name) => {
+      dispatch(
+        websiteBuilderSliceActions.editProjectName({
+          name,
+        })
+      )
+    },
+    [dispatch]
+  )
+
+  return {
+    websiteBuilderState,
+    projectId,
+    projectName,
+    editProjectName,
+    setProject,
+  }
 }

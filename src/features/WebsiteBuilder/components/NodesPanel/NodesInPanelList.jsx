@@ -8,7 +8,6 @@ import {
   getMousePositionRelativeToElement,
   isElementsOverlappingByMargin,
 } from '../../../../utils/functions'
-import { zIndexManagement } from '../../constants'
 import NodeInNodesPanel from './NodeInNodesPanel'
 import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
 import { useNodes } from '../../hooks/useNodes/useNodes.js'
@@ -16,6 +15,7 @@ import { getNewNodeObject } from '../../schemaGenerator/schemaGetters/getNewNode
 import { websiteBuilderPagesSelector } from '../../redux/websiteBuilderSlice.js'
 import { store } from '../../../../store/store.js'
 import { nodesInNodesPanel } from './constants/nodesInNodesPanel.jsx'
+import { zIndexManagement } from '../../../shared/constants/zIndexManagement.js'
 
 const NodesInPanelList = () => {
   const { addNode } = useNodes()

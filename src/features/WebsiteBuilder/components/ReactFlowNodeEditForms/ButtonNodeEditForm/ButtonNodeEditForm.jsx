@@ -34,10 +34,14 @@ import ButtonActionsSelect from './ButtonActions/ButtonActionsSelect'
 import ButtonActionForm from './ButtonActions/ButtonActionForm'
 import { BUTTON_ACTION_TYPE_TO_FUNCTION_MAP } from './ButtonActions/constants/buttonActionTypeToFunctionMap'
 import ButtonActions from './ButtonActions/ButtonActions'
+import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
+import { formInputRowSpacing } from '../constants/formInputRowSpacing'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
 const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
+  id,
+  onDeleteNode,
   data = {},
   onChange,
   websiteBuilderState,
@@ -65,7 +69,10 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
 
   return (
     // default submit is prevented because pressing enter key submits the form
-    <Grid container spacing={2}>
+    <Grid container spacing={formInputRowSpacing}>
+      <Grid item xs={12}>
+        <DeleteNodeButton id={id} onDeleteNode={onDeleteNode} />
+      </Grid>
       <Grid container item xs={12} alignItems={'center'} gap={2}>
         <Grid item xs="auto">
           Variant:
@@ -134,7 +141,6 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
           onChange={(fontSizeObj) => handleFormChange({ styles: fontSizeObj })}
         />
       </Grid>
-
       <Grid item xs={12}>
         <ColorPickerDropdown
           dropdownLabel="Text Color"
@@ -165,7 +171,6 @@ const ButtonNodeEditForm = memo(function ButtonNodeEditForm({
           }
         />
       </Grid>
-
       <Grid container item xs={12} spacing={2} alignItems="center">
         <ButtonActions
           buttonActionType={data.action.buttonActionType}

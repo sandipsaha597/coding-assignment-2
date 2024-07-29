@@ -1,4 +1,4 @@
-import { Box, Grid, TextField } from '@mui/material'
+import { Box, Button, Grid, TextField } from '@mui/material'
 import { produce } from 'immer'
 import _ from 'lodash'
 import { memo } from 'react'
@@ -6,6 +6,8 @@ import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
 import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
 import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPickerDropdown'
 import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
+import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
+import { formInputRowSpacing } from '../constants/formInputRowSpacing'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values
@@ -30,8 +32,10 @@ import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCount
 
 const TextNodeEditForm = memo(function TextNodeEditForm({
   // websiteBuilderState,
+  id,
   data = {},
   onChange,
+  onDeleteNode,
 }) {
   const handleFormChange = (changedValues) => {
     /* lodash merge function changes the original object that's why we need to create a 
@@ -45,7 +49,10 @@ const TextNodeEditForm = memo(function TextNodeEditForm({
 
   return (
     // default submit is prevented because pressing enter key submits the form
-    <Grid container spacing={2}>
+    <Grid container spacing={formInputRowSpacing}>
+      <Grid item xs={12}>
+        <DeleteNodeButton id={id} onDeleteNode={onDeleteNode} />
+      </Grid>
       <Grid item xs={12}>
         <TextField
           id="text-message"

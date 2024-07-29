@@ -38,19 +38,21 @@ const useSections = () => {
         cardData: {
           listItems: projectsAndTemplates.templates,
           emptyListMessage: 'No template available',
-          renderActions: (data) => (
-            <>
-              <PreviewButton data={data.id} />
-              <Button
-                onClick={() => {
-                  initializeProjectAndRedirect(data.id)
-                }}
-                variant="outlined"
-              >
-                Use template
-              </Button>
-            </>
-          ),
+          renderActions: (data) => {
+            return (
+              <>
+                <PreviewButton id={data.id} />
+                <Button
+                  onClick={() => {
+                    initializeProjectAndRedirect(data.id)
+                  }}
+                  variant="outlined"
+                >
+                  Use template
+                </Button>
+              </>
+            )
+          },
         },
       },
     ],

@@ -17,7 +17,7 @@ export const nodesInNodesPanel = [
     id: crypto.randomUUID(),
     nodeType: NODE_TYPE_MAP.TEXT_NODE,
     icon: <FormatColorTextIconMUI fontSize="large" />,
-    text: 'Text message',
+    text: 'Text',
     defaultData: textNodeDefaultDataObj,
     defaultWidth: 300,
     defaultHeight: 'auto',

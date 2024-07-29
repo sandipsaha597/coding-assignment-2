@@ -2,37 +2,37 @@ import ArrowBackIconMUI from '@mui/icons-material/ArrowBack'
 import { IconButton, Typography, styled } from '@mui/material'
 
 /**
- * SettingsPanelHeader Component
+ * PropertiesPanelHeader Component
  *
- * This component renders a header for the settings panel with a title and a back button.
+ * This component renders a header for the properties panel with a title and a back button.
  *
  * Props:
- * - `hideSettingsPanel` (function): Callback function to hide the settings panel when the back button is clicked.
+ * - `hidePropertiesPanel` (function): Callback function to hide the properties panel when the back button is clicked.
  * - `title` (string): The title to be displayed in the header. Defaults to an empty string.
  *
  * Usage:
  * ```
- * <SettingsPanelHeader hideSettingsPanel={handleHideSettingsPanel} title="Settings" />
+ * <PropertiesPanelHeader hidePropertiesPanel={handleHidePropertiesPanel} title="Properties" />
  * ```
  */
-const SettingsPanelHeader = ({ hideSettingsPanel, title = '' }) => {
+const PropertiesPanelHeader = ({ hidePropertiesPanel, title = '' }) => {
   return (
-    <StyledSettingsPanelHeader>
+    <StyledPropertiesPanelHeader>
       <IconButton
         sx={{ position: 'absolute', left: 5, borderRadius: '4px' }}
-        onClick={hideSettingsPanel}
+        onClick={hidePropertiesPanel}
         size="small"
       >
         <ArrowBackIconMUI fontSize="small" />
       </IconButton>
       <Typography>{title}</Typography>
-    </StyledSettingsPanelHeader>
+    </StyledPropertiesPanelHeader>
   )
 }
 
-export default SettingsPanelHeader
+export default PropertiesPanelHeader
 
-const StyledSettingsPanelHeader = styled('header')({
+const StyledPropertiesPanelHeader = styled('header')({
   borderBottom: '1px solid #d8d8d8',
   position: 'relative',
   display: 'grid',

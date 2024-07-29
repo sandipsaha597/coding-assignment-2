@@ -1,4 +1,4 @@
-import { renderMode } from '../../../../../constants/renderMode'
+import { renderMode } from '../../../../shared/constants/renderMode'
 
 export const pointerEventsNoneIfEditor = (mode) => {
   const isEditor = mode === renderMode.editor

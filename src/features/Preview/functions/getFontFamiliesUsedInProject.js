@@ -1,4 +1,4 @@
-import { availableFonts } from '../../../constants'
+import { availableFonts } from '../../shared/constants/availableFonts'
 
 export const getFontFamiliesUsedInProject = (project) => {
   const globalFontFamily =

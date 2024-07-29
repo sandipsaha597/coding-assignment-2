@@ -2,13 +2,13 @@ import FormatColorTextIconMUI from '@mui/icons-material/FormatColorText'
 import ImageOutlinedIconMUI from '@mui/icons-material/ImageOutlined'
 import SmartButtonOutlinedIconMUI from '@mui/icons-material/SmartButtonOutlined'
 import VideoCameraBackOutlinedIconMUI from '@mui/icons-material/VideoCameraBackOutlined'
-import { NODE_TYPE_MAP } from '../../../../../constants/nodeTypesMap'
 import {
   buttonNodeDefaultDataObj,
   imageNodeDefaultDataObj,
   textNodeDefaultDataObj,
   videoNodeDefaultDataObj,
 } from '../../../schemaGenerator/schemaGetters/defaultDataSchema'
+import { NODE_TYPE_MAP } from '../../../../shared/constants/nodeTypesMap'
 
 // list of nodes currently available is the app and shown in the nodes panel
 

@@ -2,13 +2,13 @@ import { styled } from '@mui/material'
 import { pointerEventsNoneIfEditor } from '../utils/functions'
 
 // Text node to show in website
-const ImageNodeInReactFlow = ({ data, mode }) => {
+const ImageNodeInWebsiteBuilder = ({ data, mode }) => {
   return (
     <StyledImg draggable="false" src={data.src} alt={data.alt} mode={mode} />
   )
 }
 
-export default ImageNodeInReactFlow
+export default ImageNodeInWebsiteBuilder
 
 const StyledImg = styled('img')(({ mode }) => ({
   display: 'block',

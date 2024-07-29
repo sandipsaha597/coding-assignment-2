@@ -1,7 +1,7 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { FONT_FAMILY_TYPES } from '../../../schemaGenerator/types/fontFamilyTypes'
-import { availableFonts } from '../../../../../constants'
 import { handleTempChange } from '../functions/handleTempChange'
+import { availableFonts } from '../../../../shared/constants/availableFonts'
 
 const FontPickerDropdown = ({
   value,

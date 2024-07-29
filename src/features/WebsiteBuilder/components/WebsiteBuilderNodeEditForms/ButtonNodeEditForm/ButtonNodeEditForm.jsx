@@ -1,41 +1,17 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@mui/material'
+import { Grid, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { produce } from 'immer'
 import _ from 'lodash'
-import { memo, useState } from 'react'
+import { memo } from 'react'
+import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
 import { BUTTON_VARIANTS } from '../../../schemaGenerator/types/buttonVariants'
 import { ColorPickerDropdown } from '../../customDropdowns/ColorPickerDropdown'
 import { getColorPickerDropdownValueFromColorStructure } from '../../customDropdowns/ColorPickerDropdown/core/functions'
 import FontPickerDropdown from '../../customDropdowns/FontPickerDropdown/FontPickerDropdown'
-import ButtonNodeInWebsiteBuilder from '../../ReactFlowNodes/ButtonNode/ButtonNodeInReactFlow'
-import { renderMode } from '../../../../../constants/renderMode'
-import Disable from '../../../../../components/Disable/Disable'
-import FontSizeChangeCounter from '../../../../../components/FontSizeChangeCounter/FontSizeChangeCounter'
-import PagesDropdown from '../../customDropdowns/PagesDropdown/PagesDropdown'
-import FileUploadAny from '../../FileUploads/FileUploadAny'
-import { redirect } from 'react-router-dom'
-import { toast } from '../../../../../customLibraries/MyReactToastify/toast'
-import { getPageById } from '../../../../../core/utilFunctions'
-import { getItemById } from '../../../../../utils/functions'
-import { store } from '../../../../../store/store'
-import { websiteBuilderPagesSelector } from '../../../redux/websiteBuilderSlice'
-import ButtonActionsSelect from './ButtonActions/ButtonActionsSelect'
-import ButtonActionForm from './ButtonActions/ButtonActionForm'
-import { BUTTON_ACTION_TYPE_TO_FUNCTION_MAP } from './ButtonActions/constants/buttonActionTypeToFunctionMap'
-import ButtonActions from './ButtonActions/ButtonActions'
 import DeleteNodeButton from '../../DeleteNodeButton/DeleteNodeButton'
+import ButtonNodeInWebsiteBuilder from '../../WebsiteBuilderNodes/ButtonNode/ButtonNodeInWebsiteBuilder'
 import { formInputRowSpacing } from '../constants/formInputRowSpacing'
+import ButtonActions from './ButtonActions/ButtonActions'
+import { renderMode } from '../../../../shared/constants/renderMode'
 
 // take data object as input and shows it in the form
 // when form value changes it calls the onChange callback function with new values

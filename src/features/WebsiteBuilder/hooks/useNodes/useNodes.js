@@ -20,7 +20,7 @@ export const useNodes = () => {
   /*  */
   /**
    * use this function to add a node to websiteBuilder.
-   * newNode should be a valid reactFlow node
+   * newNode should be a valid websiteBuilder node
    * to remove a a node just select the node in the UI and press backspace
    * that node and all the edges will get deleted automatically
    *

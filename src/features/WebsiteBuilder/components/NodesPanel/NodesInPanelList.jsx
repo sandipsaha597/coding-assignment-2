@@ -41,8 +41,7 @@ const NodesInPanelList = () => {
     // if not overlapping returning false which makes it an invalid/unsuccessful drop
     if (isOverlapping === false) return false
 
-    // need the screenToFlowPosition to place the node in the right place of the flow
-    // const position = chatbotReactFlowInstance.screenToFlowPosition()
+    // need the Container position to place the node in the right place of the builder
     const containerElement = websiteBuilderRef.current.querySelector(
       '#preview-and-website-builder-canvas-container'
     )
@@ -51,21 +50,12 @@ const NodesInPanelList = () => {
       y: e.clientY,
     })
     const positionOfNewNode = {
-      /* positioning the newNode's top-left corner to draggedItem's(node in panel) top-left corner, despite of zoom level
-                   Mathematical explanation: 
-                    Getting the top-left corner(position and offset):
-                    we know that offset gives the distance between the mouse pointer and the top-left corner of the draggedItem
-                    that means the if we subtract top-left corner with position we get the position of the top-left corner of draggedItem in reactFlow
-
-                    taking care of zoom level:
-                    the default zoom level is 1
-                    the fully zoomed-in level is 2
-                    the fully zoomed-out level is 0.5
-
-                    default zoom is normal offset divided by 1 results in the same number
-                    fully zoomed-in means, if the distance between point a and point b was x, now it is x * 2. So the offset should decrease by half to align properly
-                    the opposite goes with zoom-out
-                  */
+      /* positioning the newNode's top-left corner to draggedItem's(node in panel) top-left corner
+        Mathematical explanation: 
+          Getting the top-left corner(position and offset):
+          we know that offset gives the distance between the mouse pointer and the top-left corner of the draggedItem
+          that means the if we subtract top-left corner with position we get the position of the top-left corner of draggedItem in canvas
+      */
       x: position.x - offset.x,
       y: position.y - offset.y,
     }

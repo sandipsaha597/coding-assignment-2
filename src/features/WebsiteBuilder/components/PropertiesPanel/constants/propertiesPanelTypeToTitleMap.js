@@ -1,4 +1,4 @@
-import { NODE_TYPE_MAP } from '../../../../constants/nodeTypesMap'
+import { NODE_TYPE_MAP } from '../../../../shared/constants/nodeTypesMap'
 
 // properties panel header title should be according to the node type selected
 export const propertiesPanelTypeToTitleMap = {

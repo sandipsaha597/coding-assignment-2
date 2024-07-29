@@ -9,7 +9,7 @@ export const useTriggerButtonAction = () => {
     (buttonActionType, buttonActionValue) => {
       const actionFunction =
         BUTTON_ACTION_TYPE_TO_FUNCTION_MAP[buttonActionType]
-      actionFunction(buttonActionValue, { navigate })
+      actionFunction && actionFunction(buttonActionValue, { navigate })
     },
     [navigate]
   )

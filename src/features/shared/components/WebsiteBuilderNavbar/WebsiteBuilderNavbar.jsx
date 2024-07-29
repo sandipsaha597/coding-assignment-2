@@ -1,8 +1,8 @@
 import { styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import { renderMode } from '../../../../constants/renderMode'
 import { getActivePage, getPageById } from '../../../../core/utilFunctions'
 import { getColor } from '../../../WebsiteBuilder/schemaGenerator/valueGetters/getColor'
+import { renderMode } from '../../constants/renderMode'
 
 //  navbar.styles = {
 //   background: getColorStructure(),

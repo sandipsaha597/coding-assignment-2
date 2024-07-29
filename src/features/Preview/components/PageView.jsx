@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { nodeTypeWebsiteBuilderComponentMap } from '../../../constants/nodeTypeWebsiteBuilderComponentMap'
 import { Box } from '@mui/material'
-import { renderMode } from '../../../constants/renderMode'
 import PreviewAndWebsiteBuilderCanvasContainer from '../../shared/components/containers/PreviewAndWebsiteBuilderCanvasContainer'
+import { renderMode } from '../../shared/constants/renderMode'
+import { nodeTypeWebsiteBuilderComponentMap } from '../../shared/constants/nodeTypeWebsiteBuilderComponentMap'
 
 const PageView = ({ page, project }) => {
   // de

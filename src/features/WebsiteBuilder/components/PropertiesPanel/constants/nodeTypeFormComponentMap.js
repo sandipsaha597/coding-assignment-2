@@ -1,8 +1,8 @@
-import ButtonNodeEditForm from '../features/WebsiteBuilder/components/ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonNodeEditForm'
-import ImageNodeEditForm from '../features/WebsiteBuilder/components/ReactFlowNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
-import TextNodeEditForm from '../features/WebsiteBuilder/components/ReactFlowNodeEditForms/TextNodeEditForm/TextNodeEditForm'
-import VideoNodeEditForm from '../features/WebsiteBuilder/components/ReactFlowNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
-import { NODE_TYPE_MAP } from './nodeTypesMap'
+import { NODE_TYPE_MAP } from '../../../../shared/constants/nodeTypesMap'
+import ButtonNodeEditForm from '../../WebsiteBuilderNodeEditForms/ButtonNodeEditForm/ButtonNodeEditForm'
+import ImageNodeEditForm from '../../WebsiteBuilderNodeEditForms/ImageNodeEditForm/ImageNodeEditForm'
+import TextNodeEditForm from '../../WebsiteBuilderNodeEditForms/TextNodeEditForm/TextNodeEditForm'
+import VideoNodeEditForm from '../../WebsiteBuilderNodeEditForms/VideoNodeEditForm/VideoNodeEditForm'
 
 /**
  * Maps node types to their corresponding form components.

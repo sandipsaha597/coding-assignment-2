@@ -1,10 +1,10 @@
 import { styled } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNodes } from '../../hooks/useNodes/useNodes'
-import PropertiesPanelEditForm from './SettingsPanelForm'
-import PropertiesPanelHeader from './SettingsPanelHeader'
-import { propertiesPanelTypeToTitleMap } from './constants'
+import PropertiesPanelEditForm from './PropertiesPanelForm'
+import PropertiesPanelHeader from './PropertiesPanelHeader'
 import { zIndexManagement } from '../../../shared/constants/zIndexManagement'
+import { propertiesPanelTypeToTitleMap } from './constants/propertiesPanelTypeToTitleMap'
 
 const usePropertiesPanel = () => {
   const { selectedNodes } = useNodes()

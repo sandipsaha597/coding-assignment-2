@@ -1,8 +1,8 @@
 import { Button } from '@mui/material'
-import { renderMode } from '../../../../../constants/renderMode'
 import { getFontFamily } from '../../../schemaGenerator/valueGetters/getFontFamily'
 import { useColor } from '../../../utils/hooks'
-import { useTriggerButtonAction } from '../../ReactFlowNodeEditForms/ButtonNodeEditForm/ButtonActions/hooks/useTriggerButtonAction'
+import { useTriggerButtonAction } from '../../WebsiteBuilderNodeEditForms/ButtonNodeEditForm/ButtonActions/hooks/useTriggerButtonAction'
+import { renderMode } from '../../../../shared/constants/renderMode'
 
 // Text node to show in website
 const ButtonNodeInWebsiteBuilder = ({ data, mode, project }) => {

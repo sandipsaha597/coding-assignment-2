@@ -5,6 +5,7 @@ import { useProjectsAndTemplates } from '../../../../hooks/useProjectsAndTemplat
 import { store } from '../../../../store/store'
 import { websiteBuilderSelector } from '../../redux/websiteBuilderSlice'
 import PreviewButton from '../../../../components/PreviewButton/PreviewButton'
+import { toast } from '../../../../customLibraries/MyReactToastify/toast'
 
 // memoized header to prevent unnecessary re-renders
 const Header = memo(function Header() {
@@ -27,7 +28,10 @@ const Header = memo(function Header() {
         sx={{
           gridArea: 'button',
         }}
-        onClick={() => saveAsTemplate(websiteBuilderSelector(store.getState()))}
+        onClick={() => {
+          saveAsTemplate(websiteBuilderSelector(store.getState()))
+          toast.success('Template saved')
+        }}
       >
         Save As Template
         {/* {matches ? ( */}

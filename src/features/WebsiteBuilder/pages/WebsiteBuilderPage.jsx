@@ -3,16 +3,16 @@ import { memo, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GoogleFontLoader } from '../../../customLibraries/GoogleFontLoader/index.js'
 
-import { availableFonts } from '../../../constants.js'
 import PagesAndAddPages from '../components/AddPage/PagesAndAddPages.jsx'
 import Header from '../components/Header/Header'
 import NodesPanel from '../components/NodesPanel/NodesPanel'
-import PropertiesPanel from '../components/SettingsPanel/SettingsPanel'
+import PropertiesPanel from '../components/PropertiesPanel/PropertiesPanel.jsx'
 import WebsiteBuilderCanvas from '../components/WebsiteBuilderCanvas/WebsiteBuilderCanvas'
 import WebsiteBuilderProvider from '../context/WebsiteBuilderProvider.jsx'
 import { useAutoUpdateProject } from '../hooks/useAutoUpdateProject/useAutoUpdateProject.js'
 import { useProject } from '../hooks/useProject/useProject.js'
 import { zIndexManagement } from '../../shared/constants/zIndexManagement.js'
+import { availableFonts } from '../../shared/constants/availableFonts.js'
 
 const WebsiteBuilder = memo(function WebsiteBuilder() {
   return (

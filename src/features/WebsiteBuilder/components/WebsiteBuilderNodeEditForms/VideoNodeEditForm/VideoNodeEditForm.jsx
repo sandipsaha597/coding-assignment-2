@@ -12,7 +12,9 @@ const VideoNodeEditForm = memo(function VideoNodeEditForm({
   data = {},
   onChange,
 }) {
+  const revokeURL = () => URL.revokeObjectURL(data.src)
   const handleFormChange = (key, value) => {
+    if (key === 'src') revokeURL()
     const values = {
       ...data,
       [key]: value,
@@ -24,7 +26,13 @@ const VideoNodeEditForm = memo(function VideoNodeEditForm({
   return (
     <Grid container spacing={formInputRowSpacing}>
       <Grid item xs={12}>
-        <DeleteNodeButton id={id} onDeleteNode={onDeleteNode} />
+        <DeleteNodeButton
+          id={id}
+          onDeleteNode={() => {
+            revokeURL()
+            onDeleteNode(id)
+          }}
+        />
       </Grid>
 
       <Grid item xs={12}>

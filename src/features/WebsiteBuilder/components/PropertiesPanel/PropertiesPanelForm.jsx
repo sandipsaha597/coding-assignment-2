@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 import { useWebsiteBuilder } from '../../hooks/useWebsiteBuilder/useWebsiteBuilder'
-import { nodeTypeFormComponentMap } from '../../../../constants/nodeTypeFormComponentMap'
+import { nodeTypeFormComponentMap } from './constants/nodeTypeFormComponentMap'
 
 // this hook implements the functionalities of PropertiesPanelForm
 const usePropertiesPanelForm = () => {

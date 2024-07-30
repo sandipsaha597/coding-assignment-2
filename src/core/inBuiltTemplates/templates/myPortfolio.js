@@ -296,8 +296,8 @@ export const myPortfolio = {
         {
           id: '81fd5dde-17a1-4788-bbe3-9d0806a51ee5',
           position: {
-            x: 67.00001525878906,
-            y: 699.2000122070312,
+            x: 67,
+            y: 699,
           },
           type: 'buttonNode',
           data: {
@@ -517,8 +517,8 @@ export const myPortfolio = {
         {
           id: '3a14a95c-c844-4406-a70a-03940b2ff256',
           position: {
-            x: 83.97498321533203,
-            y: 207.19998168945312,
+            x: 84,
+            y: 207,
           },
           type: 'textNode',
           data: {
@@ -544,8 +544,8 @@ export const myPortfolio = {
         {
           id: 'b00b3cab-524f-43bb-8f9f-dc54fe38e681',
           position: {
-            x: 175.77497100830078,
-            y: 211.60000610351562,
+            x: 175,
+            y: 211,
           },
           type: 'textNode',
           data: {

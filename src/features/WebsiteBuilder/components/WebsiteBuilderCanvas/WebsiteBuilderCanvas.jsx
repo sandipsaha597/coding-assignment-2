@@ -9,12 +9,9 @@ import PreviewAndWebsiteBuilderCanvasContainer from '../../../shared/components/
 import { renderMode } from '../../../shared/constants/renderMode'
 import { nodeTypeWebsiteBuilderComponentMap } from '../../../shared/constants/nodeTypeWebsiteBuilderComponentMap'
 
-// const nodeRelativePositionTypeMap = {
-//   INSIDE_CONTAINER: 'INSIDE_CONTAINER',
-//   OUTSIDE_CONTAINER: 'OUTSIDE_CONTAINER'
-// }
-
 const WebsiteBuilderCanvas = () => {
+  // useWebsiteBuilder contains all the functionalities, states, context and
+  // methods related to website builder part
   const {
     nodes,
     websiteBuilderRef,

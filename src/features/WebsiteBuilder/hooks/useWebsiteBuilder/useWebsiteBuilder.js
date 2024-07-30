@@ -11,7 +11,7 @@
  *  - {Ref} websiteBuilderRef: HTML element reference of the websiteBuilder.
  */
 
-import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext'
+import { useWebsiteBuilderContext } from '../../temporaryRename/useWebsiteBuilderContext'
 import { useNavbar } from '../useNavbar/useNavbar'
 import { useNodes } from '../useNodes/useNodes'
 import { usePages } from '../usePages/usePages'

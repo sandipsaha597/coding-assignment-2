@@ -9,7 +9,7 @@ import {
   isElementsOverlappingByMargin,
 } from '../../../../utils/functions'
 import NodeInNodesPanel from './NodeInNodesPanel'
-import { useWebsiteBuilderContext } from '../../temporaryRename/useWebsiteBuilderContext.js'
+import { useWebsiteBuilderContext } from '../../context/useWebsiteBuilderContext.js'
 import { useNodes } from '../../hooks/useNodes/useNodes.js'
 import { getNewNodeObject } from '../../schemaGenerator/schemaGetters/getNewNodeObj.js'
 import { websiteBuilderPagesSelector } from '../../redux/websiteBuilderSlice.js'

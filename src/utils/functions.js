@@ -161,20 +161,46 @@ export const isValidNumber = (input) => {
   return input === '' || numberRegex.test(input)
 }
 
-export const handleDownload = (fileUrl) => {
+export const handleDownload = async (fileUrl) => {
   if (!fileUrl) {
     return [false, 'noFileURL', 'No file uploaded to download.']
   }
+
+  let objectUrl = null
+
+  /* In case user paste a URL, fetching the file then turning to a blob for seamless download
+  No page refresh, no redirection */
+  if (!fileUrl.startsWith('blob:')) {
+    try {
+      const response = await fetch(fileUrl)
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`)
+      }
+      const data = await response.blob()
+      objectUrl = URL.createObjectURL(data)
+    } catch (err) {
+      console.error('Fetch error:', err)
+      return [false, err.name || 'fetchError', err.message]
+    }
+  } else {
+    objectUrl = fileUrl
+  }
+
   try {
     const link = document.createElement('a')
-    link.href = fileUrl
-    link.download = ''
+    link.href = objectUrl
+    link.download = '' // We can set a default filename here if needed
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+
+    // Revoke the object URL after download if not uploaded by user
+    if (objectUrl !== fileUrl) {
+      URL.revokeObjectURL(objectUrl)
+    }
   } catch (err) {
-    console.error(err)
-    return [false, err.name || 'unknownError', err.message]
+    console.error('Download error:', err)
+    return [false, err.name || 'downloadError', err.message]
   }
 
   return [true]

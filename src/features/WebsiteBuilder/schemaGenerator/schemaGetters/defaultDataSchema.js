@@ -35,6 +35,8 @@ export const buttonNodeDefaultDataObj = {
   buttonText: 'Click',
   action: {
     buttonActionType: '',
+    /* this value can be any serializable value. Consider storing an array or object 
+    to handle multiple inputs instead of adding more field */
     buttonActionValue: '',
   },
   styles: {

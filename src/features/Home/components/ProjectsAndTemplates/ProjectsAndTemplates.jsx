@@ -65,6 +65,8 @@ const useSections = () => {
 const ProjectsAndTemplates = () => {
   const sections = useSections()
 
+  console.log('sections', sections)
+
   return (
     <Grid container rowSpacing={4}>
       {sections.map((section) => (

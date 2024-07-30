@@ -26,6 +26,8 @@ const WebsiteBuilderCanvas = () => {
     websiteBuilderState,
   } = useWebsiteBuilder()
 
+  console.log('website builder state', websiteBuilderState)
+
   return (
     <Canvas
       ref={websiteBuilderRef}

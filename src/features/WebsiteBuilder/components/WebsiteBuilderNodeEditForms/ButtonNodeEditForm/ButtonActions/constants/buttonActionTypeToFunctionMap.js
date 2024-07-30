@@ -26,8 +26,8 @@ export const BUTTON_ACTION_TYPE_TO_FUNCTION_MAP = {
     const pageSlug = page.pageDetails.slug
     navigate(pageSlug)
   },
-  [BUTTON_ACTION_TYPES.DOWNLOAD_A_FILE]: (fileURL) => {
-    const [result, errName, errMessage] = handleDownload(fileURL)
+  [BUTTON_ACTION_TYPES.DOWNLOAD_A_FILE]: async (fileURL) => {
+    const [result, errName, errMessage] = await handleDownload(fileURL)
     if (result === false) {
       toast.error(`${errName}: ${errMessage}`)
     }

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getAllTemplates } from '../../core/getAllProjectsAndTemplates/getAllTemplates'
 import {
   getProjectById,
   getSavedProjectsAndTemplates,
@@ -47,7 +48,10 @@ const projectsAndTemplatesSlice = createSlice({
     /* If a valid template id is provided it creates a new project using that template
     If not provided it creates new project using a blank template */
     initializeProject: (state, { payload }) => {
-      let [template, index] = getItemById(payload.templateId, state.templates)
+      let [template, index] = getItemById(
+        payload.templateId,
+        getAllTemplates(state.templates)
+      )
       if (index === -1) template = generateBlankTemplate(payload.newProjectId)
       state.projects.push({ ...template, id: payload.newProjectId })
     },

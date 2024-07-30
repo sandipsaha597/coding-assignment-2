@@ -9,8 +9,8 @@ const FontPickerDropdown = ({
   onChange,
   showGlobal = true,
 }) => {
-  const tempChange = (value) => {
-    onChange({ styles: { fontFamily: value } })
+  const tempChange = (tempObj) => {
+    onChange({ styles: { fontFamily: tempObj } })
   }
 
   return (

@@ -1,12 +1,16 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getAllProjectsAndTemplates } from '../../core/getAllProjectsAndTemplates/getAllProjectsAndTemplates'
 import {
   projectAndTemplatesSelector,
   projectsAndTemplatesSliceActions,
 } from '../../store/projectAndTemplatesSlice/projectsAndTemplatesSlice'
 
 export const useProjectsAndTemplates = () => {
-  const projectsAndTemplates = useSelector(projectAndTemplatesSelector)
+  const projectsAndTemplatesUserAdded = useSelector(projectAndTemplatesSelector)
+  const projectsAndTemplates = getAllProjectsAndTemplates(
+    projectsAndTemplatesUserAdded
+  )
 
   const dispatch = useDispatch()
 
